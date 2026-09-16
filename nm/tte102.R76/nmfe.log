@@ -1,0 +1,58 @@
+Changing directory to tte102.R76
+'pushdon' is not recognized as an internal or external command,
+operable program or batch file.
+Pathlist information for compiler and MPI systems are located in nmpathlist.txt
+
+Starting NMTRAN
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+             
+ (WARNING  3) THERE MAY BE AN ERROR IN THE ABBREVIATED CODE. THE FOLLOWING
+ ONE OR MORE RANDOM VARIABLES ARE DEFINED WITH "IF" STATEMENTS THAT DO NOT
+ PROVIDE DEFINITIONS FOR BOTH THE "THEN" AND "ELSE" CASES. IF ALL
+ CONDITIONS FAIL, THE VALUES OF THESE VARIABLES WILL BE ZERO.
+  
+   Y
+
+Recompiling certain components.
+starting wait
+ending wait
+Exiting lpreddo
+Compiling FSUBS
+Building NONMEM Executable
+Starting nonmem execution ...
+License Registered to: <LICENSEE>
+Expiration Date: <DATE>
+Current Date: <DATE>
+Days until program expires : <N>
+
+
+ Laplacian Conditional Estimation
+ MONITORING OF SEARCH:
+
+
+0ITERATION NO.:    0    OBJECTIVE VALUE:   1310.57480711900        NO. OF FUNC. EVALS.:   5
+ CUMULATIVE NO. OF FUNC. EVALS.:        5
+ NPARAMETR:  1.0000E-01  1.0000E+00  1.0000E+00
+ PARAMETER:  1.0000E-01  1.0000E-01  1.0000E-01
+ GRADIENT:  -9.9257E+01 -3.8127E+02  1.4765E+02
+
+0ITERATION NO.:    5    OBJECTIVE VALUE:   1245.54746594810        NO. OF FUNC. EVALS.:  32
+ CUMULATIVE NO. OF FUNC. EVALS.:       37
+ NPARAMETR:  5.3577E-02  1.5453E+00  1.6833E+00
+ PARAMETER: -5.2405E-01  5.3523E-01  1.6833E-01
+ GRADIENT:   8.2170E+00  2.0787E+01 -3.0315E+01
+
+0ITERATION NO.:   10    OBJECTIVE VALUE:   1245.41019296293        NO. OF FUNC. EVALS.:  33
+ CUMULATIVE NO. OF FUNC. EVALS.:       70
+ NPARAMETR:  5.0400E-02  1.5663E+00  1.7017E+00
+ PARAMETER: -5.8519E-01  5.4869E-01  1.7017E-01
+ GRADIENT:  -1.1930E-01 -5.1272E-01  4.2892E-01
+ Elapsed estimation  time in seconds: <SEC>
+ Elapsed covariance  time in seconds: <SEC>
+ Elapsed postprocess time in seconds: <SEC>
+ Elapsed finaloutput time in seconds: <SEC>
+Done with nonmem execution
+wall seconds: 19.0

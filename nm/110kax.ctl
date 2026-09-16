@@ -1,0 +1,49 @@
+$PROB THEO 1COMP ORAL, WRONG SCALE OF INITIAL VALUES   P:110ka  F:BASE
+$INPUT ID TIME AMT RATE=DROP DV MDV EVID WT
+$DATA ../../data/theo-nm.csv IGNORE=@
+$SUBR ADVAN2 TRANS2
+$ABBR DERIV2=NO
+
+$PK
+  TVKA = THETA(1)
+  TVCL = THETA(2)
+  TVV  = THETA(3)
+  KA   = TVKA * EXP(ETA(1))
+  CL   = TVCL * EXP(ETA(2))
+  V    = TVV  * EXP(ETA(3))
+  S2   = V
+
+$ERROR
+  IPRE = F
+  W    = 1
+  W    = SQRT(THETA(4)**2 + THETA(5)**2 * IPRE**2)
+  IF (W.LT.1E-6) W = 1E-6
+  IRES = DV - IPRE
+  IWRE = IRES / W
+  Y    = IPRE + W * EPS(1)
+
+$THETA
+  (0, 1.5)     ; KA (1/h)
+  (0, 0.04)    ; CL (L/h)
+  (0, 0.5)     ; V  (L)
+  (0, 0.5)     ; additive error SD (mg/L)
+  (0, 0.1)     ; proportional error CV
+
+$OMEGA
+  0.4          ; KA
+  0.1          ; CL
+  0.05         ; V
+
+$SIGMA 1 FIX
+
+$EST MAX=9999 PRINT=5 METHOD=COND INTER NSIG=3 SIGL=9
+     NOABORT NOTBT NOOBT NOSBT
+$COV UNCOND PRINT=E
+$TAB ID TIME AMT DV MDV EVID IPRE IWRE CWRES
+     ONEHEADER NOPRINT FILE=sdtab
+$TAB ID KA CL V ETA1 ETA2 ETA3
+     ONEHEADER NOPRINT NOAPPEND FILE=patab
+$TAB ID WT
+     ONEHEADER NOPRINT NOAPPEND FILE=cotab
+$TAB ID EVID
+     ONEHEADER NOPRINT NOAPPEND FILE=catab

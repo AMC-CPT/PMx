@@ -1,0 +1,56 @@
+Changing directory to ped100.R76
+'pushdon' is not recognized as an internal or external command,
+operable program or batch file.
+Pathlist information for compiler and MPI systems are located in nmpathlist.txt
+
+Starting NMTRAN
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+Recompiling certain components.
+starting wait
+ending wait
+Exiting lpreddo
+Compiling FSUBS
+Building NONMEM Executable
+Starting nonmem execution ...
+License Registered to: <LICENSEE>
+Expiration Date: <DATE>
+Current Date: <DATE>
+Days until program expires : <N>
+
+
+ First Order Conditional Estimation with Interaction
+ MONITORING OF SEARCH:
+
+
+0ITERATION NO.:    0    OBJECTIVE VALUE:   593.902296574042        NO. OF FUNC. EVALS.:   6
+ CUMULATIVE NO. OF FUNC. EVALS.:        6
+ NPARAMETR:  5.0000E+00  4.0000E+01  2.0000E-01  1.0000E-01  1.0000E-01  5.0000E-02
+ PARAMETER:  1.0000E-01  1.0000E-01  1.0000E-01  1.0000E-01  1.0000E-01  1.0000E-01
+ GRADIENT:   6.2722E+02 -2.9457E+01  5.6112E+01 -6.5393E+01 -9.6508E+02 -5.0941E+00
+
+0ITERATION NO.:    5    OBJECTIVE VALUE:   224.103168190192        NO. OF FUNC. EVALS.:  36
+ CUMULATIVE NO. OF FUNC. EVALS.:       42
+ NPARAMETR:  4.2518E+00  3.9692E+01  1.3590E-01  1.0468E-01  5.0404E-01  4.6738E-02
+ PARAMETER: -6.2105E-02  9.2280E-02 -2.8641E-01  1.4577E-01  9.0875E-01  6.6263E-02
+ GRADIENT:   7.2847E+01 -7.6219E+01 -1.8151E+01 -3.6731E+00 -2.9154E+01 -6.5505E+00
+
+0ITERATION NO.:   10    OBJECTIVE VALUE:   223.797049528916        NO. OF FUNC. EVALS.:  57
+ CUMULATIVE NO. OF FUNC. EVALS.:       99
+ NPARAMETR:  4.2362E+00  3.9721E+01  1.3615E-01  1.0459E-01  5.0333E-01  4.6451E-02
+ PARAMETER: -6.5772E-02  9.3007E-02 -2.8453E-01  1.4489E-01  9.0803E-01  6.3190E-02
+ GRADIENT:   7.1266E+01 -7.3426E+01 -1.7465E+01 -4.1945E+00 -2.9025E+01 -7.5369E+00
+
+0ITERATION NO.:   13    OBJECTIVE VALUE:   223.794455820621        NO. OF FUNC. EVALS.:  67
+ CUMULATIVE NO. OF FUNC. EVALS.:      166
+ NPARAMETR:  4.2361E+00  3.9721E+01  1.3616E-01  1.0459E-01  5.0333E-01  4.6452E-02
+ PARAMETER: -6.5802E-02  9.3010E-02 -2.8452E-01  1.4489E-01  9.0804E-01  6.3193E-02
+ GRADIENT:  -6.5707E+03 -3.3918E+03  2.3065E+03 -2.2944E+03 -3.9312E+02 -3.3269E+03
+ Elapsed estimation  time in seconds: <SEC>
+ Elapsed covariance  time in seconds: <SEC>
+ Elapsed postprocess time in seconds: <SEC>
+ Elapsed finaloutput time in seconds: <SEC>
+Done with nonmem execution
+wall seconds: 15.5

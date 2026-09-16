@@ -1,0 +1,2436 @@
+<DATE>
+<TIME>
+$PROB WARFARIN PK/PD SIM FROM wf201 FINAL ESTIMATES   P:wf201  F:BASE
+$INPUT ID TIME AMT CMT DV DVID MDV EVID
+$DATA ../../data/warf-sim.csv IGNORE=@
+$SUBR ADVAN13 TOL=9
+$ABBR DERIV2=NO
+$MODEL COMP=(DEPOT DEFDOSE) COMP=(CENT DEFOBS) COMP=(PCA)
+
+$PK
+  KA   = THETA(1) * EXP(ETA(1))
+  CL   = THETA(2) * EXP(ETA(2))
+  V    = THETA(3) * EXP(ETA(3))
+  BASE = THETA(4) * EXP(ETA(4))
+  KOUT = THETA(5) * EXP(ETA(5))
+  C50  = THETA(6) * EXP(ETA(6))
+  KIN  = BASE * KOUT
+  KE   = CL / V
+  S2   = V
+  A_0(3) = BASE
+
+$DES
+  CP = A(2) / V
+  DADT(1) = -KA * A(1)
+  DADT(2) =  KA * A(1) - KE * A(2)
+  DADT(3) = KIN * (1 - CP / (C50 + CP)) - KOUT * A(3)
+
+$ERROR
+  IPRE = F
+  W    = 1
+  IF (DVID.EQ.1) W = THETA(7) * IPRE       ; concentration: proportional
+  IF (DVID.EQ.2) W = THETA(8)              ; PCA: additive
+  IF (W.LT.1E-6) W = 1E-6
+  IRES = DV - IPRE
+  IWRE = IRES / W
+  Y    = IPRE + W * EPS(1)
+
+; Final estimates of wf201, fixed as truth. Nothing is estimated here.
+$THETA
+  1.57413 FIX
+  0.154181 FIX
+  7.81922 FIX
+  101.377 FIX
+  0.048268 FIX
+  0.950886 FIX
+  0.101311 FIX
+  5.13304 FIX
+
+$OMEGA
+  0.344993 FIX
+  0.0572047 FIX
+  0.0299435 FIX
+  0.00765057 FIX
+  0.090242 FIX
+  0.132047 FIX
+
+$SIGMA 1 FIX
+
+$SIM (20260917) ONLYSIMULATION SUBPROBLEMS=200
+
+$TAB ID TIME DV MDV DVID CMT
+     ONEHEADER NOPRINT NOAPPEND FILE=simtab
+  
+NM-TRAN MESSAGES 
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+  
+License Registered to: <LICENSEE>
+Expiration Date: <DATE>
+Current Date: <DATE>
+Days until program expires : <N>
+
+NONLINEAR MIXED EFFECTS MODEL PROGRAM (NONMEM) VERSION 7.6.0 (nm760)
+ORIGINALLY DEVELOPED BY STUART BEAL, LEWIS SHEINER, AND ALISON BOECKMANN
+CURRENT DEVELOPERS ARE ROBERT BAUER, ICON DEVELOPMENT SOLUTIONS,
+AND ALISON BOECKMANN. IMPLEMENTATION, EFFICIENCY, AND STANDARDIZATION
+PERFORMED BY NOUS INFOSYSTEMS.
+
+PROBLEM NO.:         1
+WARFARIN PK/PD SIM FROM wf201 FINAL ESTIMATES   P:wf201  F:BASE
+
+DATA CHECKOUT RUN:              NO
+DATA SET LOCATED ON UNIT NO.:    2
+THIS UNIT TO BE REWOUND:        NO
+CREATE/ADD TO FDATA.csv:        YES
+NO. OF DATA RECS IN DATA SET:      760
+NO. OF DATA ITEMS IN DATA SET:   8
+ID DATA ITEM IS DATA ITEM NO.:   1
+DEP VARIABLE IS DATA ITEM NO.:   5
+MDV DATA ITEM IS DATA ITEM NO.:  7
+
+INDICES PASSED TO SUBROUTINE PRED:
+  8   2   3   0   0   0   4   0   0   0   0
+
+LABELS FOR DATA ITEMS:
+ID TIME AMT CMT DV DVID MDV EVID
+
+FORMAT FOR DATA:
+(8E7.0)
+
+TOT. NO. OF OBS RECS:      720
+TOT. NO. OF INDIVIDUALS:       40
+
+LENGTH OF THETA:   8
+
+DEFAULT THETA BOUNDARY TEST OMITTED:    NO
+
+OMEGA HAS SIMPLE DIAGONAL FORM WITH DIMENSION:   6
+
+DEFAULT OMEGA BOUNDARY TEST OMITTED:    NO
+
+SIGMA HAS SIMPLE DIAGONAL FORM WITH DIMENSION:   1
+
+DEFAULT SIGMA BOUNDARY TEST OMITTED:    NO
+
+INITIAL ESTIMATE OF THETA:
+LOWER BOUND    INITIAL EST    UPPER BOUND
+ 0.1574E+01     0.1574E+01     0.1574E+01
+ 0.1542E+00     0.1542E+00     0.1542E+00
+ 0.7819E+01     0.7819E+01     0.7819E+01
+ 0.1014E+03     0.1014E+03     0.1014E+03
+ 0.4827E-01     0.4827E-01     0.4827E-01
+ 0.9509E+00     0.9509E+00     0.9509E+00
+ 0.1013E+00     0.1013E+00     0.1013E+00
+ 0.5133E+01     0.5133E+01     0.5133E+01
+
+INITIAL ESTIMATE OF OMEGA:
+0.3450E+00
+0.0000E+00   0.5720E-01
+0.0000E+00   0.0000E+00   0.2994E-01
+0.0000E+00   0.0000E+00   0.0000E+00   0.7651E-02
+0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.9024E-01
+0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.1320E+00
+
+OMEGA CONSTRAINED TO BE THIS INITIAL ESTIMATE
+
+INITIAL ESTIMATE OF SIGMA:
+0.1000E+01
+
+SIGMA CONSTRAINED TO BE THIS INITIAL ESTIMATE
+
+SIMULATION STEP OMITTED:    NO
+OBJ FUNC EVALUATED:         NO
+ORIGINAL DATA USED ON EACH NEW SIMULATION:         NO
+SEEDS RESET ON EACH NEW SUPERSET ITERATION:        YES
+
+SIMULATION RANDOM METHOD SELECTED (RANMETHOD): 4U
+SEED   1 RESET TO INITIAL: YES
+SOURCE   1:
+  SEED1:      20260917   SEED2:             0   PSEUDO-NORMAL
+NUMBER OF SUBPROBLEMS:  200
+
+TABLES STEP OMITTED:    NO
+NO. OF TABLES:           1
+SEED NUMBER (SEED):    11456
+NPDTYPE:    0
+INTERPTYPE:    0
+RANMETHOD:             3U
+MC SAMPLES (ESAMPLE):    300
+WRES SQUARE ROOT TYPE (WRESCHOL): EIGENVALUE
+
+-- TABLE   1 --
+
+RECORDS ONLY:    ALL
+
+4 COLUMNS APPENDED:    NO
+PRINTED:                NO
+HEADER:                YES
+FILE TO BE FORWARDED:   NO
+FORMAT:                S1PE11.4
+IDFORMAT:
+LFORMAT:
+RFORMAT:
+FIXED_EFFECT_ETAS:
+
+USER-CHOSEN ITEMS:
+ID TIME DV MDV DVID CMT
+
+DOUBLE PRECISION PREDPP VERSION 7.6.0 (nm760)
+
+GENERAL NONLINEAR KINETICS MODEL WITH STIFF/NONSTIFF EQUATIONS (LSODA, ADVAN13)
+
+MODEL SUBROUTINE USER-SUPPLIED - ID NO. 9999
+
+MAXIMUM NO. OF BASIC PK PARAMETERS:   6
+
+COMPARTMENT ATTRIBUTES
+COMPT. NO.   FUNCTION   INITIAL    ON/OFF      DOSE      DEFAULT    DEFAULT
+                        STATUS     ALLOWED    ALLOWED    FOR DOSE   FOR OBS.
+   1         DEPOT        ON         YES        YES        YES        NO
+   2         CENT         ON         YES        YES        NO         YES
+   3         PCA          ON         YES        YES        NO         NO
+   4         OUTPUT       OFF        YES        NO         NO         NO
+INITIAL (BASE) TOLERANCE SETTINGS:
+NRD (RELATIVE) VALUE(S) OF TOLERANCE:   9
+ANRD (ABSOLUTE) VALUE(S) OF TOLERANCE:  12
+
+
+ADDITIONAL PK PARAMETERS - ASSIGNMENT OF ROWS IN GG
+COMPT. NO.                             INDICES
+             SCALE      BIOAVAIL.   ZERO-ORDER  ZERO-ORDER  ABSORB
+                        FRACTION    RATE        DURATION    LAG
+   1            *           *           *           *           *
+   2            7           *           *           *           *
+   3            *           *           *           *           *
+   4            *           -           -           -           -
+            - PARAMETER IS NOT ALLOWED FOR THIS MODEL
+            * PARAMETER IS NOT SUPPLIED BY PK SUBROUTINE;
+              WILL DEFAULT TO ONE IF APPLICABLE
+
+DATA ITEM INDICES USED BY PRED ARE:
+  EVENT ID DATA ITEM IS DATA ITEM NO.:      8
+  TIME DATA ITEM IS DATA ITEM NO.:          2
+  DOSE AMOUNT DATA ITEM IS DATA ITEM NO.:   3
+  COMPT. NO. DATA ITEM IS DATA ITEM NO.:    4
+
+
+PK SUBROUTINE CALLED WITH EVERY EVENT RECORD.
+PK SUBROUTINE NOT CALLED AT NONEVENT (ADDITIONAL OR LAGGED) DOSE TIMES.
+
+PK SUBROUTINE INDICATES THAT COMPARTMENT AMOUNTS ARE INITIALIZED.
+
+ERROR SUBROUTINE CALLED WITH EVERY EVENT RECORD.
+
+DES SUBROUTINE USES COMPACT STORAGE MODE.
+TOLERANCES FOR SIMULATION STEP:
+NRD (RELATIVE) VALUE(S) OF TOLERANCE:   9
+ANRD (ABSOLUTE) VALUE(S) OF TOLERANCE:  12
+TOLERANCES FOR TABLE/SCATTER STEP:
+NRD (RELATIVE) VALUE(S) OF TOLERANCE:   9
+ANRD (ABSOLUTE) VALUE(S) OF TOLERANCE:  12
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:           1
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1043811206   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:           2
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1608287535   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:           3
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1131542601   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:           4
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1098467313   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:           5
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1645417964   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:           6
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     305052458   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:           7
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     677679896   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:           8
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1659066025   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:           9
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1226045229   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          10
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     282875502   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          11
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1147262012   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          12
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     638858220   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          13
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1467852631   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          14
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     500569518   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          15
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1904008009   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          16
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     764025365   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          17
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1783781582   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          18
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1385959773   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          19
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     166305197   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          20
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1933023849   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          21
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1387482652   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          22
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1406524038   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          23
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     951451842   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          24
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:      43570378   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          25
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1635898561   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          26
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:      27430098   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          27
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1373299233   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          28
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1936711032   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          29
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1380570026   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          30
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2125582214   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          31
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     569415701   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          32
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1780611061   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          33
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1230035110   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          34
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1953198688   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          35
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1093467510   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          36
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     372491092   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          37
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     480378010   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          38
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1390793219   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          39
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1946325520   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          40
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     331239120   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          41
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1889259882   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          42
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1120763910   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          43
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1393114578   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          44
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1241096303   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          45
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     666848572   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          46
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     137515947   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          47
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1623555151   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          48
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1915434488   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          49
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1553200020   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          50
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1692519689   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          51
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     308824354   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          52
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1993765472   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          53
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1293782124   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          54
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1322871031   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          55
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1896802244   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          56
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1998961671   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          57
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     644346886   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          58
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1484614811   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          59
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     344926038   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          60
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     941711319   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          61
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     439597019   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          62
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     658600342   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          63
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     942782682   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          64
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     476800367   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          65
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1934753024   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          66
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     624094407   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          67
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1218402701   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          68
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1066601069   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          69
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2107916857   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          70
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2038184784   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          71
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     663887063   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          72
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1432449505   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          73
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2015895888   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          74
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1136719848   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          75
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1165077785   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          76
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     154323322   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          77
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     849730050   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          78
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2053951298   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          79
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1905338628   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          80
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1764269067   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          81
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1839308323   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          82
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1430382361   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          83
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1289984604   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          84
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1108167686   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          85
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2056103425   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          86
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1101735865   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          87
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1658009689   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          88
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1177451306   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          89
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:      99016481   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          90
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     692641020   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          91
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1176029661   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          92
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     993711026   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          93
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:      64285912   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          94
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     128030358   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          95
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     333519436   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          96
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1554691776   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          97
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     783837383   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          98
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     613089066   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:          99
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2071562282   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         100
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     300578330   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         101
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1858595148   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         102
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     460433529   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         103
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     892831291   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         104
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     490899931   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         105
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1563448592   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         106
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1290238234   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         107
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1204589156   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         108
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1379586375   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         109
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:      66191881   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         110
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:      94226086   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         111
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1554517337   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         112
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1778943976   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         113
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2117277061   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         114
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     739015861   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         115
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1381088190   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         116
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     522233583   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         117
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2058285213   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         118
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1158394674   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         119
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2139494820   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         120
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1241292607   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         121
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:      82321183   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         122
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:       7875964   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         123
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1983382994   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         124
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:      73090342   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         125
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     810272522   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         126
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1155578023   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         127
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     415725673   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         128
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1254698986   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         129
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1109054342   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         130
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2078546285   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         131
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1558857944   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         132
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     355829866   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         133
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     400154825   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         134
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1190120224   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         135
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2126194294   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         136
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1216566976   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         137
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1836728466   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         138
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1961136516   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         139
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1118415168   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         140
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1398127725   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         141
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1743350133   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         142
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1892778910   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         143
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     923342934   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         144
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     948160074   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         145
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     475729582   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         146
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1008650389   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         147
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1953302736   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         148
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2036535921   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         149
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1786834570   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         150
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     735511635   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         151
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:       7158779   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         152
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     194464477   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         153
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     826764669   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         154
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1596904913   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         155
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     927345507   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         156
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     591568484   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         157
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     102912868   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         158
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1492067366   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         159
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2034750257   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         160
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     972175478   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         161
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2051822692   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         162
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     513332087   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         163
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     908425892   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         164
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1428650164   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         165
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1974920334   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         166
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1978661109   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         167
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:      43020351   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         168
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1113772305   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         169
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:      85291807   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         170
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     920112104   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         171
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1076321184   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         172
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2125788084   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         173
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1539339570   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         174
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     646416821   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         175
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1890010712   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         176
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1670458729   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         177
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1923636739   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         178
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2029375163   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         179
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     842458130   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         180
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1610557184   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         181
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1831142050   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         182
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     685849261   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         183
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     390392094   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         184
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     257784472   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         185
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1932483650   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         186
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1831112506   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         187
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     808565483   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         188
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    2146846100   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         189
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     855541480   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         190
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     791113816   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         191
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     391253764   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         192
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1767693018   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         193
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     705023512   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         194
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1126927396   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         195
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     244981366   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         196
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1309345030   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         197
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1987111137   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         198
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:    1439347102   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         199
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     263569827   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+ 
+
+
+PROBLEM NO.:           1      SUBPROBLEM NO.:         200
+
+SIMULATION STEP PERFORMED
+SOURCE  1:
+   SEED1:     276263192   SEED2:             0
+Elapsed simulation  time in seconds: <SEC>
+ESTIMATION STEP OMITTED:                 YES
+Elapsed finaloutput time in seconds: <SEC>
+#CPUT: Total CPU Time in Seconds, <SEC>
+Stop Time: 
+<DATE>
+<TIME>

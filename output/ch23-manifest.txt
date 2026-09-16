@@ -1,0 +1,10 @@
+                    file bytes                              md5
+1      data/pheno-nm.csv 44477 f145436d736b1d69f87c02c1ef114378
+2           nm/108wt.ctl  1152 b4f2aaf11132de5ac9a7cb805f93b91d
+3 nm/108wt.R76/108wt.lst 27495 8dc766fc94e350e835709ec17405834a
+4 nm/108wt.R76/108wt.ext  3024 01d1fcecd1cdfd14ce6c7cbcd282434b
+5              R/runnm.R  9233 c2303ba9d1d585769a534e8e05d2e9f0
+6              R/build.R  9935 727f0978713041ee7d461614e237e78c
+7               R/boot.R  4503 1f22bb26c529f8cc3aede105acd9e6a9
+                      MANIFEST.md5 
+"ee4a146e540fd4d721ca265cbd07607c" 

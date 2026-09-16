@@ -1,0 +1,13 @@
+name,value
+KA,1
+CL,4
+FPM,0.3
+V,50
+PPM,0.2
+PROP,0.12
+ADD,0.05
+OM_KA,0.16
+OM_CL,0.09
+OM_V,0.04
+PI_CL,0.04
+PI_KA,0.09

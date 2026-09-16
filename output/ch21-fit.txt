@@ -1,0 +1,8 @@
+                모형   OFV CLSTD 지수 TM50 HILL  OM_CL
+1 크기만 (0.75 고정) 223.8  4.24 0.75   NA   NA 0.5030
+2        크기 + 성숙   2.5  5.74 0.75 53.5 3.43 0.0803
+3 크기만 (지수 추정)  78.1  8.68 1.29   NA   NA 0.1580
+참값_CLSTD  참값_TM50  참값_HILL 참값_OM_CL 
+      6.00      55.00       3.40       0.09 
+[1] "0MINIMIZATION SUCCESSFUL"                          
+[2] " HOWEVER, PROBLEMS OCCURRED WITH THE MINIMIZATION."

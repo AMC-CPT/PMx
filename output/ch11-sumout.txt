@@ -1,0 +1,15 @@
+    OutName  Parent                   Formula      OFV Parameter     AICc
+1   100base                              BASE 685.5252         7 700.2871
+3   100foce 100base                      BASE 685.5252         7 700.2871
+7   101diag 100base                      BASE 725.5719         6 738.1395
+8    102sig 100base                      BASE 685.5252         7 700.2871
+9   103mats 100base                      BASE 685.5252         7 700.2871
+10  104matr 100base                      BASE 685.5252         7 700.2871
+11 105start 100base                      BASE 685.5252         7 700.2871
+12  106wtcl 100base                     CL~WT 671.7397         8 688.7260
+13   107wtv 100base                      V~WT 626.5812         8 643.5675
+14    108wt 106wtcl                CL~WT,V~WT 581.4394         9 600.6807
+15  108wtcr   108wt           CL~WT+CREA,V~WT 580.0154        10 601.5432
+16   108wts   108wt          CL~WT,V~WT(FIX1) 583.2526         8 600.2389
+18   108wtx   108wt CL~WT(FIX0.75),V~WT(FIX1) 591.3460         7 606.1079
+19   109sex   108wt            CL~WT+SEX,V~WT 580.0316        10 601.5594

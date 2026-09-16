@@ -1,0 +1,6 @@
+                        기전    OFV 모수    AIC PD가법SD
+1   간접반응 I 형 (kin 억제) 2034.6   14 2062.6     5.13
+2 간접반응 IV 형 (kout 자극) 2185.6   15 2215.6     6.91
+3       효과구획 + 직접 Emax 2336.9   14 2364.9     9.36
+[1] "0MINIMIZATION SUCCESSFUL"                          
+[2] " HOWEVER, PROBLEMS OCCURRED WITH THE MINIMIZATION."

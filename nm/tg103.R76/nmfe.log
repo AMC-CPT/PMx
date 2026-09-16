@@ -1,0 +1,69 @@
+Changing directory to tg103.R76
+'pushdon' is not recognized as an internal or external command,
+operable program or batch file.
+Pathlist information for compiler and MPI systems are located in nmpathlist.txt
+
+Starting NMTRAN
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+             
+ (WARNING  97) A RANDOM QUANTITY IS RAISED TO A POWER. IF THE RESULT AFFECTS
+ THE VALUE OF THE OBJECTIVE FUNCTION, THE USER SHOULD ENSURE THAT THE
+ RANDOM QUANTITY IS NEVER 0 WHEN THE POWER IS < 1.
+  
+Note: Analytical 2nd Derivatives are constructed in FSUBS but are never used.
+      You may insert $ABBR DERIV2=NO after the first $PROB to save FSUBS construction and compilation time
+  
+Recompiling certain components.
+starting wait
+ending wait
+Exiting lpreddo
+Compiling FSUBS
+Building NONMEM Executable
+Starting nonmem execution ...
+License Registered to: <LICENSEE>
+Expiration Date: <DATE>
+Current Date: <DATE>
+Days until program expires : <N>
+
+
+ First Order Conditional Estimation with Interaction
+ MONITORING OF SEARCH:
+
+
+0ITERATION NO.:    0    OBJECTIVE VALUE:   1850.76562742195        NO. OF FUNC. EVALS.:   6
+ CUMULATIVE NO. OF FUNC. EVALS.:        6
+ NPARAMETR:  1.0000E+00  7.0000E-01  1.0000E+01  2.0000E-01  5.0000E-02
+ PARAMETER:  1.0000E-01  1.0000E-01  1.0000E-01  1.0000E-01  1.0000E-01
+ GRADIENT:  -1.9899E+02 -3.8122E+02 -3.5196E+01 -1.3208E+02 -2.1344E+01
+
+0ITERATION NO.:    5    OBJECTIVE VALUE:   1760.51799791673        NO. OF FUNC. EVALS.:  36
+ CUMULATIVE NO. OF FUNC. EVALS.:       42
+ NPARAMETR:  8.2151E-01  7.8335E-01  3.9251E+01  1.8417E-01  1.4728E-02
+ PARAMETER: -9.6613E-02  5.5137E-01  1.4674E+00  1.7560E-02 -5.1114E-01
+ GRADIENT:  -3.0977E+02 -1.5759E+02  3.1296E+01  7.4362E+01 -3.2443E+01
+
+0ITERATION NO.:   10    OBJECTIVE VALUE:   1721.63117872844        NO. OF FUNC. EVALS.:  36
+ CUMULATIVE NO. OF FUNC. EVALS.:       78
+ NPARAMETR:  9.9337E-01  7.6607E-01  3.8534E+01  1.1978E-01  1.2958E-02
+ PARAMETER:  9.3346E-02  4.4873E-01  1.4489E+00 -4.1269E-01 -5.7514E-01
+ GRADIENT:  -4.6958E+00 -4.6927E+00 -1.7989E+00 -3.8140E-01 -1.5516E+00
+
+0ITERATION NO.:   15    OBJECTIVE VALUE:   1721.60242888922        NO. OF FUNC. EVALS.:  47
+ CUMULATIVE NO. OF FUNC. EVALS.:      125
+ NPARAMETR:  9.9431E-01  7.6624E-01  3.8941E+01  1.1941E-01  1.3473E-02
+ PARAMETER:  9.4292E-02  4.4970E-01  1.4595E+00 -4.1577E-01 -5.5567E-01
+ GRADIENT:  -1.4603E-01 -1.4363E-01  1.0884E-02 -6.4035E-03  1.4626E-03
+
+0ITERATION NO.:   16    OBJECTIVE VALUE:   1721.60242888922        NO. OF FUNC. EVALS.:   8
+ CUMULATIVE NO. OF FUNC. EVALS.:      133
+ NPARAMETR:  9.9431E-01  7.6624E-01  3.8941E+01  1.1941E-01  1.3473E-02
+ PARAMETER:  9.4292E-02  4.4970E-01  1.4595E+00 -4.1577E-01 -5.5567E-01
+ GRADIENT:  -1.4603E-01 -1.4363E-01  1.0884E-02 -6.4035E-03  1.4626E-03
+ Elapsed estimation  time in seconds: <SEC>
+ Elapsed covariance  time in seconds: <SEC>
+ Elapsed postprocess time in seconds: <SEC>
+ Elapsed finaloutput time in seconds: <SEC>
+Done with nonmem execution

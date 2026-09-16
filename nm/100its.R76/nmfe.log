@@ -1,0 +1,76 @@
+Changing directory to 100its.R76
+'pushdon' is not recognized as an internal or external command,
+operable program or batch file.
+Pathlist information for compiler and MPI systems are located in nmpathlist.txt
+
+Starting NMTRAN
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+Recompiling certain components.
+starting wait
+ending wait
+Exiting lpreddo
+Compiling FSUBS
+Building NONMEM Executable
+Starting nonmem execution ...
+License Registered to: <LICENSEE>
+Expiration Date: <DATE>
+Current Date: <DATE>
+Days until program expires : <N>
+
+
+ Iterative Two Stage
+ MONITORING OF SEARCH:
+
+ iteration            0  OBJ=   739.90266184721793
+ iteration           20  OBJ=   686.53968712655478
+ iteration           40  OBJ=   685.93250496620044
+ iteration           60  OBJ=   685.77946725329650
+ iteration           80  OBJ=   685.71285113792135
+ iteration          100  OBJ=   685.67629610598829
+ iteration          120  OBJ=   685.65347280883782
+ iteration          140  OBJ=   685.63799564738099
+ iteration          160  OBJ=   685.62687805459325
+ iteration          180  OBJ=   685.61854704840437
+ iteration          200  OBJ=   685.61209821983789
+ iteration          220  OBJ=   685.60697585888875
+ iteration          240  OBJ=   685.60282093369574
+ iteration          260  OBJ=   685.59939220371780
+ iteration          280  OBJ=   685.59652073102143
+ iteration          300  OBJ=   685.59408634005820
+ iteration          320  OBJ=   685.59199988019168
+ iteration          340  OBJ=   685.59019551654887
+ iteration          360  OBJ=   685.58862158451632
+ iteration          380  OBJ=   685.58723850115814
+ iteration          400  OBJ=   685.58601548173021
+ iteration          420  OBJ=   685.58492728075419
+ iteration          440  OBJ=   685.58395433853354
+ iteration          460  OBJ=   685.58307976012907
+ iteration          480  OBJ=   685.58229065460102
+ iteration          500  OBJ=   685.58157528769721
+ Elapsed estimation  time in seconds: <SEC>
+ OPTIMIZATION WAS NOT TESTED FOR CONVERGENCE
+ 
+ Elapsed covariance  time in seconds: <SEC>
+
+
+ Objective Function Evaluation by Importance Sampling
+ MONITORING OF SEARCH:
+
+ iteration            0  OBJ=   685.38921198703963 eff.=    3005. Smpl.=    3000. Fit.= 0.99534
+ iteration            1  OBJ=   685.43675007885531 eff.=    1190. Smpl.=    3000. Fit.= 0.78401
+ iteration            2  OBJ=   684.93241577899948 eff.=    1207. Smpl.=    3000. Fit.= 0.78597
+ iteration            3  OBJ=   684.91585649973968 eff.=    1206. Smpl.=    3000. Fit.= 0.78616
+ iteration            4  OBJ=   685.33803266222310 eff.=    1199. Smpl.=    3000. Fit.= 0.78580
+ Elapsed estimation  time in seconds: <SEC>
+ Last iteration, set up for variance assessment
+ iteration            5  OBJ=   685.53721776721591 eff.=    1193. Smpl.=    3000. Fit.= 0.78477
+ EXPECTATION ONLY PROCESS WAS NOT TESTED FOR CONVERGENCE
+ 
+ Elapsed covariance  time in seconds: <SEC>
+ Elapsed postprocess time in seconds: <SEC>
+ Elapsed finaloutput time in seconds: <SEC>
+Done with nonmem execution
+wall seconds: 46.2

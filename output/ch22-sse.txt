@@ -1,0 +1,18 @@
+         종료
+설계    ROUNDING SUCCESS
+  rich           0     100
+  sparse2       13      87
+  sparse3        1      99
+          n 편향_CL.CL RSE_KA RSE_CL RSE_V RSE_OM_KA RSE_OM_CL RSE_OM_V
+rich    100        1.2    8.2    6.0   4.6      31.0      27.1     34.2
+sparse2 100        2.0   81.8   10.1  26.6     124.9      51.9     93.5
+sparse3 100        1.3   11.5    6.6   4.6      71.8      32.0     36.8
+        RSE_ADD RSE_PROP
+rich       38.7      9.7
+sparse2   154.5     46.3
+sparse3    76.3     33.6
+              KA  CL   V OM_KA OM_CL OM_V   ADD PROP
+FIM_rich     7.0 5.3 4.0  34.6  28.6 32.6  58.7 12.4
+SSE_rich     8.2 6.0 4.6  31.0  27.1 34.2  38.7  9.7
+FIM_sparse3  9.9 5.8 4.5  57.3  54.3 41.4 349.2 43.2
+SSE_sparse3 11.5 6.6 4.6  71.8  32.0 36.8  76.3 33.6

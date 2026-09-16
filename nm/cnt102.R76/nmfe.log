@@ -1,0 +1,50 @@
+Changing directory to cnt102.R76
+'pushdon' is not recognized as an internal or external command,
+operable program or batch file.
+Pathlist information for compiler and MPI systems are located in nmpathlist.txt
+
+Starting NMTRAN
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+Recompiling certain components.
+starting wait
+ending wait
+Exiting lpreddo
+Compiling FSUBS
+Building NONMEM Executable
+Starting nonmem execution ...
+License Registered to: <LICENSEE>
+Expiration Date: <DATE>
+Current Date: <DATE>
+Days until program expires : <N>
+
+
+ Laplacian Conditional Estimation
+ MONITORING OF SEARCH:
+
+
+0ITERATION NO.:    0    OBJECTIVE VALUE:   6237.15842513642        NO. OF FUNC. EVALS.:   5
+ CUMULATIVE NO. OF FUNC. EVALS.:        5
+ NPARAMETR:  5.0000E+00  2.0000E-01  5.0000E-01
+ PARAMETER:  1.0000E-01  1.0000E-01  1.0000E-01
+ GRADIENT:   1.2736E+02 -7.5789E+01 -8.3468E+01
+
+0ITERATION NO.:    5    OBJECTIVE VALUE:   6210.41880860267        NO. OF FUNC. EVALS.:  35
+ CUMULATIVE NO. OF FUNC. EVALS.:       40
+ NPARAMETR:  4.1514E+00  2.6783E-01  6.1505E-01
+ PARAMETER: -8.6002E-02  3.9204E-01  2.0355E-01
+ GRADIENT:   1.9159E+00 -7.6204E-02 -1.4684E+00
+
+0ITERATION NO.:    9    OBJECTIVE VALUE:   6210.41333467178        NO. OF FUNC. EVALS.:  26
+ CUMULATIVE NO. OF FUNC. EVALS.:       66
+ NPARAMETR:  4.1363E+00  2.6781E-01  6.1848E-01
+ PARAMETER: -8.9628E-02  3.9196E-01  2.0632E-01
+ GRADIENT:  -7.8209E-03 -1.8021E-03  9.1904E-04
+ Elapsed estimation  time in seconds: <SEC>
+ Elapsed covariance  time in seconds: <SEC>
+ Elapsed postprocess time in seconds: <SEC>
+ Elapsed finaloutput time in seconds: <SEC>
+Done with nonmem execution
+wall seconds: 7.0

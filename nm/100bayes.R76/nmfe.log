@@ -1,0 +1,55 @@
+Changing directory to 100bayes.R76
+'pushdon' is not recognized as an internal or external command,
+operable program or batch file.
+Pathlist information for compiler and MPI systems are located in nmpathlist.txt
+
+Starting NMTRAN
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+Recompiling certain components.
+starting wait
+ending wait
+Exiting lpreddo
+Compiling FSUBS
+Building NONMEM Executable
+Starting nonmem execution ...
+License Registered to: <LICENSEE>
+Expiration Date: <DATE>
+Current Date: <DATE>
+Days until program expires : <N>
+
+
+ MCMC Bayesian Analysis
+ MONITORING OF SEARCH:
+
+ Burn-in Mode
+ iteration        -3000 MCMCOBJ=    1152.3879420989354     
+ iteration        -2500 MCMCOBJ=    387.87081271121696     
+ iteration        -2000 MCMCOBJ=    371.24830961669232     
+ iteration        -1500 MCMCOBJ=    344.86220781637365     
+ iteration        -1000 MCMCOBJ=    313.15100160606016     
+ iteration         -500 MCMCOBJ=    323.73815768287403     
+ Elapsed burn-in time in seconds:    34.58
+ Sampling Mode
+ iteration            0 MCMCOBJ=    339.66368230915668     
+ iteration          500 MCMCOBJ=    394.85212754220532     
+ iteration         1000 MCMCOBJ=    351.13792714950216     
+ iteration         1500 MCMCOBJ=    376.48884708344804     
+ iteration         2000 MCMCOBJ=    347.92671938292051     
+ iteration         2500 MCMCOBJ=    356.96588956586299     
+ iteration         3000 MCMCOBJ=    345.47623387712025     
+ iteration         3500 MCMCOBJ=    379.58085559208945     
+ iteration         4000 MCMCOBJ=    362.29226521835767     
+ iteration         4500 MCMCOBJ=    328.68170003271683     
+ iteration         5000 MCMCOBJ=    346.25606522754265     
+ Elapsed estimation  time in seconds: <SEC>
+ BURN-IN WAS NOT TESTED FOR CONVERGENCE
+ STATISTICAL PORTION WAS COMPLETED
+
+ Elapsed covariance  time in seconds: <SEC>
+ Elapsed postprocess time in seconds: <SEC>
+ Elapsed finaloutput time in seconds: <SEC>
+Done with nonmem execution
+wall seconds: 103.5

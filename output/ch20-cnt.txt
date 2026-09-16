@@ -1,0 +1,6 @@
+ CNT_LAM0 CNT_OMLAM  CNT_EMAX  CNT_EC50  CNT_OVDP    CNT_CL  CNT_OMCL 
+     6.00      0.60      0.60      0.30      0.30      5.00      0.09 
+      군 평균  분산   비 영
+1   0 mg 7.91 110.3 13.9 27
+2  50 mg 4.95  42.4  8.6 46
+3 100 mg 4.57  26.2  5.7 50

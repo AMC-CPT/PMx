@@ -1,0 +1,6 @@
+ [1] "STUDYID" "USUBJID" "SUBJID"  "SITEID"  "SEX"     "RACE"    "ARMCD"  
+ [8] "BRTHDTC" "RFSTDTC" "APGAR"  
+      SUBJID SITEID SEX APGR
+1 PHN-01-001     01   0    7
+2 PHN-02-002     02   1    9
+3 PHN-03-003     03   0    6

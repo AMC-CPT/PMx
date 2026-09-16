@@ -1,0 +1,58 @@
+Changing directory to tte100.R76
+'pushdon' is not recognized as an internal or external command,
+operable program or batch file.
+Pathlist information for compiler and MPI systems are located in nmpathlist.txt
+
+Starting NMTRAN
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+             
+ (WARNING  3) THERE MAY BE AN ERROR IN THE ABBREVIATED CODE. THE FOLLOWING
+ ONE OR MORE RANDOM VARIABLES ARE DEFINED WITH "IF" STATEMENTS THAT DO NOT
+ PROVIDE DEFINITIONS FOR BOTH THE "THEN" AND "ELSE" CASES. IF ALL
+ CONDITIONS FAIL, THE VALUES OF THESE VARIABLES WILL BE ZERO.
+  
+   Y
+
+Recompiling certain components.
+starting wait
+ending wait
+Exiting lpreddo
+Compiling FSUBS
+Building NONMEM Executable
+Starting nonmem execution ...
+License Registered to: <LICENSEE>
+Expiration Date: <DATE>
+Current Date: <DATE>
+Days until program expires : <N>
+
+
+ Laplacian Conditional Estimation
+ MONITORING OF SEARCH:
+
+
+0ITERATION NO.:    0    OBJECTIVE VALUE:   1316.23694732368        NO. OF FUNC. EVALS.:   4
+ CUMULATIVE NO. OF FUNC. EVALS.:        4
+ NPARAMETR:  1.0000E-01  5.0000E-01
+ PARAMETER:  1.0000E-01  1.0000E-01
+ GRADIENT:  -4.7271E+01 -1.0590E+02
+
+0ITERATION NO.:    5    OBJECTIVE VALUE:   1297.01918990307        NO. OF FUNC. EVALS.:  27
+ CUMULATIVE NO. OF FUNC. EVALS.:       31
+ NPARAMETR:  1.5605E-01  1.2180E+00
+ PARAMETER:  5.4499E-01  2.4360E-01
+ GRADIENT:  -1.3603E+00  9.1910E-01
+
+0ITERATION NO.:    8    OBJECTIVE VALUE:   1297.01578954216        NO. OF FUNC. EVALS.:  15
+ CUMULATIVE NO. OF FUNC. EVALS.:       46
+ NPARAMETR:  1.5697E-01  1.2240E+00
+ PARAMETER:  5.5087E-01  2.4479E-01
+ GRADIENT:   2.6483E-02 -1.1272E-02
+ Elapsed estimation  time in seconds: <SEC>
+ Elapsed covariance  time in seconds: <SEC>
+ Elapsed postprocess time in seconds: <SEC>
+ Elapsed finaloutput time in seconds: <SEC>
+Done with nonmem execution
+wall seconds: 11.7

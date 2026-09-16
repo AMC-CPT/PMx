@@ -1,0 +1,56 @@
+Changing directory to wf100.R76
+'pushdon' is not recognized as an internal or external command,
+operable program or batch file.
+Pathlist information for compiler and MPI systems are located in nmpathlist.txt
+
+Starting NMTRAN
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+Recompiling certain components.
+starting wait
+ending wait
+Exiting lpreddo
+Compiling FSUBS
+Building NONMEM Executable
+Starting nonmem execution ...
+License Registered to: <LICENSEE>
+Expiration Date: <DATE>
+Current Date: <DATE>
+Days until program expires : <N>
+
+
+ First Order Conditional Estimation with Interaction
+ MONITORING OF SEARCH:
+
+
+0ITERATION NO.:    0    OBJECTIVE VALUE:   417.462462417748        NO. OF FUNC. EVALS.:   6
+ CUMULATIVE NO. OF FUNC. EVALS.:        6
+ NPARAMETR:  1.0000E+00  1.0000E-01  1.0000E+01  1.0000E-01  2.0000E-01  1.0000E-01  5.0000E-02
+ PARAMETER:  1.0000E-01  1.0000E-01  1.0000E-01  1.0000E-01  1.0000E-01  1.0000E-01  1.0000E-01
+ GRADIENT:  -1.5911E+02 -3.4178E+02  3.9229E+02 -3.2476E+01 -9.5286E+01 -1.1324E+02 -6.8131E+01
+
+0ITERATION NO.:    5    OBJECTIVE VALUE:   248.064743259498        NO. OF FUNC. EVALS.:  39
+ CUMULATIVE NO. OF FUNC. EVALS.:       45
+ NPARAMETR:  1.6057E+00  1.5692E-01  7.6346E+00  1.0134E-01  3.4813E-01  6.7462E-02  3.4788E-02
+ PARAMETER:  5.7354E-01  5.5057E-01 -1.6989E-01  1.1328E-01  3.7713E-01 -9.6806E-02 -8.1372E-02
+ GRADIENT:   4.5304E+00  2.2457E+01 -5.2763E+01  2.6179E-01  1.9668E-01  1.1566E+01  8.9392E+00
+
+0ITERATION NO.:   10    OBJECTIVE VALUE:   246.264330322457        NO. OF FUNC. EVALS.:  38
+ CUMULATIVE NO. OF FUNC. EVALS.:       83
+ NPARAMETR:  1.5737E+00  1.5411E-01  7.8201E+00  1.0147E-01  3.4417E-01  5.7159E-02  2.9579E-02
+ PARAMETER:  5.5342E-01  5.3251E-01 -1.4589E-01  1.1459E-01  3.7141E-01 -1.7967E-01 -1.6247E-01
+ GRADIENT:  -9.8154E-02  2.6057E-01 -1.6016E-01 -2.6819E-01 -2.0003E-01  1.4330E-01 -9.6308E-02
+
+0ITERATION NO.:   14    OBJECTIVE VALUE:   246.263812314567        NO. OF FUNC. EVALS.:  41
+ CUMULATIVE NO. OF FUNC. EVALS.:      124
+ NPARAMETR:  1.5748E+00  1.5415E-01  7.8210E+00  1.0150E-01  3.4534E-01  5.7050E-02  2.9621E-02
+ PARAMETER:  5.5412E-01  5.3278E-01 -1.4578E-01  1.1485E-01  3.7311E-01 -1.8062E-01 -1.6177E-01
+ GRADIENT:  -7.6626E-03 -3.0266E-01 -7.4447E-02  3.4877E-03  1.0327E-03 -2.0185E-03  4.9552E-04
+ Elapsed estimation  time in seconds: <SEC>
+ Elapsed covariance  time in seconds: <SEC>
+ Elapsed postprocess time in seconds: <SEC>
+ Elapsed finaloutput time in seconds: <SEC>
+Done with nonmem execution
+wall seconds: 16.9

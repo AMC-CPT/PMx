@@ -1,0 +1,59 @@
+Changing directory to tg100.R76
+'pushdon' is not recognized as an internal or external command,
+operable program or batch file.
+Pathlist information for compiler and MPI systems are located in nmpathlist.txt
+
+Starting NMTRAN
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+  
+Note: Analytical 2nd Derivatives are constructed in FSUBS but are never used.
+      You may insert $ABBR DERIV2=NO after the first $PROB to save FSUBS construction and compilation time
+  
+Recompiling certain components.
+starting wait
+ending wait
+Exiting lpreddo
+Compiling FSUBS
+Building NONMEM Executable
+Starting nonmem execution ...
+License Registered to: <LICENSEE>
+Expiration Date: <DATE>
+Current Date: <DATE>
+Days until program expires : <N>
+
+
+ First Order Conditional Estimation with Interaction
+ MONITORING OF SEARCH:
+
+
+0ITERATION NO.:    0    OBJECTIVE VALUE:   2978.66460105218        NO. OF FUNC. EVALS.:   5
+ CUMULATIVE NO. OF FUNC. EVALS.:        5
+ NPARAMETR:  5.0000E-01  1.0000E+01  2.0000E-01  5.0000E-02
+ PARAMETER:  1.0000E-01  1.0000E-01  1.0000E-01  1.0000E-01
+ GRADIENT:   6.3327E+01 -5.6304E+02 -1.6356E+03  1.6297E+01
+
+0ITERATION NO.:    5    OBJECTIVE VALUE:   2138.70663333522        NO. OF FUNC. EVALS.:  30
+ CUMULATIVE NO. OF FUNC. EVALS.:       35
+ NPARAMETR:  3.8816E-01  7.9792E+01  1.1790E+00  6.3928E-03
+ PARAMETER: -1.5320E-01  2.1768E+00  1.8741E+00 -9.2843E-01
+ GRADIENT:  -4.6503E+01  1.1051E+01  7.4167E+01 -1.8043E+01
+
+0ITERATION NO.:   10    OBJECTIVE VALUE:   2077.07529907219        NO. OF FUNC. EVALS.:  31
+ CUMULATIVE NO. OF FUNC. EVALS.:       66
+ NPARAMETR:  4.1726E-01  8.9597E+01  4.4392E-01  1.1921E-02
+ PARAMETER: -8.0906E-02  2.2927E+00  8.9733E-01 -6.1686E-01
+ GRADIENT:   3.7846E+00 -2.0134E+00  9.1842E+00 -2.7418E+00
+
+0ITERATION NO.:   15    OBJECTIVE VALUE:   2076.54257944086        NO. OF FUNC. EVALS.:  33
+ CUMULATIVE NO. OF FUNC. EVALS.:       99
+ NPARAMETR:  4.1552E-01  9.7576E+01  4.0910E-01  1.2982E-02
+ PARAMETER: -8.5086E-02  2.3780E+00  8.1564E-01 -5.7423E-01
+ GRADIENT:  -9.4423E-02  2.5846E-02  1.9620E-02  1.5950E-02
+ Elapsed estimation  time in seconds: <SEC>
+ Elapsed covariance  time in seconds: <SEC>
+ Elapsed postprocess time in seconds: <SEC>
+ Elapsed finaloutput time in seconds: <SEC>
+Done with nonmem execution

@@ -1,0 +1,29 @@
+$PROB COUNT, POISSON, EMAX DRUG EFFECT ON CAVG   P:ROOT  F:BASE
+$INPUT ID TIME DV MDV DOSE CAVG
+$DATA ../../data/cnt-sim.csv IGNORE=@
+$PRED
+  LAM0 = THETA(1) * EXP(ETA(1))           ; baseline rate per 28 days
+  EMAX = THETA(2)
+  EC50 = THETA(3)
+  LAM  = LAM0 * (1 - EMAX * CAVG / (EC50 + CAVG))
+  IF (LAM.LT.1E-6) LAM = 1E-6
+  LFAC = GAMLN(DV + 1)                    ; log(DV!)
+  Y    = -2 * (DV * LOG(LAM) - LAM - LFAC)  ; -2 log-likelihood of one count
+
+$THETA
+  (0, 5)       ; LAM0
+  (0, 0.5, 1)  ; EMAX
+  (0, 0.3)     ; EC50 (mg/L)
+
+$OMEGA 0.5     ; LAM0
+
+$EST MAX=9999 PRINT=5 METHOD=COND LAPLACE -2LL NSIG=3 SIGL=9 NOABORT
+$COV UNCOND PRINT=E
+$TAB ID TIME DV MDV DOSE CAVG LAM
+     ONEHEADER NOPRINT FILE=sdtab
+$TAB ID LAM0 ETA1
+     ONEHEADER NOPRINT NOAPPEND FILE=patab
+$TAB ID CAVG
+     ONEHEADER NOPRINT NOAPPEND FILE=cotab
+$TAB ID DOSE
+     ONEHEADER NOPRINT NOAPPEND FILE=catab

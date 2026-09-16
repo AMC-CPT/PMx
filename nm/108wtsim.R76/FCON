@@ -1,0 +1,64 @@
+FILE    FSTREAM                                                                 
+PROB    PHENO 1COMP IV BOLUS SIM   P:108wt  F:CL~WT,V~WT                        
+FMTN   3                                                                        
+LDFO   0                                                                        
+DATA       1   0 803  13   0   0   0   1          -1   0 0                      
+ITEM       1   6   7  11   1   0   0   0   0   0   0   0   0   0   0   0        
+INDX       8   2   3   4   0   0   5   0   0   0   0                            
+XVID       0   0   0   0   0                                                    
+MSDT     0.00000000000000E+000
+LABL                             ID,                          TIME              
+                                AMT,                          RATE              
+                                CMT,                            DV              
+                                MDV,                          EVID              
+                                 WT,                           BWT              
+                                SEX,                          APGR              
+                               CREA                                             
+LBW1 IWRS,IPRD                                                                  
+     IRS,NPRED                                                                  
+     NRES,NWRES                                                                 
+     NIWRES,NIPRED                                                              
+     NIRES,CPRED                                                                
+     CRES,CWRES                                                                 
+     CIWRES,CIPRED                                                              
+     CIRES,PREDI                                                                
+     RESI,WRESI                                                                 
+     IWRESI,IPREDI                                                              
+     IRESI,CPREDI                                                               
+     CRESI,CWRESI                                                               
+     CIWRESI,CIPREDI                                                            
+     CIRESI,EPRED                                                               
+     ERES,EWRES                                                                 
+     EIWRES,EIPRED                                                              
+     EIRES,NPDE                                                                 
+     ECWRES,NPD                                                                 
+     OBJI                                                                       
+LRES SIGMA                                                                      
+LTHT                                                                            
+LETA                                                                            
+LEPS                                                                            
+FORM                                                                            
+(E3.0,E8.0,E5.0,2E2.0,E5.0,2E2.0,E4.0,E5.0,E2.0,E3.0,E6.0)
+STRC       6   2   1   0   0   0   1   1   0                                    
+STRC       1   2                                                                
+THCN       1   0   0   0                                                        
+THTA     7.315060000000000E-03, 1.490040000000000E+00, 2.072860000000000E+00    
+         7.244040000000000E-02, 1.133320000000000E+00, 9.152760000000000E-01    
+THTU    0,0,0,0,0,0                                                             
+LOWR     7.315060000000000E-03, 1.490040000000000E+00, 2.072860000000000E+00    
+         7.244040000000000E-02, 1.133320000000000E+00, 9.152760000000000E-01    
+UPPR     7.315060000000000E-03, 1.490040000000000E+00, 2.072860000000000E+00    
+         7.244040000000000E-02, 1.133320000000000E+00, 9.152760000000000E-01    
+BLST   1 4.688210000000000E-02, 2.758450000000000E-02, 2.096070000000000E-02    
+DIAG   1 1.000000000000000E+00                                                  
+SIML     0  1 0 0          200 1 0 0 0 0            0     0     0     0    -1
+SFIL              -1
+SORC        20260915               0                                            
+DFLT      -1                                                                    
+TABL       1   1                                                                
+PPAR              -1
+TABL   1   4     1 0     2 0     6 0     7 0                                    
+           0   1   1   0   1           0           0           0             0-1 0 0 0
+FRML    
+FRMR    
+FETA    

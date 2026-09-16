@@ -1,0 +1,33 @@
+$PROB COUNT, NEGATIVE BINOMIAL, EMAX DRUG EFFECT ON CAVG   P:cnt100  F:BASE
+$INPUT ID TIME DV MDV DOSE CAVG
+$DATA ../../data/cnt-sim.csv IGNORE=@
+$PRED
+  LAM0 = THETA(1) * EXP(ETA(1))
+  EMAX = THETA(2)
+  EC50 = THETA(3)
+  OVDP = THETA(4)                         ; overdispersion: Var = LAM + OVDP*LAM**2
+  LAM  = LAM0 * (1 - EMAX * CAVG / (EC50 + CAVG))
+  IF (LAM.LT.1E-6) LAM = 1E-6
+  R    = 1 / OVDP
+  LP1  = GAMLN(DV + R) - GAMLN(DV + 1) - GAMLN(R)
+  LP2  = R * LOG(R / (R + LAM)) + DV * LOG(LAM / (R + LAM))
+  Y    = -2 * (LP1 + LP2)                 ; -2 log-likelihood, negative binomial
+
+$THETA
+  (0, 5)       ; LAM0
+  (0, 0.5, 1)  ; EMAX
+  (0, 0.3)     ; EC50 (mg/L)
+  (0, 0.2)     ; OVDP
+
+$OMEGA 0.5     ; LAM0
+
+$EST MAX=9999 PRINT=5 METHOD=COND LAPLACE -2LL NSIG=3 SIGL=9 NOABORT
+$COV UNCOND PRINT=E
+$TAB ID TIME DV MDV DOSE CAVG LAM
+     ONEHEADER NOPRINT FILE=sdtab
+$TAB ID LAM0 ETA1
+     ONEHEADER NOPRINT NOAPPEND FILE=patab
+$TAB ID CAVG
+     ONEHEADER NOPRINT NOAPPEND FILE=cotab
+$TAB ID DOSE
+     ONEHEADER NOPRINT NOAPPEND FILE=catab

@@ -1,0 +1,5 @@
+{
+    return(FileTag("PRINT.OUT", "MINIMIZATION SUCCESSFUL"))
+}
+    수렴 표준오차 
+    TRUE     TRUE 

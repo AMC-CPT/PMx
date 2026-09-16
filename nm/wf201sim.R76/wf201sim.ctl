@@ -1,0 +1,60 @@
+$PROB WARFARIN PK/PD SIM FROM wf201 FINAL ESTIMATES   P:wf201  F:BASE
+$INPUT ID TIME AMT CMT DV DVID MDV EVID
+$DATA ../../data/warf-sim.csv IGNORE=@
+$SUBR ADVAN13 TOL=9
+$ABBR DERIV2=NO
+$MODEL COMP=(DEPOT DEFDOSE) COMP=(CENT DEFOBS) COMP=(PCA)
+
+$PK
+  KA   = THETA(1) * EXP(ETA(1))
+  CL   = THETA(2) * EXP(ETA(2))
+  V    = THETA(3) * EXP(ETA(3))
+  BASE = THETA(4) * EXP(ETA(4))
+  KOUT = THETA(5) * EXP(ETA(5))
+  C50  = THETA(6) * EXP(ETA(6))
+  KIN  = BASE * KOUT
+  KE   = CL / V
+  S2   = V
+  A_0(3) = BASE
+
+$DES
+  CP = A(2) / V
+  DADT(1) = -KA * A(1)
+  DADT(2) =  KA * A(1) - KE * A(2)
+  DADT(3) = KIN * (1 - CP / (C50 + CP)) - KOUT * A(3)
+
+$ERROR
+  IPRE = F
+  W    = 1
+  IF (DVID.EQ.1) W = THETA(7) * IPRE       ; concentration: proportional
+  IF (DVID.EQ.2) W = THETA(8)              ; PCA: additive
+  IF (W.LT.1E-6) W = 1E-6
+  IRES = DV - IPRE
+  IWRE = IRES / W
+  Y    = IPRE + W * EPS(1)
+
+; Final estimates of wf201, fixed as truth. Nothing is estimated here.
+$THETA
+  1.57413 FIX
+  0.154181 FIX
+  7.81922 FIX
+  101.377 FIX
+  0.048268 FIX
+  0.950886 FIX
+  0.101311 FIX
+  5.13304 FIX
+
+$OMEGA
+  0.344993 FIX
+  0.0572047 FIX
+  0.0299435 FIX
+  0.00765057 FIX
+  0.090242 FIX
+  0.132047 FIX
+
+$SIGMA 1 FIX
+
+$SIM (20260917) ONLYSIMULATION SUBPROBLEMS=200
+
+$TAB ID TIME DV MDV DVID CMT
+     ONEHEADER NOPRINT NOAPPEND FILE=simtab

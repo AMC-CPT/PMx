@@ -1,0 +1,56 @@
+$PROB NRS PD SIM FROM pd100 FINAL ESTIMATES   P:pd100  F:BASE
+$INPUT ID ARM DOSE TIME DV DVID MDV BSL=DROP BFLG=DROP
+$DATA ../../data/pd-sim.csv IGNORE=@
+$PRED
+  CL   = THETA(1) * EXP(ETA(1))
+  V    = THETA(2) * EXP(ETA(2))
+  BASE = THETA(3) * EXP(ETA(3))
+  PLMX = THETA(4) * EXP(ETA(4))
+  KPL  = THETA(5)
+  EMAX = THETA(6)
+  EC50 = THETA(7) * EXP(ETA(5))
+
+  CONC = DOSE / V * EXP(-CL / V * TIME)
+  PL   = PLMX * (1 - EXP(-KPL * TIME))
+  DR   = EMAX * CONC / (EC50 + CONC)
+  NRS  = BASE - PL - DR
+
+  F    = CONC
+  IF (DVID.EQ.2) F = NRS
+  IPRE = F
+  W    = 1
+  IF (DVID.EQ.1) W = THETA(8) * IPRE
+  BV   = IPRE * (10 - IPRE)
+  IF (BV.LT.0) BV = 0
+  IF (DVID.EQ.2) W = SQRT(THETA(9)**2 + THETA(10)**2 * BV)
+  IF (W.LT.1E-6) W = 1E-6
+  Y    = IPRE + W * EPS(1)
+  IF (DVID.EQ.2.AND.Y.LT.0)  Y = 0      ; the scale is bounded. So is the simulation
+  IF (DVID.EQ.2.AND.Y.GT.10) Y = 10
+
+; Final estimates of pd100, fixed as truth. Nothing is estimated here.
+$THETA
+  5.06178 FIX
+  39.2404 FIX
+  0.873566 FIX
+  0.868239 FIX
+  0.119472 FIX
+  1.49285 FIX
+  0.938852 FIX
+  0.147775 FIX
+  6.01738e-05 FIX
+  0.154403 FIX
+
+$OMEGA
+  0.0973565 FIX
+  0.0367983 FIX
+  0.10822 FIX
+  0.136077 FIX
+  0.380315 FIX
+
+$SIGMA 1 FIX
+
+$SIM (20260917) ONLYSIMULATION SUBPROBLEMS=200
+
+$TAB ID TIME DV MDV ARM DVID
+     ONEHEADER NOPRINT NOAPPEND FILE=simtab
