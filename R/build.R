@@ -277,6 +277,20 @@ if (have_nm("wf100.R76/wf100.ext", "wf200.R76/wf200.ext", "wf201.R76/wf201.ext",
     freeze("ch18-vpc", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
 }
 
+## ---- 18장 (둘째 예제): TMDD ---------------------------------------------
+#  실무 자료(개발 코드를 지운 원숭이 자료)와 nm/tm100-tm104 의 산출물을 읽는다.
+new_session()
+freeze("ch18-tmdd-data")
+freeze("ch18-tmdd-fig", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
+if (have_nm("tm100.R76/tm100.ext", "tm101.R76/tm101.ext", "tm102.R76/tm102.ext",
+            "tm103.R76/tm103.ext", "tm104.R76/tm104.ext")) {
+  freeze("ch18-tmdd-fit")
+  freeze("ch18-tmdd-gof", fig = TRUE, fig.w = 6.4, fig.h = 4.2)
+  freeze("ch18-tmdd-foce")
+  freeze("ch18-tmdd-qss")
+  freeze("ch18-tmdd-ro", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
+}
+
 ## ---- 19장: 종양성장과 TGI --------------------------------------------
 #  Benzekry 공개 자료를 여섯 성장 모형으로 적합한 결과(nm/tg*)를 읽는다.
 new_session()

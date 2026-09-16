@@ -1,7 +1,11 @@
 # 예제 자료
 
-이 책의 모든 예제는 **공개 자료와 이 책이 만든 모의 자료**만 쓴다.
+이 책의 예제는 **공개 자료와 이 책이 만든 모의 자료**만 쓴다.
 실제 과제의 자료는 워크플로와 실패 사례의 출처일 뿐 본문에도 이 저장소에도 싣지 않는다.
+18장 둘째 예제의 원숭이 자료만은 책에서는 실무 자료(개발 코드를 지운 것)를 썼고,
+이 저장소의 `tmdd-mab.csv` 는 그 최종 모형으로 같은 설계를 모의한 대역이다
+(`R/mkdata/sim_tmdd.R`, seed 2026). 그래서 `nm/tm10?.ctl` 을 다시 돌리면 책의 숫자와
+비슷하되 같지는 않고, `nm/tm10?.R76/` 실행 산출물도 여기 없다.
 
 ## `pheno.csv` - 정답 데이터셋
 
@@ -114,6 +118,7 @@ Rscript R/mkdata/make_sdtm.R
 | `pd-sim.csv` `pd-ord.csv` | `R/mkdata/make_pd.R` | 통증 NRS, 위약 포함 네 군 160명 | 17 |
 | `iov-sim.csv` | `R/mkdata/make_iov.R` | 세 회차 경구, 60명. IOV 와 청소율 아집단(POP 열이 참값) | 16 |
 | `warf-sim.csv` `warf-ipp.csv` | `R/mkdata/make_warf.R`, `make_warf_ipp.R` | warfarin 형 PK/PD 40명. IPP 용은 `wf100` 의 EBE 를 열로 | 18 |
+| `tmdd-mab.csv` | `R/mkdata/sim_tmdd.R` (모의 대역, seed 2026) | 단클론항체 원숭이 50마리, 여섯 용량. 책의 원자료와 같은 설계 | 18 |
 | `tgi-*.csv` | `R/mkdata/make_tgi.R`, `make_tgi_trt.R` | 종양 부피 (공개 자료를 다시 정리) 와 치료군 모의 | 19 |
 | `tte-sim.csv` `cnt-sim.csv` | `R/mkdata/make_tte.R` | 시간-사건 300명, 발작 횟수 200명 | 20 |
 | `ped-sim.csv` `ped-neo.csv` `ped-old.csv` | `R/mkdata/make_ped.R` | 소아 120명과 그 부분 자료 | 21 |
