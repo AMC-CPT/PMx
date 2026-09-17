@@ -74,8 +74,15 @@ Rscript R/boot.R 200           # 14장의 bootstrap
 실제 과제의 자료는 위의 한 예외를 빼면 없다. 책의 실패 사례는 재구성한 것이고, 여기 있는 것은
 전부 공개 자료이거나 모의 자료다.
 
-## 저작권
+## 저작권과 라이선스
 
-책 본문의 저작권은 저자와 출판사에 있다. 이 저장소의 코드와 모의 자료는 책을 공부하는
-독자가 자유롭게 돌려 보고 고쳐 볼 수 있도록 공개한다. NONMEM 은 ICON 의 상용
-소프트웨어이며 여기에는 그 어떤 부분도 포함되어 있지 않다.
+책 본문의 저작권은 저자와 출판사에 있고 여기에는 본문이 없다. 이 저장소의 코드, 제어파일,
+모의 자료, 얼린 출력과 그림은 **GNU General Public License v3.0 또는 그 이후 판**으로
+공개한다(`LICENSE`). 돌려 보고 고쳐 쓰는 것은 자유이며, 고친 것을 배포할 때는 같은
+조건으로 소스를 함께 내놓는다. NONMEM 은 ICON 의 상용 소프트웨어이며 여기에는 그 어떤
+부분도 포함되어 있지 않다.
+
+Copyright (C) 2026 Kyun-Seop Bae. This program is free software: you can redistribute it
+and/or modify it under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your option) any later
+version. It is distributed WITHOUT ANY WARRANTY; see `LICENSE` for details.
