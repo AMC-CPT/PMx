@@ -58,6 +58,7 @@ freeze("ch05-check")
 #  ch06-assert 가 정의한 check_nm() 을 ch06-mustfail 이 다시 쓴다(같은 세션).
 new_session()
 freeze("ch06-theo-dose", digits = 4)
+freeze("ch06-theofig", fig = TRUE, fig.w = 5.2, fig.h = 2.4)
 freeze("ch06-theo-fix",  digits = 4)
 freeze("ch06-read")
 freeze("ch06-time")
@@ -111,6 +112,9 @@ if (have_nm("100base.R76/100base.cor", "102sig.R76/102sig.cor",
   freeze("ch08-block")
   freeze("ch08-move")
   freeze("ch08-counter")
+  freeze("ch08-iterfig", fig = TRUE, fig.w = 6.6, fig.h = 2.4)
+  if (have_nm("110ka.R76/110ka.ext", "110ka.R76/patab"))
+    freeze("ch08-expfig", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
 }
 #  추정 방법 비교 (nm/100foce, 100its, 100imp, 100saem, 100bayes)
 if (have_nm("100foce.R76/100foce.ext", "100its.R76/100its.ext", "100imp.R76/100imp.ext",
@@ -180,6 +184,7 @@ if (have_nm("108wtsim.R76/simtab.csv", "108wt.R76/sdtab")) {
   freeze("ch12-pcvpcfig", fig = TRUE, fig.w = 6.4, fig.h = 3.6)
   freeze("ch12-npc")
   freeze("ch12-pd",       fig = TRUE, fig.w = 6.4, fig.h = 3.2)
+  freeze("ch12-stratfig", fig = TRUE, fig.w = 6.4, fig.h = 3.2)
 }
 
 ## ---- 13장: 무작위 순열 검정 --------------------------------------------
@@ -361,6 +366,8 @@ if (have_nm("108wt.R76/108wt.ext")) {
     freeze("ch23-unc")
   freeze("ch23-power")
   freeze("ch23-manifest")
+  if (file.exists("nm/boot/boot.csv") && file.exists("nm/llp/llp.csv"))
+    freeze("ch23-partab")
 }
 
 message("done.")
