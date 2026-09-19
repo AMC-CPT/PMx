@@ -36,6 +36,7 @@ if (have_nm("100base.R76/100base.lst")) {
 new_session()
 freeze("ch03-rng")
 freeze("ch03-hash")
+if (have_nm("oq1.R76/oq1.ext")) freeze("ch03-oq", digits = 6)   # OQ 실례 (벤더 예제)
 
 ## ---- 5장: 자료 준비 ----------------------------------------------------
 #  SDTM 형 도메인 일곱을 NONMEM 데이터셋 하나로 조립한다. 한 세션으로 이어지며
@@ -68,6 +69,8 @@ freeze("ch06-assert")
 freeze("ch06-mustfail")
 freeze("ch06-sexcode")
 freeze("ch06-blq")
+if (have_nm("120base.R76/120base.ext", "120m1.R76/120m1.ext", "120m3.R76/120m3.ext",
+            "120m5.R76/120m5.ext")) freeze("ch06-blqfit", digits = 3)
 freeze("ch06-tiny")
 
 ## ---- 7장: 기저 모형 ----------------------------------------------------
@@ -100,6 +103,13 @@ if (have_nm("130mult.R76/130mult.ext", "130addl.R76/130addl.ext", "130ss.R76/130
   freeze("ch07-mult")
   freeze("ch07-multfig", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
   freeze("ch07-multx")
+}
+#  네 번째 예제: 구획의 수 (nm/140iv2, 200iv2, 300iv2; 자료 R/mkdata/make_iv2.R)
+if (have_nm("140iv2.R76/140iv2.ext", "200iv2.R76/200iv2.ext", "300iv2.R76/300iv2.ext",
+            "140iv2.R76/sdtab", "200iv2.R76/sdtab")) {
+  new_session()
+  freeze("ch07-cpt", digits = 3)
+  freeze("ch07-cptfig", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
 }
 
 ## ---- 8장: 추정 방법과 수렴 --------------------------------------------
@@ -140,6 +150,10 @@ if (have_nm("100base.R76/patab", "106wtcl.R76/106wtcl.ext",
   freeze("ch09-omega")
   freeze("ch09-after",  fig = TRUE, fig.w = 6.4, fig.h = 3.2)
   freeze("ch09-sex")
+  if (have_nm("108wtbwt.R76/108wtbwt.ext", "108wtbwt.R76/108wtbwt.cor"))
+    freeze("ch09-collin", digits = 3)                 # 다중공선성 (se() 를 정의한다)
+  if (have_nm("108full.R76/108full.ext"))
+    freeze("ch09-full", digits = 3)                   # 완전 모형 (ch09-collin 의 se() 를 쓴다)
 }
 
 ## ---- 10장: 공변량 선택의 판단 ------------------------------------------
@@ -172,7 +186,7 @@ if (have_nm("108wt.R76/sdtab", "108wt.R76/PRINT.OUT", "108wt.R76/FCON")) {
     freeze("ch11-refplot", fig = TRUE, fig.w = 6.4, fig.h = 3.2)
     freeze("ch11-refstat")
   }
-  freeze("ch11-sumout")
+  suppressWarnings(freeze("ch11-sumout"))   # SumOut 이 모의 전용 108wtsim(추정 없음)을 요약하지 못한다는 경고. 언 출력과 무관하다
 }
 
 ## ---- 12장: 모의 기반 진단 ----------------------------------------------
@@ -184,6 +198,8 @@ if (have_nm("108wtsim.R76/simtab.csv", "108wt.R76/sdtab")) {
   freeze("ch12-pcvpcfig", fig = TRUE, fig.w = 6.4, fig.h = 3.6)
   freeze("ch12-npc")
   freeze("ch12-pd",       fig = TRUE, fig.w = 6.4, fig.h = 3.2)
+  if (requireNamespace("npde", quietly = TRUE))                     # 12장 NPDE (npde 패키지)
+    freeze("ch12-npde",   fig = TRUE, fig.w = 6.4, fig.h = 3.2)
   freeze("ch12-stratfig", fig = TRUE, fig.w = 6.4, fig.h = 3.2)
 }
 

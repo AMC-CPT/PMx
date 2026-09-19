@@ -1,0 +1,11 @@
+name,value
+CL,5
+V1,20
+Q,8
+V2,60
+PROP,0.1
+ADD,0.02
+OM_CL,0.09
+OM_V1,0.09
+OM_Q,0.09
+OM_V2,0.09

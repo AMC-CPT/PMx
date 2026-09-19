@@ -1,0 +1,9 @@
+   OFV.108wt OFV.108wtbwt 
+   "581.439"    "581.373" 
+                  추정 RSE %
+108wt    WT~CL   1.133  12.5
+108wtbwt WT~CL   0.323 886.0
+108wtbwt BWT~CL  0.814 359.3
+108wtbwt 둘의 합 1.136    NA
+cor(WT 지수, BWT 지수)           조건수 108wt        조건수 108wtbwt 
+                -0.999                 37.328              10950.800 

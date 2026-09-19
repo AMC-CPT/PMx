@@ -126,3 +126,11 @@ Rscript R/mkdata/make_sdtm.R
 | `mult-explicit.csv` `mult-addl.csv` `mult-ss.csv` `mult-ssx.csv` | `R/mkdata/make_mult.R` | 반복 경구 투여 30명을 세 가지로 코딩한 것과 함정 | 7 |
 
 `*-truth.csv` 가 각 자료의 참값이다. 모든 스크립트에 seed 가 박혀 있다.
+
+## 2026-09-19 추가 (증보 4건의 자료)
+
+| 파일 | 만드는 스크립트 | 내용 | 장 |
+|---|---|---|---|
+| `iov-blq.csv` | `R/mkdata/make_blq.R` | `iov-sim.csv` 의 관측을 LLOQ 0.5 mg/L 에서 자른 것. `BLQ` 열이 1 인 행의 `DV` 는 LLOQ/2. 관측 1,260 중 BLQ 164(13.0 %) | 6 |
+| `iv2-sim.csv` `iv2-sim-truth.csv` | `R/mkdata/make_iv2.R` | 2구획 정맥 bolus 40명, 11회 채혈. `WT`·`SEX` 는 표를 채우는 가짜 공변량 | 7 |
+| `example1.csv` | (NONMEM 7.6 배포본 `examples/`) | 벤더 OQ 예제 `setest.ctl` 의 자료. 제3자 저작물, 공개 저장소 제외 | 3 |

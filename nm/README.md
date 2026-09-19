@@ -180,3 +180,20 @@ R 쪽을 권한다. 후처리가 이미 R 이고, 한 곳에 두면 nm75/nm76 �
 `nonmem.exe`, `temp_dir/`, `FSUBS*`, `*.o` 같은 중간 파일은 `R/runnm.R` 이
 실행 직후 지운다. 보고 8종 PDF 는 `.gitignore` 대상이다.
 **실행 폴더 자체는 커밋한다.**
+
+## 2026-09-19 에 더한 모형 (증보 4건. 같은 날 실행 완료)
+
+WORKLOG 의 "NONMEM 실행이 필요한 증보" 네 건의 제어파일이다. 자료는 `R/mkdata/make_blq.R`,
+`R/mkdata/make_iv2.R` 이 만들었고, 실행 산출물도 커밋되어 있다(아홉 개 모두 MINIMIZATION SUCCESSFUL).
+
+```sh
+Rscript R/runnm.R 120m1 120m3 120m5 140iv2 200iv2 300iv2 108full 108wtbwt oq1
+```
+
+| 이름 | 무엇 | 장 |
+|---|---|---|
+| `120m1` `120m5` `120m3` | 16장 자료를 LLOQ 0.5 mg/L 에서 자른 `data/iov-blq.csv`(BLQ 13 %)를 M1(버림) / M5(LLOQ/2) / M3(F_FLAG, LAPLACE)로. 자르지 않은 적합은 `120base`, 참값은 `iov-sim-truth.csv` | 6 |
+| `140iv2` `200iv2` `300iv2` | 2구획 정맥 모의 자료 `data/iv2-sim.csv`(40명, 참값 CL 5, V1 20, Q 8, V2 60)를 1·2·3구획으로. 1구획은 잔차가 굽고, 3구획은 자료가 지지하지 않는다(조건수·SE) | 7 |
+| `108full` | 완전 모형 접근. `108wt` 에 CREA·APGR·SEX 를 한꺼번에(효과크기와 구간으로 판단). SEX 는 가짜 공변량이라 0 이 정답 | 9-10 |
+| `108wtbwt` | 다중공선성. WT 와 BWT(이 자료에서는 값이 같다)를 청소율에 함께 넣는다. 지수 둘의 합만 식별되므로 SE·조건수·R 행렬이 무너진다 | 9-10 |
+| `oq1` | OQ 실례. 벤더 예제 `examples/setest.ctl` 원문(2구획, FOCE-I). 기준 출력은 `Ref/oq/` | 3 |
