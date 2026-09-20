@@ -1,6 +1,6 @@
 # 계량약리학 with NONMEM and R — 예제 저장소
 
-배균섭, 『계량약리학 with NONMEM and R』(Pharmacometrics with NONMEM and R, 자유아카데미)의
+배균섭, 『계량약리학 with NONMEM and R』(Pharmacometrics with NONMEM and R)의
 companion 저장소다. 책에 실린 **모든 숫자와 그림을 독자가 다시 만들 수 있게** 하는
 것이 목적이며, 책 본문은 여기 없다.
 

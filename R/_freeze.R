@@ -32,6 +32,27 @@
       message(sprintf("  trimmed blank page(s): %s (kept last of %d)", figfile, npg))
     }
   }
+  .crop_fig(figfile)
+  invisible()
+}
+
+#  둘레의 빈 여백을 잘라 낸다 (2026-09-20).
+#  R 그래픽 장치는 fig.w x fig.h 판을 만들고 그 안에 그림을 그리므로, 그림이 판을
+#  다 채우지 않으면 둘레에 흰 자리가 남는다. 본문의 그림 폭은 잘라 낸 뒤의 크기에
+#  맞추어 두었으므로(인쇄된 그림 크기는 그대로다) 여기서 자르지 않으면 그림이
+#  작아져 보인다. 2bp 는 잉크가 글에 닿지 않을 만큼의 최소 여백이다.
+.crop_fig <- function(figfile) {
+  pcrop <- Sys.which("pdfcrop")
+  if (pcrop == "") return(invisible())
+  tmp <- paste0(figfile, ".crop")
+  ok <- tryCatch(system2(pcrop, c("--margins", "2", shQuote(figfile), shQuote(tmp)),
+                         stdout = FALSE, stderr = FALSE),
+                 error = function(e) 1L)
+  if (identical(as.integer(ok), 0L) && file.exists(tmp)) {
+    file.remove(figfile); file.rename(tmp, figfile)
+  } else if (file.exists(tmp)) {
+    file.remove(tmp)
+  }
   invisible()
 }
 

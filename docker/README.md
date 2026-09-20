@@ -42,14 +42,19 @@ nmfe76 CONTROL5 CONTROL5.par -parafile=/opt/nm760/run/mpilinux8.pnm '[nodes]=4'
 호스트와 컨테이너의 결과 대조 (15.6절)
 
 ```sh
+docker build --platform linux/amd64 -t nm760 .
+docker run  --platform linux/amd64 --rm -it ...
+```
+
+병렬 실행과 tmpfs (15.7-15.8절)
+
+```sh
 # 호스트(Windows)에서 돌린 것
 Rscript R/runnm.R 108wt
 # 컨테이너에서 돌린 것 (같은 제어파일, 같은 자료)
 docker run --rm -v ...:/opt/nm760/license/nonmem.lic:ro -v $PWD:/work -w /work/nm \
   nm760 nmfe76 108wt.ctl 108wt.lst -rundir=108wt.docker
 ```
-
-병렬 실행과 tmpfs (15.7-15.8절)
 
 ```sh
 nmfe76 206.CTL 206.OUT -parafile=/opt/nm760/run/mpilinux8.pnm '[nodes]=4'
@@ -63,11 +68,11 @@ docker run --rm --tmpfs /work:rw,size=4g,exec \
                 nmfe76 206.CTL 206.OUT -parafile=/opt/nm760/run/mpilinux8.pnm"
 ```
 
+Google Cloud (15.9절). `<PROJECT_ID>`, `<BUCKET>`, `<REGION>` 을 자기 것으로 바꾼다.
+
 ```sh
 docker exec <container> tar cf - -C /work . | tar xf - -C ./run2_with_tmpfs/
 ```
-
-Google Cloud (15.9절). `<PROJECT_ID>`, `<BUCKET>`, `<REGION>` 을 자기 것으로 바꾼다.
 
 ```sh
 gcloud auth login
@@ -93,49 +98,17 @@ docker push <REGION>-docker.pkg.dev/<PROJECT_ID>/nonmem-repo/nm760:latest
 ```
 
 ```sh
-# 1. 입력을 올린다
-gcloud storage cp ./run003/CONTROL5 ./run003/THEOPP gs://<BUCKET>/run003/
-
-# 2. 작업을 만든다. 버킷을 /gcs 에 붙여 파일처럼 쓴다
-gcloud run jobs create nonmem-run003 \
-  --image=<REGION>-docker.pkg.dev/<PROJECT_ID>/nonmem-repo/nm760:latest \
-  --region=<REGION> \
-  --cpu=4 --memory=4Gi \
-  --max-retries=0 \
-  --task-timeout=3600s \
-  --add-volume=name=gcs-vol,type=cloud-storage,bucket=<BUCKET> \
-  --add-volume-mount=volume=gcs-vol,mount-path=/gcs \
-  --command=bash \
-  --args="-c,cp /gcs/run003/* /data/ && cd /data && \
-    nmfe76 CONTROL5 CONTROL5.res \
-      -parafile=/opt/nm760/run/mpilinux_onecomputer.pnm '[nodes]=4' && \
-    mkdir -p /gcs/run003/results && \
-    cp /data/*.res /data/*.ext /data/*.xml /data/*.phi /gcs/run003/results/"
-
-# 3. 실행한다
-gcloud run jobs execute nonmem-run003 --region=<REGION>
-
-# 4. 상태를 보고, 끝나면 내려받는다
-gcloud run jobs executions list --job=nonmem-run003 --region=<REGION>
-gcloud storage cp -r gs://<BUCKET>/run003/results/ ./run003/
+#!/bin/bash
+set -e
+mkdir -p /tmp/nm_run && cd /tmp/nm_run
+gcloud storage cp "$INPUT_GCS_PATH" ./input.ctl
+[ -n "$DATA_GCS_PATH" ] && gcloud storage cp "$DATA_GCS_PATH" ./data.csv
+nmfe76 input.ctl output.lst
+gcloud storage cp -r ./* "$OUTPUT_GCS_PATH"
 ```
 
 ```sh
 gcloud run jobs executions describe nonmem-run003-8krcv --region=<REGION>
 gcloud run jobs executions cancel   nonmem-run003-8krcv --region=<REGION>
 gcloud run jobs delete nonmem-run003 --region=<REGION> --quiet
-```
-
-```sh
-# 재표집 200벌을 미리 만들어 올려 둔다: gs://<BUCKET>/boot/001.csv ... 200.csv
-gcloud run jobs create nonmem-boot \
-  --image=... --region=<REGION> --cpu=2 --memory=2Gi \
-  --tasks=200 --parallelism=50 --max-retries=1 --task-timeout=7200s \
-  --add-volume=name=gcs-vol,type=cloud-storage,bucket=<BUCKET> \
-  --add-volume-mount=volume=gcs-vol,mount-path=/gcs \
-  --command=bash \
-  --args="-c,I=\$(printf %03d \$((CLOUD_RUN_TASK_INDEX+1))) && \
-    mkdir -p /data/\$I && cp /gcs/boot/boot.ctl /gcs/boot/\$I.csv /data/\$I/ && \
-    cd /data/\$I && sed -i s/_boot.csv/\$I.csv/ boot.ctl && \
-    nmfe76 boot.ctl boot.lst && cp boot.ext boot.lst /gcs/boot/out/\$I/"
 ```
