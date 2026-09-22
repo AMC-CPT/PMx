@@ -1,0 +1,3 @@
+             lighter half heavier half
+subjects               30           29
+observations           83           72

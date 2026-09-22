@@ -1,0 +1,2 @@
+     records observations   parameters          OFV  OFV.per.obs 
+    803.0000     155.0000       9.0000     581.4390       3.7512 

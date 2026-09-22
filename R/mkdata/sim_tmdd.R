@@ -1,7 +1,7 @@
-# 공개 저장소용 TMDD 모의 자료. 18장 둘째 예제의 원숭이 자료는 실무 자료라 공개 저장소에
-# 싣지 않는다. 대신 최종 모형 tm103 의 추정치로 같은 설계(용량 여섯, 마리 수, 채혈
-# 시각, 정량한계)를 모의한 이 자료를 같은 이름 data/tmdd-mab.csv 로 둔다. 책의 숫자는
-# 원자료에서 나온 것이므로 이 자료로 다시 돌리면 비슷하되 같지는 않다.
+# TMDD simulated data for the public repository. The monkey data of the second
+# example of Ch 18 is practice data and is not published. Instead, this data,
+# simulated from the estimates of the final model tm103 under the same design
+# (six dose levels, animal count, sampling times, limit of quantification), is placed under the same name data/tmdd-mab.csv. The numbers in the book come from the original data, so re-running on this gives similar but not identical results.
 library(deSolve); set.seed(2026)
 th <- c(CLkg = 0.000205, V1kg = 0.0316, Q = 0.00300, V2 = 0.0141, KON = 0.305, KOFF = 0.00171,
         KINT = 0.0133, KDEG = 0.147, ADD = 0.0147, PROP = 0.0705, KSYNkg = 0.0182)
@@ -33,9 +33,9 @@ for (lv in names(design)) for (i in seq_len(design[[lv]]$n)) {
   ipred <- o[-1, 2] / v1
   w <- sqrt(th[["ADD"]]^2 + th[["PROP"]]^2 * ipred^2)
   dv <- ipred + w * rnorm(length(tt)); dv <- signif(pmax(dv, LLOQ / 2), 4)
-  keep <- dv >= LLOQ                                    # 정량한계 아래는 원자료처럼 뺀다
+  keep <- dv >= LLOQ                                    # drop below LLOQ, as in the original
   out <- rbind(out, data.frame(ID = id, LVL = dose, SEX = id %% 2, BWT = bwt, TIME = 0, AMT = amt, DV = 0, MDV = 1),
                data.frame(ID = id, LVL = dose, SEX = id %% 2, BWT = bwt, TIME = tt[keep], AMT = 0, DV = dv[keep], MDV = 0))
 }
 write.csv(out, "data/tmdd-mab-sim.csv", row.names = FALSE, quote = FALSE)
-message("data/tmdd-mab-sim.csv: ", nrow(out), " 행, ", id, " 마리, 관측 ", sum(out$MDV == 0))
+message("data/tmdd-mab-sim.csv: ", nrow(out), " rows, ", id, " animals, ", sum(out$MDV == 0), " observations")

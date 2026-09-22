@@ -1,0 +1,4 @@
+   NA.fraction  negative.time time.goes.back 
+             1              0              0 
+       missing time.goes.back     duplicated 
+             0              0             59 

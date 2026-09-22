@@ -1,0 +1,5 @@
+   answer assembled  pre.dose 
+      744       744        59 
+[1] "all 744 assembled rows match the answer"
+observations.out          max.min     mean.abs.min 
+            63.0             12.0              4.6 

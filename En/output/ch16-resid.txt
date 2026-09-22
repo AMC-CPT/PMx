@@ -1,0 +1,6 @@
+         error       OFV parameters add.SD prop.CV OM_CL
+1     additive -2252.686          4  0.205      NA 0.330
+2 proportional -2102.322          4     NA   0.216 0.311
+3     combined -2368.865          5  0.120   0.133 0.332
+ true.add.SD true.prop.CV 
+        0.05         0.12 

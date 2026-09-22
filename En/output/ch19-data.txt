@@ -1,0 +1,5 @@
+LLC_sc_CCSB.txt        ID,Time,Vol
+LM2-4LUC.txt           ID	Time	Observation
+MDA-MB-231dTomato.txt  ID	Time	Observation
+     animals observations   per.animal         time       volume 
+        "20"        "173"       "6-12"       "4-22"    "14-1492" 

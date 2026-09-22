@@ -1,0 +1,7 @@
+       group  n    weight PMA.weeks obs.per.subject
+1    neonate 30   1.1-4.1     28-44             2.6
+2     infant 30  6.5-16.1    50-143             3.5
+3      child 30 14.3-34.4   186-664             6.0
+4 adolescent 30 35.1-70.4   668-971             6.0
+ CLSTD   VSTD EXP_CL  EXP_V   TM50   HILL   PROP    ADD  OM_CL   OM_V 
+  6.00  40.00   0.75   1.00  55.00   3.40   0.10   0.20   0.09   0.04 

@@ -1,18 +1,18 @@
 # =====================================================================
-#  R/sse.R  -  설계 비교를 위한 모의-추정(SSE, 22장).  라이선스가 있는 PC 에서만.
-#  저장소 최상위에서 실행:   Rscript R/sse.R [반복횟수]
+#  R/sse.R  -  simulation-estimation for comparing designs (SSE, Ch 22).  Licensed machines only.
+#  Run from the repository root:   Rscript R/sse.R [replicates]
 #
-#  같은 모형(1구획 경구, 참값을 안다)에서 세 채혈 설계로 자료를 만들고, 각각을
-#  NONMEM 으로 추정한다. 설계마다 100번. 추정치의 흩어짐(경험적 SE)이 그 설계의
-#  정보이고, 22장이 이것을 Fisher 정보행렬로 예측한 SE 와 견준다.
+#  From one model (one-compartment oral, true values known), generate data
+#  under three sampling designs and estimate each with NONMEM, 100 times per
+#  design. The spread of the estimates (the empirical SE) is that design's information, and Ch 22 compares it with the SE predicted by the Fisher information matrix.
 #
-#    rich    30명, 0.5 1 2 4 8 12 24 h  (7점)
-#    sparse2 30명, 1, 12 h              (2점)
-#    sparse3 30명, 1, 4, 24 h           (3점. 정보행렬이 고른 시각)
+#    rich    30 subjects, 0.5 1 2 4 8 12 24 h  (7 points)
+#    sparse2 30 subjects, 1, 12 h              (2 points)
+#    sparse3 30 subjects, 1, 4, 24 h           (3 points, chosen by the information matrix)
 #
-#  결과는 nm/sse/sse.csv 하나로 남는다. 제어파일은 nm/sse.ctl (data/_sse.csv 를 읽는다).
+#  The result comes down to one file, nm/sse/sse.csv. The control stream is nm/sse.ctl (it reads data/_sse.csv).
 # =====================================================================
-if (!file.exists("PMx.tex")) stop("저장소 최상위에서 실행하라.")
+if (!dir.exists("R/snippets")) stop("Run from the repository root.")
 NREP <- as.integer(c(commandArgs(trailingOnly = TRUE), "100")[1])
 
 TRUE_PAR <- c(KA = 1.2, CL = 4, V = 50, ADD = 0.05, PROP = 0.12)
@@ -67,10 +67,10 @@ for (r in seq_len(nrow(res))) {
   v <- read_run("nm/sse.R76", "sse")
   if (!is.null(v)) for (k in cols) res[[k]][r] <- v[[k]]
   res$TERM[r] <- term_of("nm/sse.R76", "sse")
-  if (r %% 20 == 0) message(sprintf("  %3d/%d  경과 %s", r, nrow(res), format(round(Sys.time() - t0))))
+  if (r %% 20 == 0) message(sprintf("  %3d/%d  elapsed %s", r, nrow(res), format(round(Sys.time() - t0))))
 }
 write.csv(res, "nm/sse/sse.csv", row.names = FALSE, quote = FALSE)
 unlink(c("data/_sse.csv", "nm/sse.R76"), recursive = TRUE)
-message(sprintf("\n%d회, 산출물 없음 %d회, 총 %s", nrow(res), sum(is.na(res$OFV)), format(round(Sys.time() - t0))))
+message(sprintf("\n%d replicates, %d with no artefact, total %s", nrow(res), sum(is.na(res$OFV)), format(round(Sys.time() - t0))))
 print(table(res$DESIGN, res$TERM))
-message("nm/sse/sse.csv 에 썼다.  다음: Rscript R/build.R")
+message("written to nm/sse/sse.csv.  next: Rscript R/build.R")

@@ -1,0 +1,12 @@
+     total    newpage      skip2 overstrike      plain 
+       736         15         47         52        514 
+ OMEGA - COV MATRIX FOR RANDOM EFFECTS - ETAS  ********
+
+
+         ETA1      ETA2     
+ 
+ ETA1
++        2.54E-01
+ 
+ ETA2
++        1.97E-01  1.55E-01

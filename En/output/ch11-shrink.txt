@@ -1,0 +1,3 @@
+        ETA1 ETA2  EPS
+by.hand 13.9 10.7 18.0
+NONMEM  14.7 11.5 18.3

@@ -1,0 +1,11 @@
+        status
+arm      event censored
+  0 mg      86       14
+  50 mg     67       33
+  100 mg    42       58
+  TTE_GAM  TTE_MED0  TTE_BETA    TTE_CL  TTE_OMCL TTE_PDROP   TTE_LAM 
+    1.400     6.000     1.200     5.000     0.090     0.100     0.056 
+         records events median
+DOSE=0       100     86  5.595
+DOSE=50      100     67  8.243
+DOSE=100     100     42     NA

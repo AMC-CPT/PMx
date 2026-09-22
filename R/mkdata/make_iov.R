@@ -1,25 +1,25 @@
 # =====================================================================
-#  R/mkdata/make_iov.R  -  변동성 구조 장의 모의 자료를 만든다
-#  저장소 최상위에서 실행:   Rscript R/mkdata/make_iov.R
+#  R/mkdata/make_iov.R  -  simulated data for the chapter on variability
+#  Run from the repository root:   Rscript R/mkdata/make_iov.R
 #
-#  참값을 알고 만든 자료다. 개체간 변이(IIV) 위에 **투여회차간 변이(IOV)** 를
-#  얹고, 청소율이 낮은 **아집단**(대사 저하자 20 %)을 섞었다. 그래야 IOV 를
-#  무시하면 무엇이 부풀고, $MIX 가 아집단을 얼마나 되찾는지를 참값과의
-#  거리로 말할 수 있다. 결과는 data/iov-sim.csv 하나이고 seed 가 박혀 있다.
+#  Made with the true values known. **Interoccasion variability (IOV)** is
+#  laid over interindividual variability (IIV), and a **subpopulation** of
+#  low clearance (20 % poor metabolisers) is mixed in. Only then can one say,
+#  by distance from the truth, what inflates when IOV is ignored and how much of the subpopulation $MIX recovers. The result is data/iov-sim.csv, with the seed written in.
 #
-#  설계. 1구획 경구 흡수. 100 mg 을 0, 168, 336 시간(1, 8, 15일)에 한 번씩,
-#  세 회차(OCC 1-3). 회차마다 0.5, 1, 2, 4, 8, 12, 24 시간에 채혈. 60명.
+#  Design. One-compartment oral. 100 mg once at 0, 168 and 336 h (days 1, 8,
+#  15), three occasions (OCC 1-3). Sampling at 0.5, 1, 2, 4, 8, 12, 24 h per occasion. 60 subjects.
 #
-#  모형.
-#    KA = 1.0 /h, CL = 4.0 L/h (대사 정상), 1.2 L/h (대사 저하, 30 %), V = 50 L
-#    IIV  omega^2: KA 0.16, CL 0.09, V 0.04            (로그정규)
-#    IOV  pi^2:    CL 0.04, KA 0.09                    (회차마다 새로 뽑는다)
-#    잔차:  비례 12 %, 가법 0.05 mg/L
+#  Model.
+#    KA = 1.0 /h, CL = 4.0 L/h (normal), 1.2 L/h (poor, 30 %), V = 50 L
+#    IIV  omega^2: KA 0.16, CL 0.09, V 0.04            (log-normal)
+#    IOV  pi^2:    CL 0.04, KA 0.09                    (redrawn each occasion)
+#    Residual:  proportional 12 %, additive 0.05 mg/L
 #
-#  열.  ID TIME AMT DV MDV EVID OCC POP
-#    OCC 1-3 = 투여 회차.  POP 1 = 대사 정상, 2 = 대사 저하 (참값. 모형은 모른다).
+#  Columns.  ID TIME AMT DV MDV EVID OCC POP
+#    OCC 1-3 = dosing occasion.  POP 1 = normal, 2 = poor metaboliser (the truth; the model does not know it).
 # =====================================================================
-if (!file.exists("PMx.tex")) stop("저장소 최상위에서 실행하라.")
+if (!file.exists("PMx.tex")) stop("Run from the repository root.")
 
 set.seed(20260918)
 
@@ -33,7 +33,7 @@ tdose <- c(0, 168, 336)
 tobs  <- c(0.5, 1, 2, 4, 8, 12, 24)
 dose  <- 100
 
-pop  <- rbinom(n, 1, TRUE_PAR["PPM"]) + 1L          # 1 = 정상, 2 = 저하
+pop  <- rbinom(n, 1, TRUE_PAR["PPM"]) + 1L          # 1 = normal, 2 = poor
 rows <- list()
 for (i in seq_len(n)) {
   eta <- rnorm(3, 0, sqrt(OMEGA))
@@ -41,7 +41,7 @@ for (i in seq_len(n)) {
   cl  <- TRUE_PAR["CL"] * ifelse(pop[i] == 2, TRUE_PAR["FPM"], 1) * exp(eta[2])
   v   <- TRUE_PAR["V"]  * exp(eta[3])
   for (k in seq_along(tdose)) {
-    kap <- rnorm(2, 0, sqrt(PI))                      # 회차 효과
+    kap <- rnorm(2, 0, sqrt(PI))                      # occasion effects
     kao <- ka * exp(kap[2]); clo <- cl * exp(kap[1])
     ke  <- clo / v
     f   <- dose * kao / (v * (kao - ke)) * (exp(-ke * tobs) - exp(-kao * tobs))
@@ -57,7 +57,7 @@ d <- do.call(rbind, rows)
 d <- d[order(d$ID, d$TIME, -d$EVID), ]
 rownames(d) <- NULL
 write.csv(d, "data/iov-sim.csv", row.names = FALSE, quote = FALSE, na = ".")
-cat(sprintf("data/iov-sim.csv: %d 행, %d 명, 관측 %d, 대사 저하 %d 명\n",
+cat(sprintf("data/iov-sim.csv: %d rows, %d subjects, %d observations, %d poor metabolisers\n",
             nrow(d), n, sum(d$MDV == 0), sum(pop == 2)))
 
 write.csv(data.frame(name = c(names(TRUE_PAR), paste0("OM_", names(OMEGA)),

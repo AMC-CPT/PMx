@@ -1,0 +1,6 @@
+OFV.no.effect    OFV.effect          dOFV 
+      3112.89       3008.82        104.07 
+estimate      RSE    truth    lower    upper 
+  -0.409    4.300   -0.400   -0.443   -0.375 
+control.day21 treated.day21      TC.ratio 
+      1848.00        415.00          0.22 

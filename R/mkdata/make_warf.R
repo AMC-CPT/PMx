@@ -1,25 +1,25 @@
 # =====================================================================
-#  R/mkdata/make_warf.R  -  간접반응 장의 warfarin 형 PK/PD 모의 자료를 만든다
-#  저장소 최상위에서 실행:   Rscript R/mkdata/make_warf.R
+#  R/mkdata/make_warf.R  -  warfarin-type PK/PD simulated data for the indirect response chapter
+#  Run from the repository root:   Rscript R/mkdata/make_warf.R
 #
-#  참값을 알고 만든 자료다. warfarin 은 응고인자의 **합성을 억제**하고,
-#  응고 능력(PCA, prothrombin complex activity, % of normal)은 그 인자의
-#  회전율에 따라 천천히 떨어졌다가 돌아온다. 간접반응 I 형(kin 억제)이다.
+#  Made with the true values known. Warfarin **inhibits the synthesis** of
+#  clotting factors, and clotting capacity (PCA, prothrombin complex
+#  activity, % of normal) falls slowly and returns according to their turnover. This is indirect response type I (inhibition of kin).
 #
-#  설계. 40명, 100 mg 경구 단회. 농도는 0.5, 2, 6, 12, 24, 48, 72, 96, 120 시간,
-#  PCA 는 0(투여 전), 12, 24, 36, 48, 72, 96, 120, 144 시간에 잰다.
+#  Design. 40 subjects, single 100 mg oral dose. Concentration at 0.5, 2, 6,
+#  12, 24, 48, 72, 96, 120 h; PCA at 0 (pre-dose), 12, 24, 36, 48, 72, 96, 120, 144 h.
 #
-#  모형.
-#    PK   1구획 경구.  KA 1.5 /h, CL 0.15 L/h, V 8 L    (반감기 37 h)
+#  Model.
+#    PK   1-compartment oral.  KA 1.5 /h, CL 0.15 L/h, V 8 L   (half-life 37 h)
 #    PD   dPCA/dt = KIN * (1 - C/(C50 + C)) - KOUT * PCA,   PCA(0) = BASE = KIN/KOUT
-#         BASE 100 %, KOUT 0.05 /h (회전 반감기 14 h), C50 1.0 mg/L
+#         BASE 100 %, KOUT 0.05 /h (turnover half-life 14 h), C50 1.0 mg/L
 #    IIV  omega^2: KA 0.25, CL 0.09, V 0.04, BASE 0.01, KOUT 0.09, C50 0.16
-#    잔차:  농도 비례 10 %, PCA 가법 SD 5 %
+#    Residual:  concentration proportional 10 %, PCA additive SD 5 %
 #
-#  열.  ID TIME AMT CMT DV DVID MDV EVID
-#    CMT 1 = depot(투약), 2 = central(농도), 3 = PCA.   DVID 1 = 농도, 2 = PCA.
+#  Columns.  ID TIME AMT CMT DV DVID MDV EVID
+#    CMT 1 = depot (dosing), 2 = central (concentration), 3 = PCA.   DVID 1 = concentration, 2 = PCA.
 # =====================================================================
-if (!file.exists("PMx.tex")) stop("저장소 최상위에서 실행하라.")
+if (!file.exists("PMx.tex")) stop("Run from the repository root.")
 
 set.seed(20260919)
 
@@ -32,7 +32,7 @@ dose <- 100
 tPK  <- c(0.5, 2, 6, 12, 24, 48, 72, 96, 120)
 tPD  <- c(0, 12, 24, 36, 48, 72, 96, 120, 144)
 
-# PCA 는 닫힌 해가 없으므로 수치적분한다(0.05 h 격자의 4차 Runge-Kutta).
+# PCA has no closed form, so it is integrated numerically (4th-order Runge-Kutta on a 0.05 h grid).
 pca_curve <- function(ka, cl, v, base, kout, c50, tmax = 150, h = 0.05) {
   ke   <- cl / v
   conc <- function(t) dose * ka / (v * (ka - ke)) * (exp(-ke * t) - exp(-ka * t))
@@ -65,7 +65,7 @@ d <- do.call(rbind, rows)
 d <- d[order(d$ID, d$TIME, -d$EVID, d$CMT), ]
 rownames(d) <- NULL
 write.csv(d, "data/warf-sim.csv", row.names = FALSE, quote = FALSE, na = ".")
-cat(sprintf("data/warf-sim.csv: %d 행, %d 명, 농도 %d, PCA %d, PCA 최소 %g\n",
+cat(sprintf("data/warf-sim.csv: %d rows, %d subjects, conc %d, PCA %d, PCA min %g\n",
             nrow(d), n, sum(d$DVID == 1), sum(d$DVID == 2), min(d$DV[d$DVID == 2])))
 
 write.csv(data.frame(name = c(names(TRUE_PAR), paste0("OM_", names(OMEGA))),

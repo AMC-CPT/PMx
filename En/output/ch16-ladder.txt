@@ -1,0 +1,6 @@
+                  model parameters     OFV OM_CL
+1              IIV only          8 -2368.9 0.332
+2 + IIV on the residual          9 -2373.4 0.333
+3                 + IOV         10 -2717.7 0.341
+4             + mixture         10 -2390.0 0.087
+5       + IOV + mixture         12 -2739.2 0.084

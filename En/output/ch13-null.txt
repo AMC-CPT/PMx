@@ -1,0 +1,6 @@
+      actual permutations     null.max  null.median 
+      104.09       200.00        67.23         1.33 
+    p 
+0.005 
+      chisq.95 permutation.95 
+          5.99           5.70 

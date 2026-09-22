@@ -1,0 +1,5 @@
+{
+    return(FileTag("PRINT.OUT", "MINIMIZATION SUCCESSFUL"))
+}
+ converged std.errors 
+      TRUE       TRUE 

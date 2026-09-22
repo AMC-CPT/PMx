@@ -1,30 +1,30 @@
 # =====================================================================
-#  R/build.R  -  frozen R output 과 그림을 다시 만든다
-#  저장소 최상위에서 실행:   Rscript R/build.R
-#  장을 쓸 때마다 freeze(...) 한 줄씩 늘린다.
+#  R/build.R  -  regenerate the frozen R output and figures
+#  Run from the repository root:   Rscript R/build.R
+#  Add one freeze(...) line as each chapter is written.
 # =====================================================================
-if (!file.exists("PMx.tex"))
-  stop("저장소 최상위에서 실행하라 (PMx.tex 가 있는 곳).")
+if (!dir.exists("R/snippets"))
+  stop("Run from the repository root (where R/snippets/ lives).")
 
 dir.create("output",  showWarnings = FALSE)
 dir.create("figures", showWarnings = FALSE)
 source("R/_freeze.R")
 
-# 이 스크립트는 **NONMEM 을 부르지 않는다.** nm/ 에 커밋된 실행 산출물을 읽을
-# 뿐이므로 라이선스가 없는 PC 에서도 돈다. 산출물이 없으면 그 장을 건너뛰고
-# 무엇을 돌려야 하는지 알린다. 만들려면: Rscript R/runnm.R (라이선스 필요)
+# This script **never calls NONMEM.** It only reads the run artefacts
+# committed under nm/, so it runs on a machine without a licence. Where an
+# artefact is missing it skips that chapter and says what must be run.
 have_nm <- function(...) {
   f <- file.path("nm", c(...))
   ok <- all(file.exists(f))
-  if (!ok) message(sprintf("  건너뜀: %s 가 없다. Rscript R/runnm.R (라이선스 필요)",
+  if (!ok) message(sprintf("  skipped: %s missing. Rscript R/runnm.R (licence needed)",
                            paste(basename(f[!file.exists(f)]), collapse = ", ")))
   ok
 }
 
 message("Freezing R output/figures ...")
 
-## ---- 2장: NONMEM 설치와 출력 다듬기 ------------------------------------
-#  커밋된 .lst 를 읽어 제어문자를 보이고 TrimOut 으로 다듬는다.
+## ---- Ch 2: Installing NONMEM and taming its output --------------------
+#  Read the committed .lst, show the control characters, trim with TrimOut.
 if (have_nm("100base.R76/100base.lst")) {
   new_session()
   freeze("ch02-cc")
@@ -32,15 +32,15 @@ if (have_nm("100base.R76/100base.lst")) {
   freeze("ch02-need")
 }
 
-## ---- 3장: 작업 환경과 재현성 -------------------------------------------
+## ---- Ch 3: Working environment and reproducibility --------------------
 new_session()
 freeze("ch03-rng")
 freeze("ch03-hash")
-if (have_nm("oq1.R76/oq1.ext")) freeze("ch03-oq", digits = 6)   # OQ 실례 (벤더 예제)
+if (have_nm("oq1.R76/oq1.ext")) freeze("ch03-oq", digits = 6)   # worked OQ (vendor example)
 
-## ---- 5장: 자료 준비 ----------------------------------------------------
-#  SDTM 형 도메인 일곱을 NONMEM 데이터셋 하나로 조립한다. 한 세션으로 이어지며
-#  마지막 ch05-check 의 stopifnot 이 곧 이 장의 시험이다(깨지면 빌드가 선다).
+## ---- Ch 5: Data assembly ----------------------------------------------
+#  Assemble seven SDTM-style domains into one NONMEM dataset. It runs as a
+#  single session, and the stopifnot of ch05-check is this chapter's test
 new_session()
 freeze("ch05-read")
 freeze("ch05-dm")
@@ -54,9 +54,9 @@ freeze("ch05-cov")
 freeze("ch05-final")
 freeze("ch05-check")
 
-## ---- 6장: 자료 점검과 검증 -------------------------------------------
-#  문을 여는 THEO 용량 오기 대조에 이어, 5장이 만든 데이터셋을 점검한다.
-#  ch06-assert 가 정의한 check_nm() 을 ch06-mustfail 이 다시 쓴다(같은 세션).
+## ---- Ch 6: Data checking and verification -----------------------------
+#  After the opening THEO dose-error comparison, check the dataset made in
+#  Ch 5. ch06-mustfail reuses the check_nm() defined by ch06-assert.
 new_session()
 freeze("ch06-theo-dose", digits = 4)
 freeze("ch06-theofig", fig = TRUE, fig.w = 5.2, fig.h = 2.4)
@@ -73,8 +73,8 @@ if (have_nm("120base.R76/120base.ext", "120m1.R76/120m1.ext", "120m3.R76/120m3.e
             "120m5.R76/120m5.ext")) freeze("ch06-blqfit", digits = 3)
 freeze("ch06-tiny")
 
-## ---- 7장: 기저 모형 ----------------------------------------------------
-#  NONMEM 실행 산출물이 있어야 얼릴 수 있다. 없으면 건너뛴다.
+## ---- Ch 7: The base model ---------------------------------------------
+#  Freezing needs the NONMEM run artefacts. Skipped where absent.
 if (have_nm("100base.R76/100base.ext", "101diag.R76/101diag.ext",
             "100base.R76/sdtab")) {
   new_session()
@@ -85,7 +85,7 @@ if (have_nm("100base.R76/100base.ext", "101diag.R76/101diag.ext",
   freeze("ch07-gof",   fig = TRUE, fig.w = 6.4, fig.h = 3.2)
   freeze("ch07-resid", fig = TRUE, fig.w = 6.4, fig.h = 3.2)
 }
-#  두 번째 예제: theophylline 경구 흡수 (nm/110ka, 111lag, 112zo, 113blk)
+#  Second example: theophylline oral absorption (nm/110ka, 111lag, 112zo, 113blk)
 if (have_nm("110ka.R76/110ka.ext", "111lag.R76/111lag.ext", "112zo.R76/112zo.ext",
             "113blk.R76/113blk.ext", "110ka.R76/sdtab")) {
   new_session()
@@ -96,7 +96,7 @@ if (have_nm("110ka.R76/110ka.ext", "111lag.R76/111lag.ext", "112zo.R76/112zo.ext
     freeze("ch07-flip")
   freeze("ch07-blk")
 }
-#  세 번째 예제: 반복 투여 (nm/130mult, 130addl, 130ss, 130ssx)
+#  Third example: repeated dosing (nm/130mult, 130addl, 130ss, 130ssx)
 if (have_nm("130mult.R76/130mult.ext", "130addl.R76/130addl.ext", "130ss.R76/130ss.ext",
             "130ssx.R76/130ssx.ext", "130addl.R76/sdtab", "130addl.R76/patab")) {
   new_session()
@@ -104,7 +104,7 @@ if (have_nm("130mult.R76/130mult.ext", "130addl.R76/130addl.ext", "130ss.R76/130
   freeze("ch07-multfig", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
   freeze("ch07-multx")
 }
-#  네 번째 예제: 구획의 수 (nm/140iv2, 200iv2, 300iv2; 자료 R/mkdata/make_iv2.R)
+#  Fourth example: number of compartments (nm/140iv2, 200iv2, 300iv2; data R/mkdata/make_iv2.R)
 if (have_nm("140iv2.R76/140iv2.ext", "200iv2.R76/200iv2.ext", "300iv2.R76/300iv2.ext",
             "140iv2.R76/sdtab", "200iv2.R76/sdtab")) {
   new_session()
@@ -112,7 +112,7 @@ if (have_nm("140iv2.R76/140iv2.ext", "200iv2.R76/200iv2.ext", "300iv2.R76/300iv2
   freeze("ch07-cptfig", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
 }
 
-## ---- 8장: 추정 방법과 수렴 --------------------------------------------
+## ---- Ch 8: Estimation methods and convergence -------------------------
 if (have_nm("100base.R76/100base.cor", "102sig.R76/102sig.cor",
             "103mats.R76/103mats.cor", "104matr.R76/104matr.cor",
             "105start.R76/105start.cor")) {
@@ -126,19 +126,19 @@ if (have_nm("100base.R76/100base.cor", "102sig.R76/102sig.cor",
   if (have_nm("110ka.R76/110ka.ext", "110ka.R76/patab"))
     freeze("ch08-expfig", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
 }
-#  추정 방법 비교 (nm/100foce, 100its, 100imp, 100saem, 100bayes)
+#  Comparison of estimation methods (nm/100foce, 100its, 100imp, 100saem, 100bayes)
 if (have_nm("100foce.R76/100foce.ext", "100its.R76/100its.ext", "100imp.R76/100imp.ext",
             "100saem.R76/100saem.ext", "100bayes.R76/100bayes.ext")) {
   new_session()
   freeze("ch08-em")
 }
-#  $DES 의 민감도: NONMEM 이 적분한 DAETA 와 R 의 적분을 맞춘다 (nm/110des)
+#  Sensitivity in $DES: match NONMEM's integrated DAETA against R's (nm/110des)
 if (have_nm("110des.R76/sdtab", "110des.R76/patab")) {
   new_session()
   freeze("ch08-daeta")
 }
 
-## ---- 9장: 공변량 탐색 --------------------------------------------------
+## ---- Ch 9: Covariate search -------------------------------------------
 if (have_nm("100base.R76/patab", "106wtcl.R76/106wtcl.ext",
             "107wtv.R76/107wtv.ext", "108wt.R76/108wt.ext",
             "109sex.R76/109sex.ext", "108wt.R76/patab")) {
@@ -151,12 +151,12 @@ if (have_nm("100base.R76/patab", "106wtcl.R76/106wtcl.ext",
   freeze("ch09-after",  fig = TRUE, fig.w = 6.4, fig.h = 3.2)
   freeze("ch09-sex")
   if (have_nm("108wtbwt.R76/108wtbwt.ext", "108wtbwt.R76/108wtbwt.cor"))
-    freeze("ch09-collin", digits = 3)                 # 다중공선성 (se() 를 정의한다)
+    freeze("ch09-collin", digits = 3)                 # collinearity (defines se())
   if (have_nm("108full.R76/108full.ext"))
-    freeze("ch09-full", digits = 3)                   # 완전 모형 (ch09-collin 의 se() 를 쓴다)
+    freeze("ch09-full", digits = 3)                   # full model (uses se() from ch09-collin)
 }
 
-## ---- 10장: 공변량 선택의 판단 ------------------------------------------
+## ---- Ch 10: Judgment in covariate selection ---------------------------
 if (have_nm("108wt.R76/108wt.ext", "108wts.R76/108wts.ext",
             "108wtx.R76/108wtx.ext", "108wtcr.R76/108wtcr.ext")) {
   new_session()
@@ -168,9 +168,9 @@ if (have_nm("108wt.R76/108wt.ext", "108wts.R76/108wts.ext",
   freeze("ch10-eta")
 }
 
-## ---- 11장: 진단 판독 ----------------------------------------------------
-#  nmw 의 보고 8종. 커밋된 산출물만 읽으므로 NONMEM 이 없어도 만들어진다.
-#  만들어진 PDF 는 .gitignore 대상이다(언제든 다시 만들어진다).
+## ---- Ch 11: Reading the diagnostics -----------------------------------
+#  nmw's eight reports. They read only committed artefacts, so they are
+#  produced without NONMEM. The PDFs are gitignored (remade at any time).
 if (have_nm("108wt.R76/sdtab", "108wt.R76/PRINT.OUT", "108wt.R76/FCON")) {
   new_session()
   freeze("ch11-reports")
@@ -186,10 +186,10 @@ if (have_nm("108wt.R76/sdtab", "108wt.R76/PRINT.OUT", "108wt.R76/FCON")) {
     freeze("ch11-refplot", fig = TRUE, fig.w = 6.4, fig.h = 3.2)
     freeze("ch11-refstat")
   }
-  suppressWarnings(freeze("ch11-sumout"))   # SumOut 이 모의 전용 108wtsim(추정 없음)을 요약하지 못한다는 경고. 언 출력과 무관하다
+  suppressWarnings(freeze("ch11-sumout"))   # warns that SumOut cannot summarise the simulation-only 108wtsim (no estimation); does not affect the frozen output
 }
 
-## ---- 12장: 모의 기반 진단 ----------------------------------------------
+## ---- Ch 12: Simulation-based diagnostics ------------------------------
 if (have_nm("108wtsim.R76/simtab.csv", "108wt.R76/sdtab")) {
   new_session()
   freeze("ch12-vpc")
@@ -198,14 +198,14 @@ if (have_nm("108wtsim.R76/simtab.csv", "108wt.R76/sdtab")) {
   freeze("ch12-pcvpcfig", fig = TRUE, fig.w = 6.4, fig.h = 3.6)
   freeze("ch12-npc")
   freeze("ch12-pd",       fig = TRUE, fig.w = 6.4, fig.h = 3.2)
-  if (requireNamespace("npde", quietly = TRUE))                     # 12장 NPDE (npde 패키지)
+  if (requireNamespace("npde", quietly = TRUE))                     # Ch 12 NPDE (npde package)
     freeze("ch12-npde",   fig = TRUE, fig.w = 6.4, fig.h = 3.2)
   freeze("ch12-stratfig", fig = TRUE, fig.w = 6.4, fig.h = 3.2)
 }
 
-## ---- 13장: 무작위 순열 검정 --------------------------------------------
-#  merge/match 예제는 NONMEM 이 필요 없다. 귀무분포는 R/rpt.R 이 만든
-#  nm/rpt/rpt.csv 를 읽는다(작은 파일 하나).
+## ---- Ch 13: Randomization tests ---------------------------------------
+#  The merge/match example needs no NONMEM. The null distribution is read
+#  from nm/rpt/rpt.csv, produced by R/rpt.R (one small file).
 new_session()
 freeze("ch13-merge")
 freeze("ch13-assert")
@@ -219,10 +219,10 @@ if (file.exists("nm/rpt/rpt.csv") && have_nm("100base.R76/100base.ext",
   freeze("ch13-wald")
 }
 
-## ---- 14장: 파라미터 불확실성 -------------------------------------------
-#  점근 SE 는 커밋된 108wt.ext 에서 바로 나온다. 재표집과 프로파일은
-#  R/boot.R, R/llp.R 이 만든 작은 csv 를 읽는다. 한 세션으로 이어진다
-#  (ch14-asym 의 fin/se/key 를 뒤의 스니펫이 전부 쓴다).
+## ---- Ch 14: Parameter uncertainty -------------------------------------
+#  The asymptotic SE comes straight from the committed 108wt.ext. The
+#  resampling and the profile read the small csv files made by R/boot.R
+#  and R/llp.R. One session throughout (later snippets all use fin/se/key from ch14-asym).
 new_session()
 if (have_nm("108wt.R76/108wt.ext")) {
   freeze("ch14-asym")
@@ -243,8 +243,8 @@ if (have_nm("108wt.R76/108wt.ext")) {
     freeze("ch14-compare")
 }
 
-## ---- 16장: 변동성의 구조 -------------------------------------------------
-#  참값을 아는 모의 자료(R/mkdata/make_iov.R)와 nm/120*-124* 의 실행 산출물을 읽는다.
+## ---- Ch 16: The structure of variability ------------------------------
+#  Reads simulated data with known true values (R/mkdata/make_iov.R) and the run artefacts of nm/120*-124*.
 new_session()
 freeze("ch16-data")
 freeze("ch16-occfig", fig = TRUE, fig.w = 6.6, fig.h = 2.4)
@@ -261,8 +261,8 @@ if (have_nm("120base.R76/120base.ext", "120add.R76/120add.ext", "120prop.R76/120
   freeze("ch16-ladder")
 }
 
-## ---- 17장: PD 와 PK/PD 의 집단 분석 -----------------------------------
-#  참값을 아는 모의 자료(R/mkdata/make_pd.R)와 nm/pd* 의 실행 산출물을 읽는다.
+## ---- Ch 17: Population analysis of PD and PK/PD -----------------------
+#  Reads simulated data with known true values (R/mkdata/make_pd.R) and the run artefacts of nm/pd*.
 new_session()
 freeze("ch17-data")
 freeze("ch17-tcfig", fig = TRUE, fig.w = 6.0, fig.h = 3.2)
@@ -279,9 +279,9 @@ if (have_nm("pd100.R76/pd100.ext", "pd100x.R76/pd100x.ext", "pd101.R76/pd101.ext
   freeze("ch17-ord")
 }
 
-## ---- 18장: 간접반응 모형의 집단 분석 -------------------------------------
-#  참값을 아는 모의 자료(R/mkdata/make_warf.R)와 nm/wf* 의 실행 산출물을 읽는다.
-#  wf200 은 data/warf-ipp.csv 를 읽고, 그 파일은 wf100 의 patab 에서 만든다.
+## ---- Ch 18: Population analysis of indirect response models -----------
+#  Reads simulated data with known true values (R/mkdata/make_warf.R) and the run artefacts of nm/wf*.
+#  wf200 reads data/warf-ipp.csv, which is built from the patab of wf100.
 new_session()
 freeze("ch18-data")
 freeze("ch18-tcfig", fig = TRUE, fig.w = 6.6, fig.h = 2.4)
@@ -298,8 +298,8 @@ if (have_nm("wf100.R76/wf100.ext", "wf200.R76/wf200.ext", "wf201.R76/wf201.ext",
     freeze("ch18-vpc", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
 }
 
-## ---- 18장 (둘째 예제): TMDD ---------------------------------------------
-#  실무 자료(개발 코드를 지운 원숭이 자료)와 nm/tm100-tm104 의 산출물을 읽는다.
+## ---- Ch 18 (second example): TMDD -------------------------------------
+#  Reads practice data (monkey data with the development code removed) and the artefacts of nm/tm100-tm104.
 new_session()
 freeze("ch18-tmdd-data")
 freeze("ch18-tmdd-fig", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
@@ -312,8 +312,8 @@ if (have_nm("tm100.R76/tm100.ext", "tm101.R76/tm101.ext", "tm102.R76/tm102.ext",
   freeze("ch18-tmdd-ro", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
 }
 
-## ---- 19장: 종양성장과 TGI --------------------------------------------
-#  Benzekry 공개 자료를 여섯 성장 모형으로 적합한 결과(nm/tg*)를 읽는다.
+## ---- Ch 19: Tumour growth and TGI -------------------------------------
+#  Reads the results of fitting the public Benzekry data with six growth models (nm/tg*).
 new_session()
 freeze("ch19-data")
 freeze("ch19-growfig", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
@@ -332,8 +332,8 @@ if (have_nm("tg100.R76/tg100.ext", "tg101.R76/tg101.ext", "tg102.R76/tg102.ext",
   }
 }
 
-## ---- 20장: 시간-사건과 카운트 자료 ---------------------------------------
-#  참값을 아는 모의 자료 둘(R/mkdata/make_tte.R)과 nm/tte*, nm/cnt* 의 산출물을 읽는다.
+## ---- Ch 20: Time-to-event and count data ------------------------------
+#  Reads two simulated datasets with known true values (R/mkdata/make_tte.R) and the artefacts of nm/tte* and nm/cnt*.
 new_session()
 freeze("ch20-data")
 freeze("ch20-kmfig", fig = TRUE, fig.w = 5.6, fig.h = 3.2)
@@ -348,8 +348,8 @@ if (have_nm("cnt100.R76/cnt100.ext", "cnt101.R76/cnt101.ext", "cnt102.R76/cnt102
   freeze("ch20-cntfig", fig = TRUE, fig.w = 5.6, fig.h = 3.2)
 }
 
-## ---- 21장: 소아 외삽과 사전 정보 -----------------------------------------
-#  참값을 아는 모의 자료(R/mkdata/make_ped.R)와 nm/ped* 의 실행 산출물을 읽는다.
+## ---- Ch 21: Paediatric extrapolation and prior information ------------
+#  Reads simulated data with known true values (R/mkdata/make_ped.R) and the run artefacts of nm/ped*.
 new_session()
 freeze("ch21-data")
 if (have_nm("ped100.R76/ped100.ext", "ped101.R76/ped101.ext", "ped102.R76/ped102.ext",
@@ -362,8 +362,8 @@ if (have_nm("ped103x.R76/ped103x.ext", "ped103.R76/ped103.ext", "ped104.R76/ped1
   freeze("ch21-prior")
 freeze("ch21-extrap")
 
-## ---- 22장: 시험 설계 -----------------------------------------------------
-#  정보행렬은 R 만으로 계산한다. 모의-추정(R/sse.R)의 결과 nm/sse/sse.csv 를 읽는다.
+## ---- Ch 22: Study design ----------------------------------------------
+#  The information matrix is computed in R alone. Reads nm/sse/sse.csv, the result of the simulation-estimation (R/sse.R).
 new_session()
 freeze("ch22-fim")
 freeze("ch22-dopt")
@@ -372,8 +372,8 @@ if (file.exists("nm/sse/sse.csv")) {
   freeze("ch22-ssefig", fig = TRUE, fig.w = 6.6, fig.h = 2.6)
 }
 
-## ---- 23장: 시뮬레이션, 보고, 제출 --------------------------------------
-#  최종 모형의 추정치와 재표집 결과만 읽는다. NONMEM 이 없어도 돈다.
+## ---- Ch 23: Simulation, reporting and submission ----------------------
+#  Reads only the final model's estimates and the resampling results. Runs without NONMEM.
 if (have_nm("108wt.R76/108wt.ext")) {
   new_session()
   freeze("ch23-sim")

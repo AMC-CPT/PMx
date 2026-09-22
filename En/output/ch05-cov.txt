@@ -1,0 +1,5 @@
+weight
+differs from baseline      same as baseline 
+                  305                   498 
+max.vs.baseline 
+           1.06 

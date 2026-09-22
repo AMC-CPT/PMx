@@ -1,0 +1,5 @@
+   natural      logit difference 
+    299.46     293.86       5.60 
+          0h   2h  12h  24h
+natural 7.00 3.87 3.79 4.53
+logit   7.05 3.87 3.76 4.53

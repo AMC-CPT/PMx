@@ -1,0 +1,10 @@
+        estimate  RSE
+ALPHA     0.7470  4.4
+BETA      0.0815  6.8
+add.SD   37.5000 15.3
+prop.CV   0.0896 23.6
+OM_A      0.0320 33.4
+OM_AB     0.0447 35.7
+OM_B      0.0639 37.9
+   correlation max.volume.mm3 
+         0.988       9624.000 

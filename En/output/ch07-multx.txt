@@ -1,0 +1,6 @@
+                      KA   CL    V
+truth              1.200 4.00 50.0
+SS.at.steady.state 1.170 3.94 50.2
+SS.after.3.doses   0.966 4.29 52.1
+accumulation.3.doses  accumulation.steady 
+               1.529                1.620 

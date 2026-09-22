@@ -1,0 +1,6 @@
+       DV.0
+PREDOSE FALSE TRUE
+  FALSE   155    0
+  TRUE      0   59
+observations          BLQ         LLOQ 
+         155            0            2 

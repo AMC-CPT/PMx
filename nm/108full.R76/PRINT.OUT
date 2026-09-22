@@ -1,3 +1,65 @@
+<DATE>
+<TIME>
+$PROB PHENO 1COMP IV BOLUS, FULL COV   P:108wt  F:CL~WT+CREA+APGR+SEX,V~WT
+$INPUT ID DAT2=DROP TIME AMT RATE CMT DV MDV EVID
+       WT BWT SEX APGR CREA TAFD=DROP
+$DATA ../../data/pheno-nm.csv IGNORE=@
+$SUBR ADVAN1 TRANS2
+$ABBR DERIV2=NO
+
+$PK
+  CLCOV = (WT/1.5)**THETA(5) * (CREA/0.4)**THETA(7)
+  CLCOV = CLCOV * (APGR/7)**THETA(8) * (1 + THETA(9)*SEX)
+  TVCL  = THETA(1) * CLCOV
+  TVV   = THETA(2) * (WT/1.5)**THETA(6)
+  CL    = TVCL * EXP(ETA(1))
+  V     = TVV  * EXP(ETA(2))
+  S1    = V
+
+$ERROR
+  IPRE = F
+  W    = 1
+  W    = SQRT(THETA(3)**2 + THETA(4)**2 * IPRE**2)
+  IF (W.LT.1E-6) W = 1E-6
+  IRES = DV - IPRE
+  IWRE = IRES / W
+  Y    = IPRE + W * EPS(1)
+
+$THETA
+  (0, 0.0075)  ; CL (L/h)
+  (0, 1.5)     ; V  (L)
+  (0, 0.6)     ; additive error SD (mg/L)
+  (0, 0.12)    ; proportional error CV
+  (-5, 0.75, 5) ; WT~CL
+  (-5, 1.00, 5) ; WT~V
+  (-5, 0.01, 5) ; CREA~CL
+  (-5, 0.01, 5) ; APGR~CL
+  (-1, 0.2, 9)  ; SEX~CL
+
+$OMEGA BLOCK(2)
+  0.3
+  0.05  0.3
+
+$SIGMA 1 FIX
+
+$EST MAX=9999 PRINT=5 METHOD=COND INTER NSIG=3 SIGL=9
+     NOABORT NOTBT NOOBT NOSBT
+$COV UNCOND PRINT=ERS
+$TAB ID TIME AMT DV MDV EVID CMT IPRE IWRE CWRES
+     ONEHEADER NOPRINT FILE=sdtab
+$TAB ID CL V ETA1 ETA2
+     ONEHEADER NOPRINT NOAPPEND FILE=patab
+$TAB ID WT BWT CREA APGR
+     ONEHEADER NOPRINT NOAPPEND FILE=cotab
+$TAB ID SEX
+     ONEHEADER NOPRINT NOAPPEND FILE=catab
+  
+NM-TRAN MESSAGES 
+  
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+             
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+  
 License Registered to: <LICENSEE>
 Expiration Date: <DATE>
 Current Date: <DATE>
@@ -10,7 +72,7 @@ AND ALISON BOECKMANN. IMPLEMENTATION, EFFICIENCY, AND STANDARDIZATION
 PERFORMED BY NOUS INFOSYSTEMS.
 
 PROBLEM NO.:         1
-PHENO 1COMP IV BOLUS, FULL COVARIATE MODEL   P:108wt  F:CL~WT+CREA+APGR+
+PHENO 1COMP IV BOLUS, FULL COV   P:108wt  F:CL~WT+CREA+APGR+SEX,V~WT
 
 DATA CHECKOUT RUN:              NO
 DATA SET LOCATED ON UNIT NO.:    2
@@ -773,3 +835,6 @@ SG11   ......... ......... ......... ......... ......... ......... ......... ...
 
 Elapsed finaloutput time in seconds: <SEC>
 #CPUT: Total CPU Time in Seconds, <SEC>
+Stop Time: 
+<DATE>
+<TIME>

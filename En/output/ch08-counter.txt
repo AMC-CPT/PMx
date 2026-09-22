@@ -1,0 +1,6 @@
+  SE1   SE2 cond1 cond2 
+    1  1000     1     1 
+max.correlation            cond 
+         0.4999       7499.5000 
+ block1  block2 overall 
+      1       1    1999 

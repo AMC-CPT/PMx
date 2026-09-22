@@ -1,5 +1,5 @@
 FILE    FSTREAM                                                                 
-PROB    PHENO 1COMP IV BOLUS, WT AND BWT TOGETHER (COLLINEAR)   P:108wt  F:CL~WT
+PROB    PHENO 1COMP IV BOLUS, WT+BWT COLLINEAR   P:108wt  F:CL~WT+BWT,V~WT      
 FMTN   3                                                                        
 LDFO   0                                                                        
 DATA       1   0 803  13   0   0   0   0          -1   0 0                      

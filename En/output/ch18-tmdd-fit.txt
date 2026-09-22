@@ -1,0 +1,20 @@
+     tm100.OFV KSYN.intercept    lower.bound      BWT.slope 
+     1106.4500         0.0001         0.0001         0.0178 
+        estimate   RSE
+CL_kg   0.000243  16.0
+V1_kg   0.031600   2.1
+Q       0.003010  60.6
+V2      0.014100  52.8
+KON     0.305000  50.6
+KOFF    0.001710 113.8
+KINT    0.013300  85.3
+KDEG    0.147000  37.0
+add.SD  0.014700 125.6
+prop.CV 0.070500  14.4
+KSYN_kg 0.018200   9.2
+             OFV condition.number 
+         1106.33          8916.00 
+ linear.half.life.h              KD.mgL  target.half.life.h 
+           100.0000              0.0445              4.7000 
+complex.half.life.h  baseline.target.mg 
+            46.3000              0.4980 

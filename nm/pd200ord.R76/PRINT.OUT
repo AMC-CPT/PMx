@@ -4,14 +4,15 @@ $PROB NRS AS ORDINAL (0-3/4-6/7-10), PROPORTIONAL ODDS   P:ROOT  F:BASE
 $INPUT ID ARM DOSE TIME DV MDV
 $DATA ../../data/pd-ord.csv IGNORE=@
 $PRED
-  ; PK 는 pd100 의 추정치(CL 5.06, V 39.2)를 반올림해 고정한다 (sequential PK/PD).
-  ; 이 자료에는 농도가 없다.
+  ; PK is fixed to the pd100 estimates (CL 5.06, V 39.2), rounded
+  ; (sequential PK/PD). This dataset carries no concentrations.
   CL   = 5.0
   V    = 40
   CONC = DOSE / V * EXP(-CL / V * TIME)
   IF (TIME.LE.0) CONC = 0
 
-  ; 누적 로짓. P(Y>=1) 와 P(Y>=2) 의 절편이 A1 > A2 가 되도록 차로 적는다.
+  ; Cumulative logit. The intercepts of P(Y>=1) and P(Y>=2) are written as a
+  ; difference so that A1 > A2 is enforced.
   A1   = THETA(1) + ETA(1)
   A2   = A1 - THETA(2)
   PLMX = THETA(3)
@@ -20,7 +21,7 @@ $PRED
   EC50 = THETA(6)
   PL   = PLMX * (1 - EXP(-KPL * TIME))
   DR   = EMAX * CONC / (EC50 + CONC)
-  EFF  = PL + DR                      ; 통증을 내리는 쪽이 로짓을 내린다
+  EFF  = PL + DR                      ; lowering pain lowers the logit
 
   L1   = A1 - EFF
   L2   = A2 - EFF

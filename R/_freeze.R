@@ -12,16 +12,17 @@
 #  of truth, regenerable on demand:  Rscript R/build.R  (run from repo root)
 # =====================================================================
 
-# ggplot/patchwork(예: ggsurvfit + add_risktable)는 pdf 장치에 빈 첫 페이지를
-# 만들 수 있다.  다중 페이지 그림은 마지막 페이지만 남긴다(그 페이지에 실제
-# 그림이 있다).  poppler 의 pdfinfo/pdftocairo 를 쓴다 (MiKTeX 에 포함).
+# ggplot/patchwork (e.g. ggsurvfit + add_risktable) can produce a blank first
+# page on the pdf device. For a multi-page figure only the last page is kept
+# (that is the page with the figure). Uses poppler's pdfinfo/pdftocairo (shipped with MiKTeX).
 .trim_fig <- function(figfile) {
   pinfo <- Sys.which("pdfinfo"); pcairo <- Sys.which("pdftocairo")
   if (pinfo == "" || pcairo == "") return(invisible())
   out <- tryCatch(system2(pinfo, shQuote(figfile), stdout = TRUE),
                   error = function(e) character())
-  # useBytes: pdfinfo 가 시스템 로캘로 답하므로(한글 글꼴 이름이 섞인다)
-  # 그대로 grep 하면 "unable to translate ... to a wide string" 경고가 난다.
+  # useBytes: pdfinfo answers in the system locale (font names in the local
+  # script get mixed in), so a plain grep warns "unable to translate ... to a
+  # wide string".
   m <- grep("^Pages:", out, value = TRUE, useBytes = TRUE)
   npg <- if (length(m)) suppressWarnings(as.integer(sub("^Pages:\\s*", "", m[1]))) else NA
   if (!is.na(npg) && npg > 1) {
@@ -36,11 +37,11 @@
   invisible()
 }
 
-#  둘레의 빈 여백을 잘라 낸다 (2026-09-20).
-#  R 그래픽 장치는 fig.w x fig.h 판을 만들고 그 안에 그림을 그리므로, 그림이 판을
-#  다 채우지 않으면 둘레에 흰 자리가 남는다. 본문의 그림 폭은 잘라 낸 뒤의 크기에
-#  맞추어 두었으므로(인쇄된 그림 크기는 그대로다) 여기서 자르지 않으면 그림이
-#  작아져 보인다. 2bp 는 잉크가 글에 닿지 않을 만큼의 최소 여백이다.
+#  Crop the blank margin around the figure (2026-09-20).
+#  The R graphics device makes a fig.w x fig.h canvas and draws inside it, so
+#  whatever the figure does not fill stays as white border. The figure widths
+#  in the text are set to the cropped size (the printed size is unchanged), so
+#  without cropping here the figure looks smaller. 2bp is the least margin  that keeps ink off the text.
 .crop_fig <- function(figfile) {
   pcrop <- Sys.which("pdfcrop")
   if (pcrop == "") return(invisible())
@@ -57,53 +58,54 @@
 }
 
 # ---------------------------------------------------------------------
-#  긴 출력 성분의 부분 생략 (trim=)
+#  Partial elision of long output components (trim=)
 #
-#  wnl::nlr 같은 적합 함수는 결과 리스트에 관측치 수만큼의 $Prediction·
-#  $Residual 벡터를 담는다. 이를 그대로 인쇄하면 한 출력이 130줄을 넘어
-#  지면 대부분을 같은 숫자의 반복으로 채운다(SAS 교재도 핵심 출력만 싣는다).
-#  freeze(..., trim = c("Prediction", "Residual")) 로 선언하면, 그 성분의
-#  머리줄과 앞 trim.keep 줄만 남기고 나머지를 잘라 낸 뒤 생략 표시를 붙인다.
-#  성분을 통째로 지우지 않으므로 독자는 그 성분이 무엇이고 값이 어떤 모양인지
-#  볼 수 있고, 지면에 생략 사실도 드러나므로 오해가 없다.
+#  A fitting function such as wnl::nlr puts $Prediction and $Residual vectors
+#  as long as the number of observations into its result list. Printed as is,
+#  one output runs past 130 lines and fills the page with repetition (SAS  textbooks print only the essential output too).
+#  Declaring freeze(..., trim = c("Prediction", "Residual")) keeps the
+#  header line of that component and the first trim.keep lines, cuts the rest
+#  and marks the elision. The component is not removed, so the reader can see
+#  what it is and what its values look like, and the elision is visible on  the page, so there is no misunderstanding.
 .trim_blocks <- function(txt, trim, trim.keep = 2L) {
   if (!length(trim)) return(txt)
-  hdr <- grepl("^\\$", txt)                       # 리스트 성분 머리줄
+  hdr <- grepl("^\\$", txt)                       # header line of a list component
   keep <- rep(TRUE, length(txt))
   marks <- character(length(txt))
   for (nm in trim) {
-    pat   <- paste0("^\\$`?", nm, "`?$")          # 예: $Prediction
-    child <- paste0("^\\$`?", nm, "`?\\$")        # 예: $Prediction$x (하위 성분)
+    pat   <- paste0("^\\$`?", nm, "`?$")          # e.g. $Prediction
+    child <- paste0("^\\$`?", nm, "`?\\$")        # e.g. $Prediction$x (sub-component)
     for (s in which(grepl(pat, txt))) {
       nxt <- which(hdr & seq_along(txt) > s & !grepl(child, txt))
       e <- if (length(nxt)) min(nxt) - 1L else length(txt)
-      # 머리줄(s)과 그 뒤 '값이 있는' trim.keep 줄까지 남기고, 그다음부터 e 까지
-      # 통째로 자른다(하위 성분이 남긴 빈 줄까지 함께 지워야 빈 줄이 몰리지 않는다).
+      # Keep the header (s) and the following trim.keep lines that carry
+      # values, then cut everything through e (the blank lines left by
+      # sub-components go too, or blanks pile up).
       body <- (s + 1L):e
-      body <- body[nzchar(trimws(txt[body]))]     # 값이 있는 줄만 센다
+      body <- body[nzchar(trimws(txt[body]))]     # count only lines with values
       if (length(body) > trim.keep) {
         keep[body[trim.keep + 1L]:e] <- FALSE
-        marks[body[trim.keep]] <- "  ... (이하 생략)"
+        marks[body[trim.keep]] <- "  ... (remainder omitted)"
       }
     }
   }
   out <- character(0)
   for (i in seq_along(txt)) {
     if (keep[i]) out <- c(out, txt[i])
-    if (nzchar(marks[i])) out <- c(out, marks[i], "")   # 다음 성분과 한 줄 띄운다
+    if (nzchar(marks[i])) out <- c(out, marks[i], "")   # one blank line before the next component
   }
-  # 잘라 낸 자리에 빈 줄이 겹칠 수 있으므로 연속 빈 줄은 하나로 줄인다.
+  # Blank lines can pile up where the cut was, so runs of them are reduced to one.
   blank <- !nzchar(trimws(out))
   out[!(blank & c(FALSE, head(blank, -1)))]
 }
 
 # ---------------------------------------------------------------------
-#  성분 통째 제거 (drop=)
+#  Removing a component entirely (drop=)
 #
-#  부분 생략(trim=)과 달리 성분을 아예 지운다. 본문이 한 줄뿐이어서 부분
-#  생략이 뜻이 없고, 값 자체가 지면에 실릴 값어치가 없는 성분에 쓴다.
-#  현재 쓰는 곳: nlr() 의 $`Elapsed Time` - 실행마다 값이 달라져 고정 출력의
-#  재현성을 깨는 유일한 항목이었다(ch14 의 Sys.time() 출력을 제거한 것과 같은 이유).
+#  Unlike partial elision (trim=), the component is removed altogether. Used
+#  where the body is one line so elision is pointless and the value is not  worth printing.
+#  Currently used for nlr()'s $`Elapsed Time`: the value differs on every run
+#  and it was the one item breaking the reproducibility of the frozen output  (the same reason the Sys.time() output of ch14 was removed).
 .drop_blocks <- function(txt, drop) {
   if (!length(drop)) return(txt)
   hdr <- grepl("^\\$", txt)
@@ -121,11 +123,11 @@
 }
 
 # ---------------------------------------------------------------------
-#  빈 줄 제거 (squeeze=)
+#  Removing blank lines (squeeze=)
 #
-#  R 은 리스트를 인쇄할 때 성분마다 빈 줄을 넣는다. 성분이 20개에 가까운
-#  nlr() 결과에서는 그 빈 줄만으로 20줄가까이 되므로, 지면에서는 없는 편이
-#  낫다. 각 성분이 '$이름' 머리줄로 시작하므로 빈 줄이 없어도 경계가 뚜렷하다.
+#  R puts a blank line after each component when printing a list. In an
+#  nlr() result with close to twenty components those blanks alone come to
+#  nearly twenty lines, so the page is better without them. Each component  starts with a '$name' header, so the boundaries stay clear.
 .squeeze_blanks <- function(txt) txt[nzchar(trimws(txt))]
 
 # Shared session environment: snippets run in order (like a real R session)
@@ -137,22 +139,33 @@ new_session <- function() .session <<- new.env(parent = globalenv())
 freeze <- function(name, seed = 1L, fig = FALSE, fig.w = 5, fig.h = 3.2,
                    width = 76, digits = 7, env = .session,
                    trim = NULL, trim.keep = 2L, drop = NULL, squeeze = FALSE) {
-  snippet <- file.path("R", "snippets", paste0(name, ".R"))
-  outfile <- file.path("output", paste0(name, ".txt"))
-  figfile <- file.path("figures", paste0(name, ".pdf"))
+  #  The paths are options. The defaults are the Korean edition's; the
+  #  English edition (En/build.R) swaps in its own folders. With the defaults
+  #  the behaviour is unchanged.
+  snippet <- file.path(getOption("pmx.snipdir", "R/snippets"),
+                       paste0(name, ".R"))
+  outfile <- file.path(getOption("pmx.outdir",  "output"),
+                       paste0(name, ".txt"))
+  figfile <- file.path(getOption("pmx.figdir",  "figures"),
+                       paste0(name, ".pdf"))
   stopifnot(file.exists(snippet))
 
   old <- options(width = width, digits = digits)
   on.exit(options(old), add = TRUE)
   set.seed(seed)
 
-  # 그림의 글꼴: 본문 sans(KoPubWorld돋움체)와 같은 서체를 쓴다.  pyfig/ 의
-  # matplotlib 그림 22점도 같은 글꼴이므로, 한글이 든 그림 전체의 서체가 통일된다.
-  # (cairo 는 이 글꼴을 CairoFont-* 이름으로 재내장하므로 pdffonts 출력에는
-  #  KoPubWorld 라는 이름이 보이지 않는다 - 한글 렌더는 정상이다.)
-  # cairo 가 없는 환경에서는 pdf() 로 떨어지며 한글이 깨질 수 있다.
+  # Figure font: the same face as the body sans (KoPubWorld Dotum). The 22
+  # matplotlib figures under pyfig/ use it too, so every figure carrying
+  # Korean has one face. (cairo re-embeds this font under CairoFont-* names,
+  #  so the name KoPubWorld does not appear in pdffonts output -- the Korean
+  #  renders correctly.)
+  # Without cairo it falls back to pdf(), where Korean may break.
+  # The font name below must stay as it is: it is a real font name.
+  #  The family is an option so the English edition (En/build.R) can use a
+  #  Latin face. The default is the Korean edition's and is unchanged.
+  fam <- getOption("pmx.figfont", "KoPubWorld돋움체 Medium")
   if (fig) {
-    if (capabilities("cairo")) grDevices::cairo_pdf(figfile, width = fig.w, height = fig.h, family = "KoPubWorld돋움체 Medium")
+    if (capabilities("cairo")) grDevices::cairo_pdf(figfile, width = fig.w, height = fig.h, family = fam)
     else grDevices::pdf(figfile, width = fig.w, height = fig.h)
     on.exit({ if (length(grDevices::dev.list())) grDevices::dev.off() }, add = TRUE)
   }

@@ -1,7 +1,7 @@
-# 1. 입력을 올린다
+# 1. upload the input
 gcloud storage cp ./run003/CONTROL5 ./run003/THEOPP gs://<BUCKET>/run003/
 
-# 2. 작업을 만든다. 버킷을 /gcs 에 붙여 파일처럼 쓴다
+# 2. create the job. Mount the bucket at /gcs and use it like files
 gcloud run jobs create nonmem-run003 \
   --image=<REGION>-docker.pkg.dev/<PROJECT_ID>/nonmem-repo/nm760:latest \
   --region=<REGION> \
@@ -17,9 +17,9 @@ gcloud run jobs create nonmem-run003 \
     mkdir -p /gcs/run003/results && \
     cp /data/*.res /data/*.ext /data/*.xml /data/*.phi /gcs/run003/results/"
 
-# 3. 실행한다
+# 3. execute
 gcloud run jobs execute nonmem-run003 --region=<REGION>
 
-# 4. 상태를 보고, 끝나면 내려받는다
+# 4. check the status and download when it finishes
 gcloud run jobs executions list --job=nonmem-run003 --region=<REGION>
 gcloud storage cp -r gs://<BUCKET>/run003/results/ ./run003/

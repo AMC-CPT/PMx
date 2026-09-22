@@ -1,0 +1,5 @@
+original
+ 0  1 
+30 29 
+original     mean     2.5%    97.5% 
+      29       29       22       37 

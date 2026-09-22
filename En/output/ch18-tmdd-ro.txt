@@ -1,0 +1,2 @@
+0.3 mg/kg   1 mg/kg   3 mg/kg   5 mg/kg  10 mg/kg  20 mg/kg 
+      0.0       1.8       5.4       7.5      10.7      14.3 

@@ -5,9 +5,9 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://namespaces.oreilly.com/xmlnut/address output.xsd"
 xmlns:nm="http://namespaces.oreilly.com/xmlnut/address"
 >
-<nm:start_datetime>2026-09-19T08:08:54.155</nm:start_datetime>
+<nm:start_datetime>2026-09-22T03:01:56.000</nm:start_datetime>
 <nm:control_stream><![CDATA[
-$PROB PHENO 1COMP IV BOLUS, WT AND BWT TOGETHER (COLLINEAR)   P:108wt  F:CL~WT+BWT,V~WT
+$PROB PHENO 1COMP IV BOLUS, WT+BWT COLLINEAR   P:108wt  F:CL~WT+BWT,V~WT
 $INPUT ID DAT2=DROP TIME AMT RATE CMT DV MDV EVID
        WT BWT SEX APGR CREA TAFD=DROP
 $DATA ../../data/pheno-nm.csv IGNORE=@
@@ -79,11 +79,11 @@ Days until program expires : <N>
  PERFORMED BY NOUS INFOSYSTEMS.
 ]]></nm:program_information>
 <nm:problem nm:number='1' nm:subproblem='0' nm:superproblem1='0' nm:iteration1='0' nm:superproblem2='0' nm:iteration2='0'>
-<nm:problem_title>PHENO 1COMP IV BOLUS, WT AND BWT TOGETHER (COLLINEAR)   P:108wt  F:CL~WT</nm:problem_title>
+<nm:problem_title>PHENO 1COMP IV BOLUS, WT+BWT COLLINEAR   P:108wt  F:CL~WT+BWT,V~WT</nm:problem_title>
 <nm:problem_information><![CDATA[
 
  PROBLEM NO.:         1
- PHENO 1COMP IV BOLUS, WT AND BWT TOGETHER (COLLINEAR)   P:108wt  F:CL~WT
+ PHENO 1COMP IV BOLUS, WT+BWT COLLINEAR   P:108wt  F:CL~WT+BWT,V~WT
 0DATA CHECKOUT RUN:              NO
  DATA SET LOCATED ON UNIT NO.:    2
  THIS UNIT TO BE REWOUND:        NO
@@ -430,11 +430,11 @@ Days until program expires : <N>
 <nm:col nm:cname='EPS1'>32.409713664905915</nm:col>
 </nm:row>
 </nm:epsshrinkvr>
-<nm:estimation_elapsed_time>1.84</nm:estimation_elapsed_time>
+<nm:estimation_elapsed_time>1.54</nm:estimation_elapsed_time>
 <nm:covariance_information><![CDATA[
 ]]></nm:covariance_information>
 <nm:covariance_status nm:error='0' nm:numnegeigenvalues='-1' nm:mineigenvalue='0.0000000000000000' nm:maxeigenvalue='0.0000000000000000' nm:rms='0.0000000000000000'/>
-<nm:covariance_elapsed_time>1.39</nm:covariance_elapsed_time>
+<nm:covariance_elapsed_time>0.96</nm:covariance_elapsed_time>
 <nm:final_objective_function_text>MINIMUM VALUE OF OBJECTIVE FUNCTION</nm:final_objective_function_text>
 <nm:final_objective_function>581.37251441423928</nm:final_objective_function>
 <nm:theta>
@@ -975,11 +975,11 @@ Days until program expires : <N>
 </nm:eigenvalues>
 </nm:estimation>
 <nm:post_process_times>
-<nm:post_elapsed_time>0.03</nm:post_elapsed_time>
-<nm:finaloutput_elapsed_time>0.08</nm:finaloutput_elapsed_time>
+<nm:post_elapsed_time>0.02</nm:post_elapsed_time>
+<nm:finaloutput_elapsed_time>0.07</nm:finaloutput_elapsed_time>
 </nm:post_process_times>
 </nm:problem>
 </nm:nonmem>
-<nm:stop_datetime>2026-09-19T08:08:57.752</nm:stop_datetime>
-<nm:total_cputime>3.500</nm:total_cputime>
+<nm:stop_datetime>2026-09-22T03:01:58.743</nm:stop_datetime>
+<nm:total_cputime>2.672</nm:total_cputime>
 </nm:output>

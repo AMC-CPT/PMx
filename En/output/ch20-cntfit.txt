@@ -1,0 +1,9 @@
+                     model    OFV LAM0  EMAX   EC50  OVDP OM_LAM0
+1         Poisson + effect 6808.6 5.48 0.417 0.0733    NA   0.617
+2   neg. binomial + effect 6196.6 5.60 0.418 0.0734 0.268   0.571
+3 neg. binomial, no effect 6210.4 4.14    NA     NA 0.268   0.618
+RSE_EMAX RSE_EC50 RSE_OVDP 
+    27.0    168.6      8.7 
+           [,1]  [,2]
+truth     0.350 0.441
+estimated 0.356 0.384

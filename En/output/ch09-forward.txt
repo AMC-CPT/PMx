@@ -1,0 +1,5 @@
+       base WT.on.CL WT.on.V
+OFV  685.53   671.74  626.58
+dOFV   0.00   -13.79  -58.94
+dOFV.both threshold 
+   -45.14      3.84 

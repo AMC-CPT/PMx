@@ -1,0 +1,8 @@
+                           model   OFV CLSTD exponent TM50 HILL  OM_CL
+1         size only (0.75 fixed) 223.8  4.24     0.75   NA   NA 0.5030
+2              size + maturation   2.5  5.74     0.75 53.5 3.43 0.0803
+3 size only (exponent estimated)  78.1  8.68     1.29   NA   NA 0.1580
+true.CLSTD  true.TM50  true.HILL true.OM_CL 
+      6.00      55.00       3.40       0.09 
+[1] "0MINIMIZATION SUCCESSFUL"                          
+[2] " HOWEVER, PROBLEMS OCCURRED WITH THE MINIMIZATION."

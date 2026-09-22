@@ -1,20 +1,20 @@
-# 15장의 명령 모음
+# The commands of Chapter 15
 
-배포본 폴더의 구조 (15.2절)
+The structure of the distribution folder (15.2)
 
 ```
 nm760CD/
-  Dockerfile           이미지를 만드는 지시서
-  .dockerignore        이미지에 넣지 않을 것 (*.tar.gz, .git, *.md)
-  SETUP76              배포본의 설치 스크립트
-  install_Linux*       배포본
-  nonmem76e.zip        배포본 (암호화된 소스)
+  Dockerfile           the instructions for building the image
+  .dockerignore        what not to put in the image (*.tar.gz, .git, *.md)
+  SETUP76              the distribution's install script
+  install_Linux*       distribution
+  nonmem76e.zip        distribution (encrypted source)
   nonmem76r.zip
-  mpilinux8.pnm        병렬 설정 본보기
+  mpilinux8.pnm        a parallel-configuration template
   util/  ...
 ```
 
-이미지 만들기
+Building the image
 
 ```sh
 cd nm760CD
@@ -22,7 +22,7 @@ docker build -t nm760 .
 docker images nm760
 ```
 
-실행 (라이선스는 -v 로 붙인다)
+Running it (the licence is attached with -v)
 
 ```sh
 docker run --rm \
@@ -34,24 +34,24 @@ docker run --rm \
 docker run --rm -it \
   -v /path/to/nonmem.lic:/opt/nm760/license/nonmem.lic:ro \
   -v $PWD/example:/data nm760
-# 컨테이너 안에서
+# inside the container
 nmfe76 CONTROL5 CONTROL5.res
 nmfe76 CONTROL5 CONTROL5.par -parafile=/opt/nm760/run/mpilinux8.pnm '[nodes]=4'
 ```
 
-호스트와 컨테이너의 결과 대조 (15.6절)
+Comparing the host's result with the container's (15.6)
 
 ```sh
 docker build --platform linux/amd64 -t nm760 .
 docker run  --platform linux/amd64 --rm -it ...
 ```
 
-병렬 실행과 tmpfs (15.7-15.8절)
+Parallel running, and tmpfs (15.7-15.8)
 
 ```sh
-# 호스트(Windows)에서 돌린 것
+# run on the host (Windows)
 Rscript R/runnm.R 108wt
-# 컨테이너에서 돌린 것 (같은 제어파일, 같은 자료)
+# run in the container (same control file, same data)
 docker run --rm -v ...:/opt/nm760/license/nonmem.lic:ro -v $PWD:/work -w /work/nm \
   nm760 nmfe76 108wt.ctl 108wt.lst -rundir=108wt.docker
 ```
@@ -68,7 +68,7 @@ docker run --rm --tmpfs /work:rw,size=4g,exec \
                 nmfe76 206.CTL 206.OUT -parafile=/opt/nm760/run/mpilinux8.pnm"
 ```
 
-Google Cloud (15.9절). `<PROJECT_ID>`, `<BUCKET>`, `<REGION>` 을 자기 것으로 바꾼다.
+Google Cloud (15.9). Put your own values in `<PROJECT_ID>`, `<BUCKET>` and `<REGION>`.
 
 ```sh
 docker exec <container> tar cf - -C /work . | tar xf - -C ./run2_with_tmpfs/
@@ -77,18 +77,18 @@ docker exec <container> tar cf - -C /work . | tar xf - -C ./run2_with_tmpfs/
 ```sh
 gcloud auth login
 gcloud config set project <PROJECT_ID>
-gcloud config set compute/region <REGION>          # 예: asia-northeast3 (서울)
+gcloud config set compute/region <REGION>          # e.g. asia-northeast3 (Seoul)
 
 gcloud services enable artifactregistry.googleapis.com
 gcloud services enable run.googleapis.com
 gcloud services enable storage.googleapis.com
 
-# 이미지 저장소
+# image registry
 gcloud artifacts repositories create nonmem-repo \
   --repository-format=docker --location=<REGION>
 gcloud auth configure-docker <REGION>-docker.pkg.dev
 
-# 파일 저장소 (버킷)
+# file store (bucket)
 gcloud storage buckets create gs://<BUCKET> --location=<REGION>
 ```
 

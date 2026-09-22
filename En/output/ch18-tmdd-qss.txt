@@ -1,0 +1,8 @@
+                OFV estimated       term sigdig    CL_kg  V1_kg   KDEG
+full (tm103) 1106.3        20 SUCCESSFUL    2.2 0.000243 0.0316  0.147
+QSS (tm102)  1166.7        19 TERMINATED    1.0 0.000402 0.0310 16.500
+MM (tm104)   1227.7        15 TERMINATED    1.9 0.000179 0.0293     NA
+   KSS.mg.from.full       KSS.mg.of.QSS      KSS.RSE.of.QSS 
+             0.0492              0.0001              0.0000 
+complex.half.life.h  target.half.life.h 
+            46.3000              4.7000 

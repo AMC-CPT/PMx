@@ -1,0 +1,7 @@
+       var.CL var.V   corr
+base   0.2538 0.155 0.9908
+weight 0.0469 0.021 0.8800
+var.CL  var.V 
+  81.5   86.5 
+THETA5 THETA6 
+ 1.133  0.915 

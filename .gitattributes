@@ -1,9 +1,10 @@
-# 줄끝: 저장소(index)도 작업 트리도 LF. make_public.py 가 모든 텍스트 파일을 LF 로 쓰므로
-# core.autocrlf 가 true 인 PC 에서도 "LF will be replaced by CRLF" 경고가 나지 않는다.
+# Line endings: LF in the index and in the working tree alike. make_public.py writes
+# every text file with LF, so no "LF will be replaced by CRLF" warning appears even on
+# a machine with core.autocrlf true.
 * text=auto eol=lf
 
-# 이진 파일: 줄끝 변환도, 텍스트 diff 도 하지 않는다. 작은 PDF 는 앞 8KB 가 순수 텍스트라
-# text=auto 가 텍스트로 오판할 수 있으므로 확장자로 못 박는다.
+# Binary files: no line-ending conversion and no text diff. The first 8 KB of a small PDF
+# can be pure text, which text=auto may mistake for a text file, so nail them by extension.
 *.pdf   binary
 *.png   binary
 *.jpg   binary

@@ -1,0 +1,2 @@
+    overall   structure variability THETA.block 
+     407.48        7.39      267.25       17.51 

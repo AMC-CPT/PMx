@@ -1,0 +1,6 @@
+                     mechanism    OFV parameters    AIC PD.add.SD
+1    indirect I: kin inhibited 2034.6         14 2062.6      5.13
+2 indirect IV: kout stimulated 2185.6         15 2215.6      6.91
+3    effect compartment + Emax 2336.9         14 2364.9      9.36
+[1] "0MINIMIZATION SUCCESSFUL"                          
+[2] " HOWEVER, PROBLEMS OCCURRED WITH THE MINIMIZATION."

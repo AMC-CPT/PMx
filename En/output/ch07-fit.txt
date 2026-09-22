@@ -1,0 +1,7 @@
+                         estimate
+CL (L/h)                   0.0068
+V (L)                      1.4066
+additive error SD (mg/L)   2.2763
+proportional error CV      0.0640
+   OFV 
+685.53 

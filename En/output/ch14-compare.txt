@@ -1,0 +1,21 @@
+
+T3   estimate 2.073
+            lower  upper  width
+asymptotic 0.6367 3.5090 2.8723
+resampling 0.0000 2.9808 2.9808
+profile        NA 2.9912     NA
+SIR        0.3696 2.9075 2.5380
+
+T5   estimate 1.133
+            lower  upper  width
+asymptotic 0.8560 1.4106 0.5546
+resampling 0.7305 1.4556 0.7251
+profile    0.8841 1.3861 0.5020
+SIR        0.9341 1.3880 0.4539
+
+T6   estimate 0.9153
+            lower  upper  width
+asymptotic 0.7586 1.0719 0.3133
+resampling 0.7452 1.0802 0.3350
+profile    0.7934 1.0397 0.2463
+SIR        0.8059 1.0275 0.2217

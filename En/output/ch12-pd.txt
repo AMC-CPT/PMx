@@ -1,0 +1,4 @@
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.000   0.275   0.515   0.516   0.792   0.985 
+             mean     expected.mean          variance expected.variance 
+           0.5160            0.5000            0.0893            0.0833 

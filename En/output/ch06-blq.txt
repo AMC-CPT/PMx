@@ -1,0 +1,7 @@
+cls
+  apriori0 quantified 
+        59        155 
+denominator         BLQ     percent 
+        155           0           0 
+if.mixed 
+    27.6 

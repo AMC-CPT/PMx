@@ -1,0 +1,14 @@
+
+-- broken: ID order 
+ID not ascending 
+               1 
+
+-- broken: time-invariant covariate 
+time-invariant covariate varies 
+                              1 
+
+-- broken: time format 
+                datetime is NA same kind duplicated at a time 
+                           803                            685 
+   dose first at the same time 
+                            59 

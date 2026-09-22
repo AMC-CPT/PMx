@@ -1,0 +1,4 @@
+            observed           sim.median                sim.5 
+               0.892                1.011                0.875 
+              sim.95 position.of.observed 
+               1.143                0.100 

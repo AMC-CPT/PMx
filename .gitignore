@@ -1,9 +1,12 @@
-# 수백 번 돌리는 스크립트의 임시물 (정상 종료하면 스스로 지운다)
+# Scratch files of the scripts that run hundreds of times (they delete these themselves
+# when they finish normally)
 nm/boot.R76/
 nm/rpt.R76/
 nm/sse.R76/
 nm/_*.ctl
 data/_*.csv
-# nmw 의 보고 PDF 는 R/build.R 이 다시 만든다
+# nmw's report PDFs are remade by R/build.R
 nm/**/*.pdf
 nm/**/*.Rout
+# The English edition's build writes any figure a snippet draws to a scratch folder
+En/figures-check/

@@ -1,0 +1,4 @@
+     dOFV threshold         p 
+    1.410     3.840     0.235 
+SEX.effect 
+     0.116 

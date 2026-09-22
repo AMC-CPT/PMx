@@ -1,0 +1,13 @@
+            broken
+termination  FALSE TRUE
+  OTHER          0    1
+  SUCCESS       37    0
+  TERMINATED     0    1
+    lower  upper
+T3     NA 2.9912
+T5 0.8841 1.3861
+T6 0.7934 1.0397
+   grid.bottom dOFV.there
+T3  0.00732739       3.33
+T5  0.70888000      10.13
+T6  0.67551090      13.59

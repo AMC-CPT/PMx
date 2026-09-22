@@ -1,0 +1,2 @@
+         chisq    F.threshold permutation.95 
+          5.99           6.20           5.70 

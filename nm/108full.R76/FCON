@@ -1,5 +1,5 @@
 FILE    FSTREAM                                                                 
-PROB    PHENO 1COMP IV BOLUS, FULL COVARIATE MODEL   P:108wt  F:CL~WT+CREA+APGR+
+PROB    PHENO 1COMP IV BOLUS, FULL COV   P:108wt  F:CL~WT+CREA+APGR+SEX,V~WT    
 FMTN   3                                                                        
 LDFO   0                                                                        
 DATA       1   0 803  13   0   0   0   0          -1   0 0                      

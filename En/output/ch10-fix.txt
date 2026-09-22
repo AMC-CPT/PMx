@@ -1,0 +1,5 @@
+            both.estimated V.fixed both.fixed
+OFV                 581.44  583.25     591.35
+vs.previous             NA    1.81       8.09
+ forward backward 
+    3.84    10.83 

@@ -1,0 +1,8 @@
+                     model    OFV parameters   AICc
+tg102b    Gompertz (block) 1687.2          7 1701.9
+tg105     reduced Gompertz 1704.5          5 1714.8
+tg103            power law 1721.6          5 1732.0
+tg104      von Bertalanffy 1721.5          7 1736.2
+tg101             logistic 1729.8          6 1742.3
+tg102  Gompertz (diagonal) 1734.7          6 1747.2
+tg100          exponential 2076.5          4 2084.8

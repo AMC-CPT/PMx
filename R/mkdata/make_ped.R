@@ -1,25 +1,25 @@
 # =====================================================================
-#  R/mkdata/make_ped.R  -  소아 외삽 장의 모의 자료를 만든다
-#  저장소 최상위에서 실행:   Rscript R/mkdata/make_ped.R
+#  R/mkdata/make_ped.R  -  simulated data for the paediatric extrapolation chapter
+#  Run from the repository root:   Rscript R/mkdata/make_ped.R
 #
-#  참값을 알고 만든 자료다. 9장에서 체중 지수 1.13 이 이론값 0.75 보다 큰 것을
-#  "크기 위에 성숙이 겹친 것"으로 읽었다. 이 자료는 그 읽기를 참값으로 확인한다.
+#  Made with the true values known. In Ch 9 the weight exponent of 1.13,
+#  larger than the theoretical 0.75, was read as "maturation laid over size". This data confirms that reading against the truth.
 #
-#  설계. 120명, 정맥 bolus 5 mg/kg, 네 연령군 30명씩.
-#    1 신생아(재태연령 포함 PMA 26-44주, 출생 후 0-28일)   채혈 2-3회 (희박)
-#    2 영아(1-24개월)                                        채혈 3-4회
-#    3 소아(2-12세)                                          채혈 6회
-#    4 청소년(12-18세)                                       채혈 6회
+#  Design. 120 subjects, IV bolus 5 mg/kg, four age groups of 30.
+#    1 neonate (PMA 26-44 weeks incl. gestation, 0-28 days postnatal)  2-3 samples (sparse)
+#    2 infant (1-24 months)                                            3-4 samples
+#    3 child (2-12 years)                                              6 samples
+#    4 adolescent (12-18 years)                                        6 samples
 #
-#  모형(참값).  CL = 6 * (WT/70)^0.75 * MAT(PMA),  V = 40 * (WT/70)
-#    MAT = PMA^H / (TM50^H + PMA^H),  TM50 = 55 주, H = 3.4   (Anderson & Holford)
-#    IIV omega^2: CL 0.09, V 0.04.   잔차: 비례 10 %, 가법 0.2 mg/L
+#  Model (truth).  CL = 6 * (WT/70)^0.75 * MAT(PMA),  V = 40 * (WT/70)
+#    MAT = PMA^H / (TM50^H + PMA^H),  TM50 = 55 weeks, H = 3.4  (Anderson & Holford)
+#    IIV omega^2: CL 0.09, V 0.04.   Residual: proportional 10 %, additive 0.2 mg/L
 #
-#  열.  ID TIME AMT DV MDV EVID WT PMA AGE GRP
-#    PMA 는 주(week), AGE 는 년(year), GRP 1-4 는 위의 연령군.
-#  부분 자료: data/ped-neo.csv (신생아 30명), data/ped-old.csv (나머지 90명).
+#  Columns.  ID TIME AMT DV MDV EVID WT PMA AGE GRP
+#    PMA in weeks, AGE in years, GRP 1-4 are the age groups above.
+#  Subsets: data/ped-neo.csv (30 neonates), data/ped-old.csv (the other 90).
 # =====================================================================
-if (!file.exists("PMx.tex")) stop("저장소 최상위에서 실행하라.")
+if (!file.exists("PMx.tex")) stop("Run from the repository root.")
 
 set.seed(20260921)
 
@@ -31,17 +31,17 @@ mat <- function(pma) pma^TRUE_PAR["HILL"] / (TRUE_PAR["TM50"]^TRUE_PAR["HILL"] +
 n_grp <- 30
 subj <- list()
 for (g in 1:4) for (k in seq_len(n_grp)) {
-  if (g == 1) {                                     # 신생아
-    ga  <- runif(1, 26, 41); pna <- runif(1, 0, 28) # 재태 주, 출생 후 일
+  if (g == 1) {                                     # neonate
+    ga  <- runif(1, 26, 41); pna <- runif(1, 0, 28) # gestational weeks, postnatal days
     pma <- ga + pna / 7; age <- pna / 365
     wt  <- 3.4 * (ga / 40)^2.8 * exp(rnorm(1, 0, 0.10)) + 0.03 * pna
-  } else if (g == 2) {                              # 영아
+  } else if (g == 2) {                              # infant
     mo  <- runif(1, 1, 24); pma <- 40 + mo * 4.35; age <- mo / 12
     wt  <- (3.4 + 6.6 * (1 - exp(-mo / 6)) + 0.2 * mo) * exp(rnorm(1, 0, 0.10))
-  } else if (g == 3) {                              # 소아
+  } else if (g == 3) {                              # child
     age <- runif(1, 2, 12); pma <- 40 + age * 52.18
     wt  <- (8 + 2.2 * age) * exp(rnorm(1, 0, 0.12))
-  } else {                                          # 청소년
+  } else {                                          # adolescent
     age <- runif(1, 12, 18); pma <- 40 + age * 52.18
     wt  <- (40 + 4 * (age - 12)) * exp(rnorm(1, 0, 0.12))
   }
@@ -75,9 +75,9 @@ rownames(d) <- NULL
 write.csv(d, "data/ped-sim.csv", row.names = FALSE, quote = FALSE, na = ".")
 write.csv(d[d$GRP == 1, ], "data/ped-neo.csv", row.names = FALSE, quote = FALSE, na = ".")
 write.csv(d[d$GRP != 1, ], "data/ped-old.csv", row.names = FALSE, quote = FALSE, na = ".")
-cat(sprintf("data/ped-sim.csv: %d 행, %d 명, 관측 %d. 체중 %.2f-%.1f kg, PMA %.0f-%.0f 주\n",
+cat(sprintf("data/ped-sim.csv: %d rows, %d subjects, %d observations. Weight %.2f-%.1f kg, PMA %.0f-%.0f weeks\n",
             nrow(d), nrow(s), sum(d$MDV == 0), min(s$WT), max(s$WT), min(s$PMA), max(s$PMA)))
-cat(sprintf("신생아 30명의 관측 %d 개 (1인당 %.1f)\n", sum(d$MDV == 0 & d$GRP == 1),
+cat(sprintf("%d observations from the 30 neonates (%.1f each)\n", sum(d$MDV == 0 & d$GRP == 1),
             sum(d$MDV == 0 & d$GRP == 1) / 30))
 
 write.csv(data.frame(name = c(names(TRUE_PAR), paste0("OM_", names(OMEGA))),

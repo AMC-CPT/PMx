@@ -1,0 +1,4 @@
+     records     subjects        doses observations     pre.dose 
+         803           59          589          155           59 
+EX.rows PC.rows 
+    589     214 

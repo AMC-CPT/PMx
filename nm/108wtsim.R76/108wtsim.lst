@@ -21,7 +21,7 @@ $ERROR
   IF (W.LT.1E-6) W = 1E-6
   Y    = IPRE + W * EPS(1)
 
-; 108wt 의 최종 추정치를 참값으로 고정한다. 추정하지 않는다.
+; Final estimates of 108wt, fixed as truth. Nothing is estimated here.
 $THETA
   0.00731506 FIX   ; CL (L/h)
   1.49004    FIX   ; V  (L)
@@ -36,7 +36,7 @@ $OMEGA BLOCK(2) FIX
 
 $SIGMA 1 FIX
 
-; 재추정하지 않고 모의만 200번 한다. ONLYSIM 이 추정 단계를 아예 건너뛴다.
+; Simulate 200 times without re-estimation. ONLYSIM skips estimation.
 $SIM (20260915) ONLYSIMULATION SUBPROBLEMS=200
 
 $TAB ID TIME DV MDV

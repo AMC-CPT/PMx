@@ -1,0 +1,4 @@
+numeric.order  string.order 
+         TRUE         FALSE 
+[1] "110001" "110002" "20001" 
+[1]  20001 110001 110002

@@ -1,0 +1,4 @@
+     subject          EBE observations 
+       7.000       -0.769       10.000 
+   mode   exact      FO Laplace 
+ -0.846   3.210   3.790   3.210 

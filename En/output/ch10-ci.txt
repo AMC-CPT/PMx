@@ -1,0 +1,5 @@
+      estimate    SE lower upper
+WT~CL    1.133 0.141 0.856 1.411
+WT~V     0.915 0.080 0.759 1.072
+CI of CL contains 0.75   CI of V contains 1.0 
+                 FALSE                   TRUE 
