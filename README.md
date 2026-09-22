@@ -1,5 +1,7 @@
 # Pharmacometrics with NONMEM and R — example repository
 
+*한국어 설명은 [README.ko.md](README.ko.md) 에 있습니다.*
+
 The companion repository of Kyun-Seop Bae, *Pharmacometrics with NONMEM and R*
 (계량약리학 with NONMEM and R). Its purpose is to let a reader **remake every
 number and every figure in the book**; the text of the book is not here.
@@ -8,6 +10,10 @@ The book exists in two editions, Korean and English, and this one repository
 serves both. The R code that appears in the Korean edition is in
 `R/snippets/`, with Korean comments; the English edition's translation of the
 same code is in `En/R/snippets/`. Both produce the same numbers.
+
+**An English-speaking reader needs nothing from the Korean side.** `En/` is a
+complete parallel tree, and the control streams, the NONMEM run artefacts and
+the data are not language-bound at all.
 
 > **To study with this book you need a NONMEM licence.** The exercise is to
 > change a control stream, run it again and see how the result moves, and that
@@ -120,3 +126,12 @@ Copyright (C) 2026 Kyun-Seop Bae. This program is free software: you can redistr
 and/or modify it under the terms of the GNU General Public License as published by the
 Free Software Foundation, either version 3 of the License, or (at your option) any later
 version. It is distributed WITHOUT ANY WARRANTY; see `LICENSE` for details.
+
+## The other books in the series
+
+| | |
+|---|---|
+| 1 Scientific Computation with R | <https://github.com/AMC-CPT/SciCompR> |
+| 2 Scientific Inference in Clinical Trials with R | <https://github.com/AMC-CPT/CTDA> |
+| 3 Pharmacokinetics with R | <https://github.com/AMC-CPT/PKwR> |
+| 5 Essentials of Clinical Drug Development (online appendix) | <https://github.com/AMC-CPT/CDD> |
