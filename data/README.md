@@ -7,7 +7,7 @@ second example of Ch 18 alone the book used data from a real analysis (with the
 development code removed), and the `tmdd-mab.csv` here is a stand-in that
 simulates the same design from the book's final model (`R/mkdata/sim_tmdd.R`,
 seed 2026). So rerunning `nm/tm10?.ctl` gives numbers close to the book's
-rather than equal to them, and the run artefacts `nm/tm10?.R76/` are not here
+rather than equal to them, and the run artifacts `nm/tm10?.R76/` are not here
 either.
 
 ## `pheno.csv` — the known-answer dataset
@@ -43,7 +43,7 @@ and `R/snippets/ch06-theo-fix.R`, and the frozen output is in `output/`.
 
 ## `sdtm/` — source domains for the Ch 5 exercise
 
-> **These domains are an artefact this book made.** They are not real clinical
+> **These domains are an artifact this book made.** They are not real clinical
 > trial data. They were made by **decomposing** `pheno.csv` above.
 
 Chapter 5 teaches the process of assembling scattered domains, and the only
@@ -140,9 +140,9 @@ Chapter 6 takes this file as its input and checks it
 | `iov-sim.csv` | `R/mkdata/make_iov.R` | Three oral occasions, 60 subjects. IOV and clearance subpopulations (the `POP` column is the true value) | 16 |
 | `warf-sim.csv` `warf-ipp.csv` | `R/mkdata/make_warf.R`, `make_warf_ipp.R` | Warfarin-type PK/PD, 40 subjects. The IPP version carries the EBEs of `wf100` as columns | 18 |
 | `tmdd-mab.csv` | `R/mkdata/sim_tmdd.R` (a simulated stand-in, seed 2026) | Monoclonal antibody in 50 monkeys, six doses. The same design as the book's original data | 18 |
-| `tgi-*.csv` | `R/mkdata/make_tgi.R`, `make_tgi_trt.R` | Tumour volume (public data re-tidied) and a simulated treatment arm | 19 |
+| `tgi-*.csv` | `R/mkdata/make_tgi.R`, `make_tgi_trt.R` | Tumor volume (public data re-tidied) and a simulated treatment arm | 19 |
 | `tte-sim.csv` `cnt-sim.csv` | `R/mkdata/make_tte.R` | Time-to-event, 300 subjects; seizure counts, 200 subjects | 20 |
-| `ped-sim.csv` `ped-neo.csv` `ped-old.csv` | `R/mkdata/make_ped.R` | 120 paediatric subjects and subsets of them | 21 |
+| `ped-sim.csv` `ped-neo.csv` `ped-old.csv` | `R/mkdata/make_ped.R` | 120 pediatric subjects and subsets of them | 21 |
 | `theo-nm.csv` | `R/mkdata/make_theo.R` | THEO as a NONMEM dataset | 7, 8 |
 | `mult-explicit.csv` `mult-addl.csv` `mult-ss.csv` `mult-ssx.csv` | `R/mkdata/make_mult.R` | Repeated oral dosing in 30 subjects coded three ways, and the trap | 7 |
 

@@ -10,13 +10,13 @@ dir.create("output",  showWarnings = FALSE)
 dir.create("figures", showWarnings = FALSE)
 source("R/_freeze.R")
 
-# This script **never calls NONMEM.** It only reads the run artefacts
-# committed under nm/, so it runs on a machine without a licence. Where an
-# artefact is missing it skips that chapter and says what must be run.
+# This script **never calls NONMEM.** It only reads the run artifacts
+# committed under nm/, so it runs on a machine without a license. Where an
+# artifact is missing it skips that chapter and says what must be run.
 have_nm <- function(...) {
   f <- file.path("nm", c(...))
   ok <- all(file.exists(f))
-  if (!ok) message(sprintf("  skipped: %s missing. Rscript R/runnm.R (licence needed)",
+  if (!ok) message(sprintf("  skipped: %s missing. Rscript R/runnm.R (license needed)",
                            paste(basename(f[!file.exists(f)]), collapse = ", ")))
   ok
 }
@@ -74,7 +74,7 @@ if (have_nm("120base.R76/120base.ext", "120m1.R76/120m1.ext", "120m3.R76/120m3.e
 freeze("ch06-tiny")
 
 ## ---- Ch 7: The base model ---------------------------------------------
-#  Freezing needs the NONMEM run artefacts. Skipped where absent.
+#  Freezing needs the NONMEM run artifacts. Skipped where absent.
 if (have_nm("100base.R76/100base.ext", "101diag.R76/101diag.ext",
             "100base.R76/sdtab")) {
   new_session()
@@ -169,7 +169,7 @@ if (have_nm("108wt.R76/108wt.ext", "108wts.R76/108wts.ext",
 }
 
 ## ---- Ch 11: Reading the diagnostics -----------------------------------
-#  nmw's eight reports. They read only committed artefacts, so they are
+#  nmw's eight reports. They read only committed artifacts, so they are
 #  produced without NONMEM. The PDFs are gitignored (remade at any time).
 if (have_nm("108wt.R76/sdtab", "108wt.R76/PRINT.OUT", "108wt.R76/FCON")) {
   new_session()
@@ -186,7 +186,7 @@ if (have_nm("108wt.R76/sdtab", "108wt.R76/PRINT.OUT", "108wt.R76/FCON")) {
     freeze("ch11-refplot", fig = TRUE, fig.w = 6.4, fig.h = 3.2)
     freeze("ch11-refstat")
   }
-  suppressWarnings(freeze("ch11-sumout"))   # warns that SumOut cannot summarise the simulation-only 108wtsim (no estimation); does not affect the frozen output
+  suppressWarnings(freeze("ch11-sumout"))   # warns that SumOut cannot summarize the simulation-only 108wtsim (no estimation); does not affect the frozen output
 }
 
 ## ---- Ch 12: Simulation-based diagnostics ------------------------------
@@ -244,7 +244,7 @@ if (have_nm("108wt.R76/108wt.ext")) {
 }
 
 ## ---- Ch 16: The structure of variability ------------------------------
-#  Reads simulated data with known true values (R/mkdata/make_iov.R) and the run artefacts of nm/120*-124*.
+#  Reads simulated data with known true values (R/mkdata/make_iov.R) and the run artifacts of nm/120*-124*.
 new_session()
 freeze("ch16-data")
 freeze("ch16-occfig", fig = TRUE, fig.w = 6.6, fig.h = 2.4)
@@ -262,7 +262,7 @@ if (have_nm("120base.R76/120base.ext", "120add.R76/120add.ext", "120prop.R76/120
 }
 
 ## ---- Ch 17: Population analysis of PD and PK/PD -----------------------
-#  Reads simulated data with known true values (R/mkdata/make_pd.R) and the run artefacts of nm/pd*.
+#  Reads simulated data with known true values (R/mkdata/make_pd.R) and the run artifacts of nm/pd*.
 new_session()
 freeze("ch17-data")
 freeze("ch17-tcfig", fig = TRUE, fig.w = 6.0, fig.h = 3.2)
@@ -280,7 +280,7 @@ if (have_nm("pd100.R76/pd100.ext", "pd100x.R76/pd100x.ext", "pd101.R76/pd101.ext
 }
 
 ## ---- Ch 18: Population analysis of indirect response models -----------
-#  Reads simulated data with known true values (R/mkdata/make_warf.R) and the run artefacts of nm/wf*.
+#  Reads simulated data with known true values (R/mkdata/make_warf.R) and the run artifacts of nm/wf*.
 #  wf200 reads data/warf-ipp.csv, which is built from the patab of wf100.
 new_session()
 freeze("ch18-data")
@@ -299,7 +299,7 @@ if (have_nm("wf100.R76/wf100.ext", "wf200.R76/wf200.ext", "wf201.R76/wf201.ext",
 }
 
 ## ---- Ch 18 (second example): TMDD -------------------------------------
-#  Reads practice data (monkey data with the development code removed) and the artefacts of nm/tm100-tm104.
+#  Reads practice data (monkey data with the development code removed) and the artifacts of nm/tm100-tm104.
 new_session()
 freeze("ch18-tmdd-data")
 freeze("ch18-tmdd-fig", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
@@ -312,7 +312,7 @@ if (have_nm("tm100.R76/tm100.ext", "tm101.R76/tm101.ext", "tm102.R76/tm102.ext",
   freeze("ch18-tmdd-ro", fig = TRUE, fig.w = 6.4, fig.h = 3.0)
 }
 
-## ---- Ch 19: Tumour growth and TGI -------------------------------------
+## ---- Ch 19: Tumor growth and TGI --------------------------------------
 #  Reads the results of fitting the public Benzekry data with six growth models (nm/tg*).
 new_session()
 freeze("ch19-data")
@@ -333,7 +333,7 @@ if (have_nm("tg100.R76/tg100.ext", "tg101.R76/tg101.ext", "tg102.R76/tg102.ext",
 }
 
 ## ---- Ch 20: Time-to-event and count data ------------------------------
-#  Reads two simulated datasets with known true values (R/mkdata/make_tte.R) and the artefacts of nm/tte* and nm/cnt*.
+#  Reads two simulated datasets with known true values (R/mkdata/make_tte.R) and the artifacts of nm/tte* and nm/cnt*.
 new_session()
 freeze("ch20-data")
 freeze("ch20-kmfig", fig = TRUE, fig.w = 5.6, fig.h = 3.2)
@@ -348,8 +348,8 @@ if (have_nm("cnt100.R76/cnt100.ext", "cnt101.R76/cnt101.ext", "cnt102.R76/cnt102
   freeze("ch20-cntfig", fig = TRUE, fig.w = 5.6, fig.h = 3.2)
 }
 
-## ---- Ch 21: Paediatric extrapolation and prior information ------------
-#  Reads simulated data with known true values (R/mkdata/make_ped.R) and the run artefacts of nm/ped*.
+## ---- Ch 21: Pediatric extrapolation and prior information -------------
+#  Reads simulated data with known true values (R/mkdata/make_ped.R) and the run artifacts of nm/ped*.
 new_session()
 freeze("ch21-data")
 if (have_nm("ped100.R76/ped100.ext", "ped101.R76/ped101.ext", "ped102.R76/ped102.ext",

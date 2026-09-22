@@ -71,6 +71,6 @@ for (r in seq_len(nrow(res))) {
 }
 write.csv(res, "nm/sse/sse.csv", row.names = FALSE, quote = FALSE)
 unlink(c("data/_sse.csv", "nm/sse.R76"), recursive = TRUE)
-message(sprintf("\n%d replicates, %d with no artefact, total %s", nrow(res), sum(is.na(res$OFV)), format(round(Sys.time() - t0))))
+message(sprintf("\n%d replicates, %d with no artifact, total %s", nrow(res), sum(is.na(res$OFV)), format(round(Sys.time() - t0))))
 print(table(res$DESIGN, res$TERM))
 message("written to nm/sse/sse.csv.  next: Rscript R/build.R")

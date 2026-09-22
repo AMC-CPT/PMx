@@ -66,7 +66,7 @@ for (i in seq_len(nrow(grid))) {
 }
 
 #  A profile OFV **cannot be smaller** than the overall minimum. It was
-#  optimised with one parameter tied down, so it is at least that much
+#  optimized with one parameter tied down, so it is at least that much
 #  worse. If it came out smaller, that run is broken (the objective function
 #  was not computed on the same data). This is an inequality, not an assumption, so it serves directly as a check.
 #  The grid point sitting exactly at the optimum comes out about 1e-6 low

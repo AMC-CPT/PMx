@@ -21,7 +21,7 @@ q <- function(eta) {                          # kernel of the individual -2 log 
   f <- F(eta); v <- th[4]^2 + th[5]^2 * f^2
   sum(log(v) + (yy - f)^2 / v) + eta^2 / om
 }
-# FO: linearise F at eta = 0 and measure the residual variance there too. It
+# FO: linearize F at eta = 0 and measure the residual variance there too. It
 # becomes a quadratic in eta.
 h <- 1e-4; f0 <- F(0); g0 <- (F(h) - F(-h)) / (2 * h)
 v0 <- th[4]^2 + th[5]^2 * f0^2

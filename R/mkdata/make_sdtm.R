@@ -3,7 +3,7 @@
 #
 #  Builds the practice data of Ch 5. Starting from the public phenobarbital
 #  neonate data (Beal & Sheiner, a NONMEM distribution example), it
-#  **decomposes it backwards** into SDTM-style source domains (DM/EX/PC/VS/LB).
+#  **decomposes it backward** into SDTM-style source domains (DM/EX/PC/VS/LB).
 #
 #  Why do it this way.
 #    Ch 5 teaches the process of merging scattered domains, but the public
@@ -23,7 +23,7 @@
 #  Output:  data/pheno.csv          (the answer dataset)
 #           data/sdtm/*.csv         (the source domains)
 #
-#  Note: the SDTM domains are **an artefact made by this book**. They are not
+#  Note: the SDTM domains are **an artifact made by this book**. They are not
 #        real trial data; the provenance of the original is given in data/README.md.
 # =====================================================================
 
@@ -39,7 +39,7 @@ dir.create(file.path(OUT, "sdtm"), recursive = TRUE, showWarnings = FALSE)
 #    The original is util/PHENO of a default NONMEM installation (nm75g64 and
 #    so on for other versions). Without it, the committed data/pheno.csv is
 #    used instead. That file was produced by the write.csv below, so the
-#    content is the same and **this whole script runs on a machine without    NONMEM.** In practice there is no need to re-run it (the artefacts are committed).
+#    content is the same and **this whole script runs on a machine without    NONMEM.** In practice there is no need to re-run it (the artifacts are committed).
 # ---------------------------------------------------------------------
 SRC <- c("C:/nm76g64/util/PHENO", "C:/nm75g64/util/PHENO", "data/PHENO")
 SRC <- SRC[file.exists(SRC)]

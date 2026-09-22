@@ -1,4 +1,4 @@
-# Six models fitted to the same data. The OFV does not penalise the number of
+# Six models fitted to the same data. The OFV does not penalize the number of
 # parameters, so they are compared by AICc. 173 observations, 20 subjects.
 mods <- c(tg100 = "exponential", tg101 = "logistic", tg102 = "Gompertz (diagonal)",
           tg102b = "Gompertz (block)", tg103 = "power law", tg104 = "von Bertalanffy",

@@ -1,4 +1,4 @@
-# The eight reports read **committed artefacts only**. They are produced even
+# The eight reports read **committed artifacts only**. They are produced even
 # on a PC without NONMEM. That the run folder is nm/<model>.R76/ earns its keep
 # here (Ch 3). The model name comes from the folder name, the tables from
 # sdtab/patab/cotab/catab, and the termination status from PRINT.OUT.

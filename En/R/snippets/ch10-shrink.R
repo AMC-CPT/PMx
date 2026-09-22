@@ -1,6 +1,6 @@
 # Shrinkage. How much smaller is the standard deviation of the EBEs than the
 # estimated OMEGA? When the data cannot speak about a subject, the EBE is
-# pulled towards 0.
+# pulled toward 0.
 shrink <- function(m, tab) {
   f <- fin(m)
   s <- read.table(nmf(m, tab), skip = 1, header = TRUE)

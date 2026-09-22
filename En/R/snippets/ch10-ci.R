@@ -1,4 +1,4 @@
-# Run artefacts live in one folder per model: nm/<model>.R76/ (Ch 3)
+# Run artifacts live in one folder per model: nm/<model>.R76/ (Ch 3)
 nmf <- function(model, file) file.path("nm", paste0(model, ".R76"), file)
 
 # The standard errors are on the ITERATION = -1000000001 row of the .ext.

@@ -14,8 +14,8 @@
 #  snippet draws here goes to a scratch folder so that an English build
 #  can never overwrite the Korean edition's frozen figures.
 #
-#  Like R/build.R this does NOT call NONMEM.  It reads the run artefacts
-#  committed under nm/, so it runs on a machine without a licence.
+#  Like R/build.R this does NOT call NONMEM.  It reads the run artifacts
+#  committed under nm/, so it runs on a machine without a license.
 # =====================================================================
 if (!dir.exists("R/snippets"))
   stop("Run from the repository root (where R/snippets/ lives).")
@@ -43,7 +43,7 @@ source("R/_freeze.R")
 have_nm <- function(...) {
   f <- file.path("nm", c(...))
   ok <- all(file.exists(f))
-  if (!ok) message(sprintf("  skipped: %s missing. Rscript R/runnm.R (licence needed)",
+  if (!ok) message(sprintf("  skipped: %s missing. Rscript R/runnm.R (license needed)",
                            paste(basename(f[!file.exists(f)]), collapse = ", ")))
   ok
 }
@@ -196,7 +196,7 @@ if (have("ch09-ebe") &&
     freeze("ch09-full", digits = 3)                   # full model (uses se() from ch09-collin)
 }
 
-## ---- Ch 10: Judgement in Covariate Selection --------------------------
+## ---- Ch 10: Judgment in Covariate Selection ---------------------------
 if (have("ch10-ci") &&
     have_nm("108wt.R76/108wt.ext", "108wts.R76/108wts.ext",
             "108wtx.R76/108wtx.ext", "108wtcr.R76/108wtcr.ext")) {
@@ -210,7 +210,7 @@ if (have("ch10-ci") &&
 }
 
 ## ---- Ch 11: Reading the Diagnostics -----------------------------------
-#  nmw's eight reports. They read only committed artefacts, so they are
+#  nmw's eight reports. They read only committed artifacts, so they are
 #  produced without NONMEM. The PDFs are gitignored (remade at any time).
 if (have("ch11-reports") &&
     have_nm("108wt.R76/sdtab", "108wt.R76/PRINT.OUT", "108wt.R76/FCON")) {
@@ -228,7 +228,7 @@ if (have("ch11-reports") &&
     freeze("ch11-refplot", fig = TRUE, fig.w = 6.4, fig.h = 3.2)
     freeze("ch11-refstat")
   }
-  suppressWarnings(freeze("ch11-sumout"))   # warns that SumOut cannot summarise the simulation-only 108wtsim (no estimation); does not affect the frozen output
+  suppressWarnings(freeze("ch11-sumout"))   # warns that SumOut cannot summarize the simulation-only 108wtsim (no estimation); does not affect the frozen output
 }
 
 ## ---- Ch 12: Simulation-Based Diagnostics ------------------------------
@@ -288,7 +288,7 @@ if (have("ch14-asym") && have_nm("108wt.R76/108wt.ext")) {
 }
 
 ## ---- Ch 16: The Structure of Variability ------------------------------
-#  Reads simulated data with known true values (R/mkdata/make_iov.R) and the run artefacts of nm/120*-124*.
+#  Reads simulated data with known true values (R/mkdata/make_iov.R) and the run artifacts of nm/120*-124*.
 if (have("ch16-data")) {
   new_session()
   freeze("ch16-data")
@@ -308,7 +308,7 @@ if (have("ch16-data")) {
 }
 
 ## ---- Ch 17: Population Analysis of PD and PK/PD -----------------------
-#  Reads simulated data with known true values (R/mkdata/make_pd.R) and the run artefacts of nm/pd*.
+#  Reads simulated data with known true values (R/mkdata/make_pd.R) and the run artifacts of nm/pd*.
 if (have("ch17-data")) {
   new_session()
   freeze("ch17-data")
@@ -328,7 +328,7 @@ if (have("ch17-data")) {
 }
 
 ## ---- Ch 18: Population Analysis of Indirect Response Models -----------
-#  Reads simulated data with known true values (R/mkdata/make_warf.R) and the run artefacts of nm/wf*.
+#  Reads simulated data with known true values (R/mkdata/make_warf.R) and the run artifacts of nm/wf*.
 #  wf200 reads data/warf-ipp.csv, which is built from the patab of wf100.
 if (have("ch18-data")) {
   new_session()
@@ -349,7 +349,7 @@ if (have("ch18-data")) {
 }
 
 ## ---- Ch 18 (second example): TMDD -------------------------------------
-#  Reads practice data (monkey data with the development code removed) and the artefacts of nm/tm100-tm104.
+#  Reads practice data (monkey data with the development code removed) and the artifacts of nm/tm100-tm104.
 if (have("ch18-tmdd-data")) {
   new_session()
   freeze("ch18-tmdd-data")
@@ -364,7 +364,7 @@ if (have("ch18-tmdd-data")) {
   }
 }
 
-## ---- Ch 19: Tumour Growth and TGI -------------------------------------
+## ---- Ch 19: Tumor Growth and TGI --------------------------------------
 #  Reads the results of fitting the public Benzekry data with six growth models (nm/tg*).
 if (have("ch19-data")) {
   new_session()
@@ -387,7 +387,7 @@ if (have("ch19-data")) {
 }
 
 ## ---- Ch 20: Time-to-Event and Count Data ------------------------------
-#  Reads two simulated datasets with known true values (R/mkdata/make_tte.R) and the artefacts of nm/tte* and nm/cnt*.
+#  Reads two simulated datasets with known true values (R/mkdata/make_tte.R) and the artifacts of nm/tte* and nm/cnt*.
 if (have("ch20-data")) {
   new_session()
   freeze("ch20-data")
@@ -404,8 +404,8 @@ if (have("ch20-data")) {
   }
 }
 
-## ---- Ch 21: Paediatric Extrapolation and Prior Information ------------
-#  Reads simulated data with known true values (R/mkdata/make_ped.R) and the run artefacts of nm/ped*.
+## ---- Ch 21: Pediatric Extrapolation and Prior Information -------------
+#  Reads simulated data with known true values (R/mkdata/make_ped.R) and the run artifacts of nm/ped*.
 if (have("ch21-data")) {
   new_session()
   freeze("ch21-data")

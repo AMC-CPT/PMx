@@ -1,5 +1,5 @@
 # =====================================================================
-#  R/mkdata/make_ped.R  -  simulated data for the paediatric extrapolation chapter
+#  R/mkdata/make_ped.R  -  simulated data for the pediatric extrapolation chapter
 #  Run from the repository root:   Rscript R/mkdata/make_ped.R
 #
 #  Made with the true values known. In Ch 9 the weight exponent of 1.13,

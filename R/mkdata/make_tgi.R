@@ -1,5 +1,5 @@
 # =====================================================================
-#  R/mkdata/make_tgi.R  -  the tumour volume data of Ch 19 as NONMEM datasets
+#  R/mkdata/make_tgi.R  -  the tumor volume data of Ch 19 as NONMEM datasets
 #  Run from the repository root:   Rscript R/mkdata/make_tgi.R
 #
 #  The originals are three preclinical datasets published by Benzekry et al.

@@ -22,7 +22,7 @@ docker build -t nm760 .
 docker images nm760
 ```
 
-Running it (the licence is attached with -v)
+Running it (the license is attached with -v)
 
 ```sh
 docker run --rm \

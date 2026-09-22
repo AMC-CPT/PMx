@@ -1,5 +1,5 @@
 # The second example of Ch 18. 50 monkeys given a monoclonal antibody once as
-# an intravenous bolus, at six dose levels. Data the author analysed in practice,
+# an intravenous bolus, at six dose levels. Data the author analyzed in practice,
 # published here with only the development code and the animal numbers removed
 # (R/mkdata/make_tmdd.R). Concentration is mg/L, time h, dose mg/kg, and AMT is
 # the actual amount given (mg).

@@ -1,5 +1,5 @@
 # The EBEs per animal. An animal with a large ALPHA has a large BETA too: a
-# tumour that started growing fast slows down fast. It means there is one axis,
+# tumor that started growing fast slows down fast. It means there is one axis,
 # and the reduced Gompertz uses that axis.
 pa <- read.table("nm/tg102b.R76/patab", skip = 1, header = TRUE)
 pa <- pa[!duplicated(pa$ID), ]

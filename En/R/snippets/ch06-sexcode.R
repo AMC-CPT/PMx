@@ -12,7 +12,7 @@ cov <- data.frame(AGE = round(runif(n, 20, 70)), BWT = round(runif(n, 50, 90), 1
 # only the CRCL column arrives.)
 cov$CRCL <- with(cov, (140 - AGE) * BWT * ifelse(SEX == 0, 0.85, 1) / (72 * CREA))
 
-# Work it backwards. Divide by the Cockcroft-Gault expression without the 0.85
+# Work it backward. Divide by the Cockcroft-Gault expression without the 0.85
 # female factor and only one of two values can come out.
 r <- with(cov, round(CRCL / ((140 - AGE) * BWT / (72 * CREA)), 3))
 table(SEX = cov$SEX, factor = r)

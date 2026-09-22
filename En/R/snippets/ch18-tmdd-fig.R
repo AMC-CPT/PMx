@@ -1,4 +1,4 @@
-# Left: the concentrations of all 50 animals (log axis), coloured by dose level.
+# Left: the concentrations of all 50 animals (log axis), colored by dose level.
 # Right: the geometric mean per dose group divided by the dose. Under linear
 # pharmacokinetics the curves on the right would superimpose. The lower the dose
 # the earlier the curve bends down and disappears, because the share the target

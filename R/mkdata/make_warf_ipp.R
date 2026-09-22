@@ -4,7 +4,7 @@
 #
 #  The IPP method of sequential PK/PD (Zhang, Beal and Sheiner 2003) puts the
 #  individual estimates (EBEs) of the PK model into the data as columns and
-#  fits the PD alone. So this script **depends on the run artefacts of wf100  (its patab)**; wf100 must be run first.
+#  fits the PD alone. So this script **depends on the run artifacts of wf100  (its patab)**; wf100 must be run first.
 #
 #  Result: data/warf-ipp.csv (ID TIME DV MDV EVID DOSE IKA ICL IV). PCA records only.
 # =====================================================================

@@ -27,5 +27,5 @@ cl <- th[["THETA1"]] * bwt; v1 <- th[["THETA2"]] * bwt
 c(linear.half.life.h = round(log(2) * (v1 + th[["THETA4"]]) / cl, 1),
   KD.mgL = signif(th[["THETA6"]] / th[["THETA5"]] / v1, 3),
   target.half.life.h = round(log(2) / th[["THETA9"]], 1),
-  complex.half.life.h = round(log(2) / (th[["THETA6"]] + th[["THETA7"]]), 1),   # dissociation and internalisation remove it together
+  complex.half.life.h = round(log(2) / (th[["THETA6"]] + th[["THETA7"]]), 1),   # dissociation and internalization remove it together
   baseline.target.mg = signif(th[["THETA12"]] * bwt / th[["THETA9"]], 3))

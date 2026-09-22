@@ -5,6 +5,6 @@ table(arm = factor(arm[d$ARM], arm),
       type = factor(c("concentration", "NRS")[d$DVID], c("concentration", "NRS")))
 
 # The NRS at time 0 is the baseline. It should be the same across arms
-# (randomised allocation).
+# (randomized allocation).
 b <- d[d$DVID == 2 & d$TIME == 0, ]
 round(tapply(b$DV, arm[b$ARM], mean), 2)

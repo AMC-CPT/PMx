@@ -1,5 +1,5 @@
 # The parameter table of the final model: the report's table, built from this
-# book's artefacts alone. The point estimates and RSEs come from the .ext, the
+# book's artifacts alone. The point estimates and RSEs come from the .ext, the
 # resampling intervals from the boot.csv of Ch 14, and the likelihood intervals
 # from its llp.csv. The column names say which interval is which.
 fin <- unlist(e[e$ITERATION == -1000000000, -1])

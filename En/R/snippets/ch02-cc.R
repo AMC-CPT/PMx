@@ -2,7 +2,7 @@
 # line is not a character but a signal sent to the printer.
 #   '1' new page,  '0' skip two lines,  '+' **overstrike the previous line**,
 #   ' ' one line
-# Run artefacts live in a folder of their own per model: nm/<model>.R76/ (Ch 3)
+# Run artifacts live in a folder of their own per model: nm/<model>.R76/ (Ch 3)
 RUN <- "nm/100base.R76"
 x  <- readLines(file.path(RUN, "100base.lst"), warn = FALSE)
 cc <- substr(x, 1, 1)

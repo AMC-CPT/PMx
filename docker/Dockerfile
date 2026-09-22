@@ -1,6 +1,6 @@
 # NONMEM 7.6 on Ubuntu 22.04 with gfortran and OpenMPI. The Dockerfile of Ch 15.
 # Put this file in the NONMEM distribution folder (nm760CD/) and build from there.
-# The licence file does not go into the image. Attach it with -v at run time.
+# The license file does not go into the image. Attach it with -v at run time.
 
 FROM ubuntu:22.04 AS builder
 ENV DEBIAN_FRONTEND=noninteractive

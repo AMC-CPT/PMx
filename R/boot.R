@@ -88,7 +88,7 @@ for (i in seq_len(NREP)) {
 
 write.csv(res, "nm/boot/boot.csv", row.names = FALSE, quote = FALSE)
 unlink(c("data/_boot.csv", "nm/boot.R76"), recursive = TRUE)
-message(sprintf("\n%d replicates, %d with no artefact, total %s", NREP, sum(is.na(res$OFV)),
+message(sprintf("\n%d replicates, %d with no artifact, total %s", NREP, sum(is.na(res$OFV)),
                 format(round(Sys.time() - t0))))
 print(table(res$TERM, useNA = "ifany"))
 message("written to nm/boot/boot.csv.  next: Rscript R/build.R")

@@ -4,16 +4,16 @@ This repository has one rule.
 
 | | With what | What it needs |
 |---|---|---|
-| **Run NONMEM** | `Rscript R/runnm.R` | A NONMEM licence and a Fortran compiler |
+| **Run NONMEM** | `Rscript R/runnm.R` | A NONMEM license and a Fortran compiler |
 | **Run R** | `Rscript R/build.R` | R only. **Works without NONMEM** |
 | **Build the book** | `latexmk -xelatex PMx.tex` | LaTeX only |
 
-The run artefacts (`.lst`, `.ext`, `.phi` and the four tables) are
-**committed**, so R and the book build run on a machine without a licence.
+The run artifacts (`.lst`, `.ext`, `.phi` and the four tables) are
+**committed**, so R and the book build run on a machine without a license.
 Run `R/runnm.R` on a licensed machine only when a control stream or the data
 has been changed.
 
-`R/build.R` **never calls NONMEM.** It only reads the committed artefacts, and
+`R/build.R` **never calls NONMEM.** It only reads the committed artifacts, and
 where they are absent it skips that chapter and says what must be run.
 
 ## Model names
@@ -41,8 +41,8 @@ parent compartments.
 | `pd101` `pd101b` `pd102` `pd103` | Placebo arm excluded / 160 mg arm only / observed baseline / combined error | 17 |
 | `pd100sim` | 200 simulations from the `pd100` estimates (VPC by arm) | 17 |
 | `pd200ord` | Proportional odds model with NRS collapsed to three categories. `LAPLACE LIKELIHOOD` | 17 |
-| `tg100`--`tg105` | Tumour volume. Exponential / logistic / Gompertz (diagonal, `b` block) / power / von Bertalanffy (ADVAN13) / reduced Gompertz | 19 |
-| `tm100` | Full TMDD (2 compartments + target synthesis/degradation/binding/dissociation/internalisation, `ADVAN13`), FO. Monkey monoclonal antibody | 18 |
+| `tg100`--`tg105` | Tumor volume. Exponential / logistic / Gompertz (diagonal, `b` block) / power / von Bertalanffy (ADVAN13) / reduced Gompertz | 19 |
+| `tm100` | Full TMDD (2 compartments + target synthesis/degradation/binding/dissociation/internalization, `ADVAN13`), FO. Monkey monoclonal antibody | 18 |
 | `tm101` | The same structure with FOCE-I | 18 |
 | `tm102` `tm104` | QSS approximation (`KSS`) / Michaelis-Menten limit | 18 |
 | `tm103` | Full TMDD with the target-synthesis intercept removed. **The final model of the second example of Ch 18** | 18 |
@@ -61,7 +61,7 @@ parent compartments.
 | `wf201sim` | 200 simulations from the `wf201` estimates (VPC) | 18 |
 | `tte100` `tte101` `tte102` | Time-to-event. Constant hazard / Weibull / Weibull + exposure. `LAPLACE LIKELIHOOD` | 20 |
 | `cnt100` `cnt101` `cnt102` | Counts. Poisson / negative binomial / negative binomial with no drug effect. `LAPLACE -2LL` | 20 |
-| `ped100` `ped101` `ped102` | 120 paediatric subjects. Size only / size + maturation / exponent estimated | 21 |
+| `ped100` `ped101` `ped102` | 120 pediatric subjects. Size only / size + maturation / exponent estimated | 21 |
 | `ped104` | 90 subjects with neonates excluded (the source of the prior) | 21 |
 | `ped103x` `ped103` | 30 neonates only. Without a prior / with `$PRIOR NWPRI` | 21 |
 | `130mult` `130addl` `130ss` | Repeated oral dosing. Every dose / `ADDL II` / `SS=1` (the first two give the same answer) | 7 |
@@ -69,9 +69,9 @@ parent compartments.
 | `sse` | For the simulation--estimation of the design comparison. `R/sse.R` runs it on temporary data | 22 |
 
 The suffixes are `s` (simplified, or `$COV MAT=S`), `i` (iteration) and
-`x` (experimental). `pd` is pharmacodynamics, `tg` tumour growth, `wf`
+`x` (experimental). `pd` is pharmacodynamics, `tg` tumor growth, `wf`
 warfarin-type PK/PD, `tte` and `cnt` time-to-event and counts, and `ped`
-paediatric models. Naming by the number of compartments applies to PK models
+pediatric models. Naming by the number of compartments applies to PK models
 only.
 
 ### What is left out when `R/runnm.R` is called with no name
@@ -85,7 +85,7 @@ only.
 
 `llp.ctl` and `sir.ctl` are **templates** carrying markers (`<T3>`,
 `<THETA>` and the like). `R/llp.R` and `R/sir.R` substitute those lines only,
-write `nm/_llp.ctl` and `nm/_sir.ctl`, run them and delete them afterwards.
+write `nm/_llp.ctl` and `nm/_sir.ctl`, run them and delete them afterward.
 `runnm.R` leaves control streams beginning with `_` out of its list.
 
 The results of the things that run hundreds of times all come down to
@@ -117,7 +117,7 @@ structure.
 
 The eight reports (`S1-OFV.PDF` and so on) are produced by
 `Rscript R/build.R` and are covered by `.gitignore`. They read only the
-committed artefacts, so **they can be produced without NONMEM.**
+committed artifacts, so **they can be produced without NONMEM.**
 
 Control streams are written in pure ASCII. Non-ASCII comments bring a flood of
 missing-font warnings when the reports are produced (CTL_Style_Guide 20.2).
@@ -205,7 +205,7 @@ covered by `.gitignore`.
 
 These are the control streams of the four items under "supplements needing a
 NONMEM run" in the WORKLOG. The data were made by `R/mkdata/make_blq.R` and
-`R/mkdata/make_iv2.R`, and the run artefacts are committed too (all nine
+`R/mkdata/make_iv2.R`, and the run artifacts are committed too (all nine
 MINIMIZATION SUCCESSFUL).
 
 ```sh

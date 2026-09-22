@@ -2,7 +2,7 @@
 #  R/mkdata/make_tgi_trt.R  -  the treatment-effect practice data of Ch 19
 #  Run from the repository root:   Rscript R/mkdata/make_tgi_trt.R
 #
-#  The Benzekry data has control animals only. Practising with a treatment
+#  The Benzekry data has control animals only. Practicing with a treatment
 #  effect needs a treated arm whose truth is known. Taking the estimates of
 #  tg102b (Gompertz, block) as the truth, 20 control and 20 treated animals
 #  are generated. Treatment starts on day 7 after implantation and lowers the  growth rate ALPHA by 40 % (truth THETA(5) = -0.4). The sampling design is the same as the original.

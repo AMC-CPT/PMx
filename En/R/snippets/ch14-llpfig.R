@@ -1,5 +1,5 @@
 # Three profile likelihood curves. The horizontal dashed line is 3.84 and the
-# grey verticals are the asymptotic interval. Matching the vertical scale of
+# gray verticals are the asymptotic interval. Matching the vertical scale of
 # the three panels lets their steepness be compared.
 par(mfrow = c(1, 3), mar = c(4, 4, 2.2, 1))
 for (k in c("T3", "T5", "T6")) {

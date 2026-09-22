@@ -141,7 +141,7 @@ freeze <- function(name, seed = 1L, fig = FALSE, fig.w = 5, fig.h = 3.2,
                    trim = NULL, trim.keep = 2L, drop = NULL, squeeze = FALSE) {
   #  The paths are options. The defaults are the Korean edition's; the
   #  English edition (En/build.R) swaps in its own folders. With the defaults
-  #  the behaviour is unchanged.
+  #  the behavior is unchanged.
   snippet <- file.path(getOption("pmx.snipdir", "R/snippets"),
                        paste0(name, ".R"))
   outfile <- file.path(getOption("pmx.outdir",  "output"),

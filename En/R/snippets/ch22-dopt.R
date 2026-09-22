@@ -1,5 +1,5 @@
 # D-optimal search. If each person can be sampled three times and the times are
-# chosen from eight candidates, which three maximise the determinant of the
+# chosen from eight candidates, which three maximize the determinant of the
 # information matrix? Evaluate all 56.
 cand <- c(0.5, 1, 2, 4, 6, 8, 12, 24)
 trip <- combn(cand, 3)

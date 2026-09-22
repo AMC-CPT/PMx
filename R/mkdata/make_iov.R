@@ -4,7 +4,7 @@
 #
 #  Made with the true values known. **Interoccasion variability (IOV)** is
 #  laid over interindividual variability (IIV), and a **subpopulation** of
-#  low clearance (20 % poor metabolisers) is mixed in. Only then can one say,
+#  low clearance (20 % poor metabolizers) is mixed in. Only then can one say,
 #  by distance from the truth, what inflates when IOV is ignored and how much of the subpopulation $MIX recovers. The result is data/iov-sim.csv, with the seed written in.
 #
 #  Design. One-compartment oral. 100 mg once at 0, 168 and 336 h (days 1, 8,
@@ -17,7 +17,7 @@
 #    Residual:  proportional 12 %, additive 0.05 mg/L
 #
 #  Columns.  ID TIME AMT DV MDV EVID OCC POP
-#    OCC 1-3 = dosing occasion.  POP 1 = normal, 2 = poor metaboliser (the truth; the model does not know it).
+#    OCC 1-3 = dosing occasion.  POP 1 = normal, 2 = poor metabolizer (the truth; the model does not know it).
 # =====================================================================
 if (!file.exists("PMx.tex")) stop("Run from the repository root.")
 
@@ -57,7 +57,7 @@ d <- do.call(rbind, rows)
 d <- d[order(d$ID, d$TIME, -d$EVID), ]
 rownames(d) <- NULL
 write.csv(d, "data/iov-sim.csv", row.names = FALSE, quote = FALSE, na = ".")
-cat(sprintf("data/iov-sim.csv: %d rows, %d subjects, %d observations, %d poor metabolisers\n",
+cat(sprintf("data/iov-sim.csv: %d rows, %d subjects, %d observations, %d poor metabolizers\n",
             nrow(d), n, sum(d$MDV == 0), sum(pop == 2)))
 
 write.csv(data.frame(name = c(names(TRUE_PAR), paste0("OM_", names(OMEGA)),

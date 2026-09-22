@@ -1,4 +1,4 @@
-# Run artefacts live in a folder of their own per model: nm/<model>.R76/ (Ch 3)
+# Run artifacts live in a folder of their own per model: nm/<model>.R76/ (Ch 3)
 nmf <- function(model, file) file.path("nm", paste0(model, ".R76"), file)
 
 # Before looking at the fit, look at whether the data went into NONMEM

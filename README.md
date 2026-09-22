@@ -12,24 +12,24 @@ serves both. The R code that appears in the Korean edition is in
 same code is in `En/R/snippets/`. Both produce the same numbers.
 
 **An English-speaking reader needs nothing from the Korean side.** `En/` is a
-complete parallel tree, and the control streams, the NONMEM run artefacts and
+complete parallel tree, and the control streams, the NONMEM run artifacts and
 the data are not language-bound at all.
 
-> **To study with this book you need a NONMEM licence.** The exercise is to
+> **To study with this book you need a NONMEM license.** The exercise is to
 > change a control stream, run it again and see how the result moves, and that
-> only happens on a licensed machine. The NONMEM run artefacts are committed
-> here, though, so the R code runs without a licence and the numbers in the
+> only happens on a licensed machine. The NONMEM run artifacts are committed
+> here, though, so the R code runs without a license and the numbers in the
 > book can be checked.
 
 ## There is one rule
 
 | | With what | What it needs |
 |---|---|---|
-| **Run NONMEM** | `Rscript R/runnm.R [model ...]` | A NONMEM 7.6 licence and gfortran |
+| **Run NONMEM** | `Rscript R/runnm.R [model ...]` | A NONMEM 7.6 license and gfortran |
 | **Run R (Korean edition)** | `Rscript R/build.R` | R only. Works without NONMEM |
 | **Run R (English edition)** | `Rscript En/build.R` | R only. Works without NONMEM |
 
-`R/build.R` never calls NONMEM. It reads the run artefacts committed under
+`R/build.R` never calls NONMEM. It reads the run artifacts committed under
 `nm/<model>.R76/` and remakes `output/` (console output) and `figures/`.
 Run `R/runnm.R` again only when a control stream or the data has changed.
 
@@ -44,13 +44,13 @@ R/rpt.R boot.R llp.R sir.R sse.R   the things that run hundreds of times (Ch 13,
 R/mkdata/             the scripts that make the simulated data (the seeds are in them)
 data/                 the example data. README.md gives the provenance
 nm/<model>.ctl        control streams. README.md is the key to the model names
-nm/<model>.R76/       their run artefacts (.lst .ext .phi and four tables). The licensee string is removed
+nm/<model>.R76/       their run artifacts (.lst .ext .phi and four tables). The licensee string is removed
 nm/boot/ rpt/ llp/ sir/ sse/   the summary csv of the things that ran hundreds of times
 output/               frozen console output (as printed in the book)
 figures/              frozen figures
 En/                   the same for the English edition (see below)
 docker/               the Dockerfile and the commands of Ch 15
-Ref/growth/dataset/   the tumour volume data published by Benzekry et al. (Ch 19)
+Ref/growth/dataset/   the tumor volume data published by Benzekry et al. (Ch 19)
 ```
 
 ### `En/` — the English edition
@@ -95,13 +95,13 @@ R packages needed: `nmw` (CRAN), `deSolve`, `survival`. The rest is base R.
   Biol 2014;10:e1003800 and Vaghi C, et al. PLoS Comput Biol 2020;16:e1007178.
 
 - `data/tmdd-mab.csv`: a **simulated stand-in** for the second example of
-  Chapter 18 (TMDD). The book used monkey data the author analysed in practice
+  Chapter 18 (TMDD). The book used monkey data the author analyzed in practice
   (with the development code removed), and those data are not published. The
   file here simulates the same design (six doses, the same number of animals,
   the same sampling times, the same limit of quantification) from the estimates
   of the book's final model `tm103` (`R/mkdata/sim_tmdd.R`, seed 2026).
   `nm/tm10?.ctl` runs on it unchanged, but the numbers come out close to the
-  book's rather than equal to them, which is why the run artefacts
+  book's rather than equal to them, which is why the run artifacts
   `nm/tm10?.R76/` are not here either. `output/ch18-tmdd-*` and
   `figures/ch18-tmdd-*` are committed as printed in the book, from the original
   data; **running `R/build.R` overwrites the ones that need no NONMEM**
@@ -112,7 +112,7 @@ Apart from that one exception there are no data from a real project here. The
 failure cases in the book are reconstructions, and everything here is either
 public or simulated.
 
-## Copyright and licence
+## Copyright and license
 
 The copyright in the text of the book belongs to the author and the publisher,
 and the text is not here. The code, the control streams, the simulated data and

@@ -4,11 +4,11 @@
 #
 #  This repository has one rule.
 #
-#      Run NONMEM = this script.        A licence is needed.
+#      Run NONMEM = this script.        A license is needed.
 #      Run R      = R/build.R.          Works without NONMEM.
 #
-#  The run artefacts (.lst .ext .phi and the four tables) are **committed**,
-#  so R/build.R and the book build run on a machine without a licence.
+#  The run artifacts (.lst .ext .phi and the four tables) are **committed**,
+#  so R/build.R and the book build run on a machine without a license.
 #  Run this on a licensed machine only when a control stream or data changed.
 # =====================================================================
 if (!dir.exists("R/snippets"))
@@ -43,7 +43,7 @@ find_nmfe <- function() {
 NMFE <- find_nmfe()
 if (is.na(NMFE)) {
   message("NONMEM not found. It cannot be run on this machine.\n",
-          "  The run artefacts are committed under nm/, so Rscript R/build.R\n",
+          "  The run artifacts are committed under nm/, so Rscript R/build.R\n",
           "  still runs. If a control stream changed, run this where licensed.")
   quit(save = "no", status = 0)     # not a failure; there is simply nothing to do
 }
