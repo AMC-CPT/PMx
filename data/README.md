@@ -10,7 +10,7 @@ seed 2026). So rerunning `nm/tm10?.ctl` gives numbers close to the book's
 rather than equal to them, and the run artifacts `nm/tm10?.R76/` are not here
 either.
 
-## `pheno.csv` — the known-answer dataset
+## `pheno.csv`: the known-answer dataset
 
 Phenobarbital neonate data. A **NONMEM distribution example** (Beal &
 Sheiner); the original is the fixed-width file `PHENO` (the `FIN` on its last
@@ -23,7 +23,7 @@ line is NONMEM's end marker).
 | Columns | `ID TIME AMT WT APGR DV MDV EVID` |
 | Note | `WT` and `APGR` are constant within a subject. Median 12 doses per subject |
 
-## `theo-raw.txt` — the mistyped dose of Ch 6
+## `theo-raw.txt`: the mistyped dose of Ch 6
 
 A copy of `util/THEO` from the NONMEM distribution (132 rows, 12 subjects).
 The columns are `ID DOSE TIME CP WT`, and `DOSE` is in mg/kg.
@@ -41,7 +41,7 @@ transcribing handwriting. **The same error is in R's built-in `Theoph`.**
 Chapter 6 opens with this. The reproduction is `R/snippets/ch06-theo-dose.R`
 and `R/snippets/ch06-theo-fix.R`, and the frozen output is in `output/`.
 
-## `sdtm/` — source domains for the Ch 5 exercise
+## `sdtm/`: source domains for the Ch 5 exercise
 
 > **These domains are an artifact this book made.** They are not real clinical
 > trial data. They were made by **decomposing** `pheno.csv` above.
@@ -110,7 +110,7 @@ When these data are used in the text, state the following.
 > example). The SDTM-form domains of Chapter 5 were made by this book by
 > decomposing those data.
 
-## `pheno-nm.csv` — what Ch 5 assembled
+## `pheno-nm.csv`: what Ch 5 assembled
 
 The `sdtm/` above put back together by the pipeline of Chapter 5. **It is not
 made by hand.** The last line of `R/snippets/ch05-check.R` writes it, and only

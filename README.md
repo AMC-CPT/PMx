@@ -1,4 +1,4 @@
-# Pharmacometrics with NONMEM and R — example repository
+# Pharmacometrics with NONMEM and R: example repository
 
 *한국어 설명은 [README.ko.md](README.ko.md) 에 있습니다.*
 
@@ -53,7 +53,7 @@ docker/               the Dockerfile and the commands of Ch 15
 Ref/growth/dataset/   the tumor volume data published by Benzekry et al. (Ch 19)
 ```
 
-### `En/` — the English edition
+### `En/`: the English edition
 
 ```
 En/R/snippets/chNN-*.R   the same code with the comments, labels and messages in English
@@ -83,7 +83,9 @@ Rscript R/runnm.R              # all of them (rpt, boot and sse have their own s
 Rscript R/boot.R 200           # the bootstrap of Ch 14
 ```
 
-R packages needed: `nmw` (CRAN), `deSolve`, `survival`. The rest is base R.
+R packages needed: `nmw` (CRAN), `deSolve`, `survival`, and `npde` for the NPDE
+of Ch 12 (`R/build.R` skips that one snippet when `npde` is missing). The rest is
+base R.
 
 ## Where the data come from
 

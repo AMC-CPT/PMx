@@ -1,4 +1,4 @@
-# 계량약리학 with NONMEM and R — 예제 저장소
+# 계량약리학 with NONMEM and R: 예제 저장소
 
 *An English description is in [README.md](README.md).*
 
@@ -47,7 +47,7 @@ docker/               15장의 Dockerfile 과 명령 모음
 Ref/growth/dataset/   Benzekry 등이 공개한 종양 부피 자료 (19장)
 ```
 
-### `En/` — 영문판
+### `En/`: 영문판
 
 ```
 En/R/snippets/chNN-*.R   같은 코드의 주석·이름표·메시지를 영어로 옮긴 것
@@ -77,7 +77,8 @@ Rscript R/runnm.R              # 전부 (rpt, boot, sse 는 각각의 스크립�
 Rscript R/boot.R 200           # 14장의 bootstrap
 ```
 
-필요한 R 패키지: `nmw`(CRAN), `deSolve`, `survival`. 나머지는 base R 이다.
+필요한 R 패키지: `nmw`(CRAN), `deSolve`, `survival`, 그리고 12장 NPDE 에 쓰는 `npde`
+(없으면 `R/build.R` 이 그 스니펫 하나만 건너뛴다). 나머지는 base R 이다.
 
 ## 자료의 출처
 
