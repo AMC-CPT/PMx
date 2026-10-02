@@ -166,8 +166,9 @@ business being inside nmfe**.
 **Only the remaining kind is a real modification.** Two bugs in the
 distribution.
 
-- `pushdon=1` is missing its `set` (line 118 of the 469-line version). It only
-  prints one error line to the console and does not affect the result
+- `pushdon=1` is missing its `set` (line 118 of the 469-line version), so the
+  closing `popd` never runs. The run itself is unaffected, but a batch file that
+  `call`s the original is left inside the run folder afterward
 - `call gfcompile.bat` may fail to find the current folder.
   `call .\gfcompile.bat` always finds it
 
