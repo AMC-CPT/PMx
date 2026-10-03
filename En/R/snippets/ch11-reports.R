@@ -1,6 +1,6 @@
 # The eight reports read **committed artifacts only**. They are produced even
 # on a PC without NONMEM. That the run folder is nm/<model>.R76/ earns its keep
-# here (Ch 3). The model name comes from the folder name, the tables from
+# here (Ch 3). The model name comes from the .xml, the tables from
 # sdtab/patab/cotab/catab, and the termination status from PRINT.OUT.
 library(nmw)
 nmf <- function(model, file) file.path("nm", paste0(model, ".R76"), file)

@@ -1,5 +1,5 @@
 # .phi 파일. 사람마다 EBE 와 그 조건부 분산(ETC), 그리고 개인 목적함수값(OBJ)이 있다.
-# 2008년에는 verbatim 코드와 R 로 캐내야 했던 것이 NONMEM 7 부터는 파일 하나다.
+# NONMEM 6 까지는 verbatim 코드와 R 로 캐내야 했던 것이 NONMEM 7 부터는 파일 하나다.
 fin <- function(m) { e <- read.table(nmf(m, paste0(m, ".ext")), skip = 1, header = TRUE)
   list(f = unlist(e[e$ITERATION == -1000000000, -1])) }
 phi <- read.table(nmf("108wt", "108wt.phi"), skip = 1, header = TRUE, check.names = FALSE)

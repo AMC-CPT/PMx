@@ -1,6 +1,6 @@
 # The .phi file. Per person it holds the EBEs, their conditional variances
-# (ETC) and the individual objective function value (OBJ). What in 2008 had to
-# be dug out with verbatim code and R has been one file since NONMEM 7.
+# (ETC) and the individual objective function value (OBJ). What up to NONMEM 6
+# had to be dug out with verbatim code and R has been one file since NONMEM 7.
 fin <- function(m) { e <- read.table(nmf(m, paste0(m, ".ext")), skip = 1, header = TRUE)
   list(f = unlist(e[e$ITERATION == -1000000000, -1])) }
 phi <- read.table(nmf("108wt", "108wt.phi"), skip = 1, header = TRUE, check.names = FALSE)

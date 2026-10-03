@@ -109,7 +109,7 @@ structure.
 
 | What nmw looks for | Where |
 |---|---|
-| Model name | The first token of the folder name (`108wt.R76` -> `108wt`) |
+| Model name | The name of the `.xml` in the run folder (`108wt.xml` -> `108wt`); the first token of the folder name only when there is no `.xml` |
 | Tables | `sdtab` `patab` `cotab` `catab` (**no numbers attached**) |
 | Termination status | `PRINT.OUT` (`runnm.R` makes it with `TrimOut`) |
 | Model lineage | The `P:` and `F:` written in `$PROB`, read from `FCON` |
@@ -183,13 +183,30 @@ over directly.
 ```bat
 @echo off
 set NM=C:\nm76g64\run\nmfe76.bat
+set RS="C:\Program Files\R\R-4.6.1\bin\Rscript.exe"
 set MODEL=%1
 md "%MODEL%.R76" 2>nul
 copy "%MODEL%.ctl" "%MODEL%.R76" >nul
 set NoDefaultCurrentDirectoryInExePath=
+set HERE=%CD%
 call "%NM%" %MODEL%.ctl %MODEL%.lst -rundir=%MODEL%.R76
-Rscript -e "nmw::nmw_run('%MODEL%.R76')"
+cd /d "%HERE%"
+%RS% -e "nmw::TrimOut('%MODEL%.R76/%MODEL%.lst', '%MODEL%.R76/PRINT.OUT')"
+%RS% -e "nmw::nmw_run('%MODEL%.R76')"
 ```
+
+The first two `set` lines hold this book's installation; change them to yours.
+`NM` is the run script in the `run` folder of the folder given to `SETUP76`
+(the `nmldir` line of its `nmloc.bat`), and its name follows the version
+(`nmfe75.bat` for 7.5). `RS` is `Rscript.exe` of the installed R, written with
+its full path because the R installer for Windows does not add R to the PATH;
+if `where Rscript` finds it, `set RS=Rscript` is enough.
+
+`cd /d "%HERE%"` is needed because of the missing `set` above (the `call`er is
+left inside the run folder), and `TrimOut()` comes first because `nmw_run()`
+does not make `PRINT.OUT`. The same steps typed in a console, or registered as
+two user tools in the ACRE editor, are in Ch 11 ("Making the reports for the
+reader's own model").
 
 The R side is recommended. The post-processing is already R; keeping it in one
 place lets nm75 and nm76 be handled by the same code; and nothing needs fixing

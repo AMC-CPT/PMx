@@ -33,8 +33,8 @@ KEEP <- function(model) c(
 
 # ---- Find nmfe. Without it we stop here ------------------------------
 find_nmfe <- function() {
-  cand <- c("C:/nm76g64/run/nmfe76.bat", "C:/nm75g64/run/nmfe75.bat",
-            Sys.getenv("NMFE", ""))
+  cand <- c(Sys.getenv("NMFE", ""),        # set NMFE when NONMEM is installed elsewhere
+            "C:/nm76g64/run/nmfe76.bat", "C:/nm75g64/run/nmfe75.bat")
   cand <- cand[nzchar(cand) & file.exists(cand)]
   if (!length(cand)) return(NA_character_)
   cand[1]
@@ -43,6 +43,8 @@ find_nmfe <- function() {
 NMFE <- find_nmfe()
 if (is.na(NMFE)) {
   message("NONMEM not found. It cannot be run on this machine.\n",
+          "  If NONMEM is installed elsewhere, set NMFE to its run script\n",
+          "  (e.g. set NMFE=D:/nm760/run/nmfe76.bat) and run this again.\n",
           "  The run artifacts are committed under nm/, so Rscript R/build.R\n",
           "  still runs. If a control stream changed, run this where licensed.")
   quit(save = "no", status = 0)     # not a failure; there is simply nothing to do
